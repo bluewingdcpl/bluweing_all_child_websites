@@ -1,12 +1,12 @@
 {
   "current": {
     "bluewing": "https://bluewing-new-sigma.vercel.app",
-    "bhaaratprecast": "https://bhaaratprecast.vercel.app",
-    "sygnificinfra": "https://sygnificinfra.vercel.app"
+    "bhaaratprecast": "https://bhaaratprecast.com",
+    "sygnificinfra": "https://sygnificinfra.com"
   },
   "production": {
     "bluewing": "https://www.bluewingconstruction.com",
-    "bhaaratprecast": "https://www.bhaaratprecast.com",
-    "sygnificinfra": "https://www.sygnificinfra.com"
+    "bhaaratprecast": "https://bhaaratprecast.com",
+    "sygnificinfra": "https://sygnificinfra.com"
   }
 }
