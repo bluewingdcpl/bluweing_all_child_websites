@@ -5,6 +5,16 @@
       "source": "/:page(.*?\\.html)/:rest(.*)",
       "destination": "/:page",
       "permanent": true
+    },
+    {
+      "source": "/projects/:slug([a-z0-9-]+)\\.html",
+      "destination": "/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug([a-z0-9-]+)\\.html",
+      "destination": "/blog/:slug",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -31,6 +41,14 @@
     {
       "source": "/",
       "destination": "/bluewing/index.html"
+    },
+    {
+      "source": "/blog/:slug([a-z0-9]+(?:-[a-z0-9]+)*)",
+      "destination": "/bluewing/blog-post.html"
+    },
+    {
+      "source": "/:slug((?!(?:api|blog|projects|assets|new-pillar)$)[a-z0-9]+(?:-[a-z0-9]+)*)",
+      "destination": "/bluewing/project-view.html"
     },
     {
       "source": "/:path((?!api/).*)",

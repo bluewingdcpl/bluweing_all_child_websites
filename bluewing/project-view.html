@@ -1399,7 +1399,11 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
     });
   }
-  var slug = new URLSearchParams(location.search).get('slug');
+  // Clean URL: /<slug>. Old ?slug= links are sent to the clean URL.
+  var qSlug = new URLSearchParams(location.search).get('slug');
+  if (qSlug) { location.replace('/' + encodeURIComponent(qSlug) + location.hash); return; }
+  var slug = decodeURIComponent(location.pathname.split('/').filter(Boolean).pop() || '');
+  if (slug === 'project-view.html') slug = '';
   if (!slug) { document.getElementById('pv-title').textContent = 'Project not found'; return; }
 
   fetch('/api/projects?slug=' + encodeURIComponent(slug), { cache: 'no-store' }).then(function(r){

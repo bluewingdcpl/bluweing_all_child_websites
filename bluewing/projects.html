@@ -1121,7 +1121,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
     grid.innerHTML = published.map(function(p){
       var img = p.images && p.images[0] ? p.images[0].url : '';
       var statusClass = p.status === 'Ongoing' ? ' pj__st--on' : '';
-      var href = 'project-view.html?slug=' + encodeURIComponent(p.slug);
+      var href = '/' + encodeURIComponent(p.slug);
       return '<a class="pj" href="' + esc(href) + '">' +
         '<div class="pj__im"><span class="pj__st' + statusClass + '">' + esc(p.status || 'Completed') + '</span>' +
         (img ? '<img decoding="async" src="' + esc(img) + '" alt="' + esc(p.title) + ' — a BlueWing Group project" loading="lazy" width="640" height="480">' : '') +
