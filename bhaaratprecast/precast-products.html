@@ -859,7 +859,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
   align-items:center}
 .prow+.prow{margin-top:clamp(56px,7vw,104px);padding-top:clamp(56px,7vw,104px);
   border-top:1px solid var(--line)}
-.prow:nth-child(even) .prow__fig{order:-1}
+.prow:nth-of-type(even) .prow__fig{order:-1}
 .prow__fig img{width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--concrete);
   border-radius:var(--r);padding:20px}
 .prow h2{font-size:clamp(1.5rem,2.6vw,2.1rem);margin-bottom:8px}
@@ -872,7 +872,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .adv__l{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
 .adv__l li{display:flex;gap:10px;font-size:var(--fs-sm);align-items:flex-start}
 .adv__l svg{width:15px;height:15px;color:var(--accent);flex:none;margin-top:5px}
-@media(max-width:900px){.prow{grid-template-columns:1fr}.prow:nth-child(even) .prow__fig{order:0}
+@media(max-width:900px){.prow{grid-template-columns:1fr}.prow:nth-of-type(even) .prow__fig{order:0}
   .adv__l{grid-template-columns:1fr}}
 .cust{margin-top:clamp(56px,7vw,104px);padding-top:clamp(56px,7vw,104px);border-top:1px solid var(--line)}
 .cust h2{font-size:clamp(1.5rem,2.6vw,2.1rem);margin-bottom:28px}
@@ -881,6 +881,32 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .cust__i{margin:0}
 .cust__i figcaption{margin-bottom:14px;font-size:1.05rem;font-weight:600}
 @media(max-width:700px){.cust__g{grid-template-columns:1fr}}
+/* Product groups (Section I / II), detailed advantages, why + applications */
+.prow__adv{grid-column:1/-1}
+.prow__adv .spec__h{margin-top:0}
+.advd--2{grid-template-columns:1fr 1fr;gap:20px 48px}
+@media(max-width:900px){.advd--2{grid-template-columns:1fr}}
+.grp{margin-bottom:clamp(40px,5vw,64px)}
+.grp h2{font-size:var(--fs-h2);margin-top:18px;max-width:22ch}
+.grp h2 em{font-style:normal;color:var(--accent)}
+.grp--2{margin-top:clamp(56px,7vw,104px);padding-top:clamp(56px,7vw,104px);border-top:1px solid var(--line)}
+.advd{display:grid;gap:16px}
+.advd li{display:flex;gap:12px;align-items:flex-start}
+.advd svg{width:16px;height:16px;color:var(--accent);flex:none;margin-top:4px}
+.advd b{display:block;font-size:var(--fs-sm);font-weight:600;color:var(--ink);margin-bottom:3px}
+.advd span{display:block;font-size:var(--fs-sm);color:var(--steel);line-height:1.6}
+.cust__g--3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cust__g--3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cust__g--3{grid-template-columns:1fr}}
+.whyb{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.whyb li{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px 22px;display:flex;gap:14px;align-items:baseline;font-weight:600;font-size:1rem;line-height:1.4}
+.whyb span{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.18em;color:var(--accent);font-weight:400;flex:none}
+@media(max-width:1000px){.whyb{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.whyb{grid-template-columns:1fr}}
+.ind__g--5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1000px){.ind__g--5{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.ind__g--5{grid-template-columns:1fr}}
 
 /* ── Project photo block ───────────────────────────────── */
 .shots{padding-block:0 var(--sec-y)}
@@ -1038,6 +1064,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 </section>
 <section class="prod gfx">
 <div class="shell">
+<div class="grp rv"><p class="eyebrow">Section I</p><h2>Precast products <em>for buildings.</em></h2></div>
 <article class="prow rv">
 <div>
 <p class="prow__code">Product 01</p>
@@ -1045,55 +1072,99 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <p class="spec__h">Specification</p>
 <ul class="spec__l"><li>Thickness: 150, 200, 265, 320, 400 and 500 mm</li><li>Width: standard 1200 mm</li></ul>
 <p class="spec__h">Mould specification</p><ul class="spec__l"><li>150 m &times; 1.2 m long casting bed — 6 nos.</li></ul>
-<p class="spec__h">Key advantages</p>
-<ul class="adv__l"><li><svg><use href="#i-check"/></svg><span>Long clear span</span></li><li><svg><use href="#i-check"/></svg><span>High loading capacity</span></li><li><svg><use href="#i-check"/></svg><span>Weight reduction of up to 40%</span></li><li><svg><use href="#i-check"/></svg><span>No scaffolding, propping or formwork shuttering required</span></li><li><svg><use href="#i-check"/></svg><span>Fast, easy site erection</span></li><li><svg><use href="#i-check"/></svg><span>Fire and thermal resistance</span></li></ul>
 </div>
 <div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452143969-bgutky-Hollow_Core_Slab-EXXsHCAXxrAysDSW60MT6iGUUg902j.webp" alt="Hollow Core Slab — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__adv">
+<p class="spec__h">Key advantages</p>
+<ul class="advd advd--2">
+<li><svg><use href="#i-check"/></svg><div><b>Long Clear Spans</b><span>Achieve larger column-free spaces with optimized structural systems, offering greater flexibility for modern building layouts.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>High Load-Carrying Capacity</b><span>Engineered to withstand substantial structural and imposed loads while maintaining strength, stability, and durability.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Up to 40% Weight Reduction</b><span>Optimized structural sections significantly reduce self-weight, helping minimize foundation loads and overall structural requirements.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>No Scaffolding, Propping or Formwork</b><span>Factory-manufactured components require minimal temporary works at site, reducing construction complexity, labour, and associated costs.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Fast &amp; Easy Erection</b><span>Precast elements are designed for efficient lifting, positioning, and installation, enabling faster project completion with reduced site manpower.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Fire &amp; Thermal Resistance</b><span>Concrete provides excellent fire resistance and thermal performance, contributing to enhanced safety, durability, energy efficiency, and long-term building performance.</span></div></li>
+</ul>
+</div>
 </article><article class="prow rv">
 <div>
 <p class="prow__code">Product 02</p>
-<h2>Wall Panels (External &amp; Internal)</h2>
-<p class="spec__h">Specification</p>
-<ul class="spec__l"><li>Thickness: 75, 100, 125, 150, 200, 225, 250, 300 and 400 mm</li></ul>
+<h2>Wall Panels</h2>
+<p class="spec__h">Specification — three wall panel ranges</p>
+<ul class="spec__l"><li>External / load-bearing wall panels: 125, 150, 160 and 230 mm thick</li><li>Shear wall panels: 300 and 400 mm thick</li><li>Internal / non-load-bearing wall panels: 75 and 100 mm thick</li></ul>
 <p class="spec__h">Mould specification</p><ul class="spec__l"><li>12 m length &times; 4 m wide — tilting and stationary table, 30 nos.</li></ul>
-<p class="spec__h">Key advantages</p>
-<ul class="adv__l"><li><svg><use href="#i-check"/></svg><span>Smooth surface quality</span></li><li><svg><use href="#i-check"/></svg><span>No plaster required</span></li><li><svg><use href="#i-check"/></svg><span>No putty needed — ready to paint</span></li><li><svg><use href="#i-check"/></svg><span>Easy to install</span></li><li><svg><use href="#i-check"/></svg><span>Reduced on-site MEP work</span></li><li><svg><use href="#i-check"/></svg><span>High fire resistance</span></li><li><svg><use href="#i-check"/></svg><span>Increase in carpet area</span></li></ul>
 </div>
-<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452146309-gabeja-Wall_Panels-9AwensIzYShmlWGUMEmrzKqHRyh3bK.webp" alt="Wall Panels (External &amp; Internal) — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452146309-gabeja-Wall_Panels-9AwensIzYShmlWGUMEmrzKqHRyh3bK.webp" alt="Wall Panels — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__adv">
+<p class="spec__h">Key advantages</p>
+<ul class="advd advd--2">
+<li><svg><use href="#i-check"/></svg><div><b>Superior Surface Finish</b><span>Precision-manufactured surfaces provide a smooth, uniform finish, ensuring high-quality aesthetics and consistency.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>No Plastering Required</b><span>The high-quality precast finish eliminates the need for conventional plastering, saving time, material, and labour costs.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Putty-Free &amp; Ready to Paint</b><span>The smooth surface minimizes finishing requirements, allowing the elements to be directly prepared for painting after necessary surface treatment.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Fast &amp; Easy Installation</b><span>Lightweight, factory-produced components enable quick and efficient installation, significantly reducing construction time at site.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Reduced On-Site MEP Work</b><span>Factory-integrated openings, sleeves, and service provisions minimize on-site MEP modifications and simplify service coordination.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>High Fire Resistance</b><span>Concrete construction provides excellent fire resistance, enhancing building safety, durability, and long-term performance.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Increased Carpet Area</b><span>Optimized wall thickness and precision manufacturing help maximize usable internal space, delivering greater carpet area within the same building footprint.</span></div></li>
+</ul>
+</div>
 </article><article class="prow rv">
 <div>
 <p class="prow__code">Product 03</p>
-<h2>Columns</h2>
+<h2>Beams</h2>
 <p class="spec__h">Specification</p>
-<ul class="spec__l"><li>Width: min 600 mm, max 1500 mm</li><li>Depth / height: min 300 mm, max 1200 mm</li><li>Type: L, T and rectangular</li></ul>
-<p class="spec__h">Mould specification</p><ul class="spec__l"><li>60 m bed length &times; 1.5 m wide — column mould, 3 nos.</li></ul>
-<p class="spec__h">Key advantages</p>
-<ul class="adv__l"><li><svg><use href="#i-check"/></svg><span>Can be produced and erected up to 3–4 storeys</span></li><li><svg><use href="#i-check"/></svg><span>Smooth quality finish</span></li><li><svg><use href="#i-check"/></svg><span>More efficient in highly corrosive environments</span></li><li><svg><use href="#i-check"/></svg><span>Corbels can be cast on four sides</span></li></ul>
+<ul class="spec__l"><li>Type: precast &amp; prestressed — rectangular, L-type and inverted T-type beams</li><li>Width: 300 mm to 1400 mm</li><li>Depth / height: 300 mm to 1000 mm</li></ul>
+<p class="spec__h">Mould specification</p><ul class="spec__l"><li>60 m bed length &times; 3.4 m wide</li><li>Twin beam mould — 3 nos.</li></ul>
 </div>
-<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452145819-pm9cs6-Columns-JKiAnC5B3HsBJkt0wRlBrok03diXZY.webp" alt="Columns — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452145278-fya6mp-Beams-DQykTwCPq0Td5ZOa0WOkTSkN8rYXd5.webp" alt="Beams — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__adv">
+<p class="spec__h">Key advantages</p>
+<ul class="advd advd--2">
+<li><svg><use href="#i-check"/></svg><div><b>Long Clear Spans</b><span>Enables expansive, column-free spaces, providing greater flexibility for architectural planning and functional layouts.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Optimized Structural Depth</b><span>Engineered sections optimize structural depth, maximizing available headroom and creating more usable internal space.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>No Scaffolding or Propping Required</b><span>Factory-manufactured components can be efficiently erected with minimal temporary support, reducing site complexity and labour requirements.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Eliminates Expensive On-Site Formwork</b><span>Precast construction minimizes or eliminates conventional on-site formwork, significantly reducing labour, material consumption, and construction time.</span></div></li>
+</ul>
+</div>
 </article><article class="prow rv">
 <div>
 <p class="prow__code">Product 04</p>
-<h2>Beams</h2>
+<h2>Columns</h2>
 <p class="spec__h">Specification</p>
-<ul class="spec__l"><li>Width: min 800 mm, max 1400 mm</li><li>Depth / height: min 300 mm, max 1000 mm</li><li>Type: L, T and rectangular beam</li></ul>
-<p class="spec__h">Mould specification</p><ul class="spec__l"><li>60 m bed length &times; 3.4 m wide</li><li>Twin beam mould — 3 nos.</li></ul>
-<p class="spec__h">Key advantages</p>
-<ul class="adv__l"><li><svg><use href="#i-check"/></svg><span>Long clear span</span></li><li><svg><use href="#i-check"/></svg><span>Optimised structural depth for more usable space</span></li><li><svg><use href="#i-check"/></svg><span>No scaffolding or propping</span></li><li><svg><use href="#i-check"/></svg><span>No expensive on-site formwork</span></li></ul>
+<ul class="spec__l"><li>Type: square and rectangular columns</li><li>Width: 300 mm to 1200 mm</li><li>Depth / height: 300 mm to 1200 mm</li></ul>
+<p class="spec__h">Mould specification</p><ul class="spec__l"><li>60 m bed length &times; 1.5 m wide — column mould, 3 nos.</li></ul>
 </div>
-<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452145278-fya6mp-Beams-DQykTwCPq0Td5ZOa0WOkTSkN8rYXd5.webp" alt="Beams — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452145819-pm9cs6-Columns-JKiAnC5B3HsBJkt0wRlBrok03diXZY.webp" alt="Columns — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__adv">
+<p class="spec__h">Key advantages</p>
+<ul class="advd advd--2">
+<li><svg><use href="#i-check"/></svg><div><b>Multi-Storey Production &amp; Erection</b><span>Designed for efficient production and erection of structural elements for multistorey buildings, enabling faster and more streamlined construction.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Superior Surface Finish</b><span>Precision-manufactured elements deliver a smooth, consistent, and high-quality surface finish with excellent dimensional accuracy.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Enhanced Performance in Corrosive Environments</b><span>High-quality precast concrete provides excellent durability and resistance to aggressive and highly corrosive environments, ensuring long-term structural performance.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Four-Sided Corbel Provision</b><span>Can be manufactured with four-sided corbels, offering greater flexibility for structural connections and supporting beams from multiple directions.</span></div></li>
+</ul>
+</div>
 </article><article class="prow rv">
 <div>
 <p class="prow__code">Product 05</p>
-<h2>Staircases &amp; Landings</h2>
+<h2>Staircases</h2>
 <p class="spec__h">Specification</p>
-<ul class="spec__l"><li>Width: 3500 mm</li><li>Depth / height: 2700 mm</li><li>Tread: 150 mm</li><li>Riser: 300 mm</li></ul>
+<ul class="spec__l"><li>Tread: 300 mm</li><li>Riser: 150 mm</li><li>Width: 900 mm to 2400 mm</li></ul>
 <p class="spec__h">Mould specification</p><ul class="spec__l"><li>2.7 &times; 3.5 m — staircase and landing mould, 3 nos.</li></ul>
-<p class="spec__h">Key advantages</p>
-<ul class="adv__l"><li><svg><use href="#i-check"/></svg><span>No on-site formwork required</span></li><li><svg><use href="#i-check"/></svg><span>Faster installation</span></li><li><svg><use href="#i-check"/></svg><span>Smooth quality finish</span></li><li><svg><use href="#i-check"/></svg><span>Direct Kota stone or tile work possible</span></li><li><svg><use href="#i-check"/></svg><span>Reduced site labour</span></li><li><svg><use href="#i-check"/></svg><span>Dimensional accuracy in tread, riser and floor height</span></li></ul>
 </div>
-<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452144507-lrilqy-Staircases-dCoeNCHRIYcoWUFi3byEGYU6jG0rDF.webp" alt="Staircases &amp; Landings — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
-</article><article class="prow rv">
+<div class="prow__fig"><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452144507-lrilqy-Staircases-dCoeNCHRIYcoWUFi3byEGYU6jG0rDF.webp" alt="Staircases — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
+<div class="prow__adv">
+<p class="spec__h">Key advantages</p>
+<ul class="advd advd--2">
+<li><svg><use href="#i-check"/></svg><div><b>No On-Site Formwork Required</b><span>Factory-manufactured stair components eliminate the need for conventional formwork at site, simplifying construction and reducing overall project time.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Faster Installation</b><span>Precast stair elements enable quick and efficient erection, significantly accelerating the construction process.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Superior Surface Finish</b><span>Precision manufacturing delivers a smooth, uniform, and high-quality finish with excellent dimensional consistency.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Direct Kota Stone / Tile Installation</b><span>The accurately finished surface allows Kota stone, tiles, and other floor finishes to be installed directly, minimizing additional finishing work.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>Reduced Site Labour</b><span>Off-site manufacturing and rapid installation substantially reduce on-site manpower requirements, improving productivity and construction efficiency.</span></div></li>
+<li><svg><use href="#i-check"/></svg><div><b>High Dimensional Accuracy</b><span>Precision-controlled manufacturing ensures accurate tread, riser, inclination, and floor-to-floor heights, resulting in consistent quality and easy installation.</span></div></li>
+</ul>
+</div>
+</article>
+<div class="grp grp--2 rv"><p class="eyebrow">Section II</p><h2>Precast products for <em>infrastructure &amp; miscellaneous.</em></h2></div>
+<article class="prow rv">
 <div>
 <p class="prow__code">Product 06</p>
 <h2>U Drains</h2>
@@ -1105,12 +1176,10 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 </div>
 <div class="prow__fig"><img decoding="async" src="https://bluewing.brandismtechnologies.in/wp-content/uploads/2026/06/new-U-Drains.png" alt="U Drains — Bhaarat Precast" loading="lazy" width="700" height="525"></div>
 </article>
-<div class="cust">
-<p class="prow__code">Product 07</p>
-<h2>Customized Products</h2>
+<div class="cust rv">
 <div class="cust__g">
-<figure class="cust__i"><figcaption>Boundary wall</figcaption><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452142783-tdlcus-Boundary_wall-SFq9oXz0URwMlSu7xtu7x14vmKnQLR.webp" alt="Boundary wall — Bhaarat Precast" loading="lazy" width="700" height="525"></figure>
-<figure class="cust__i"><figcaption>Road barrier</figcaption><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452143439-z48tqx-Road_barrier-oIY656XAxKd5IXSWgZ3mcK3TdlV90a.webp" alt="Road barrier — Bhaarat Precast" loading="lazy" width="700" height="525"></figure>
+<figure class="cust__i"><figcaption>Boundary Wall</figcaption><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452142783-tdlcus-Boundary_wall-SFq9oXz0URwMlSu7xtu7x14vmKnQLR.webp" alt="Boundary Wall — Bhaarat Precast" loading="lazy" width="700" height="525"></figure>
+<figure class="cust__i"><figcaption>Road Medians</figcaption><img decoding="async" src="https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1791452143439-z48tqx-Road_barrier-oIY656XAxKd5IXSWgZ3mcK3TdlV90a.webp" alt="Road Medians — Bhaarat Precast" loading="lazy" width="700" height="525"></figure>
 </div>
 </div>
 </div>
@@ -1118,14 +1187,40 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 
 <section class="strip" style="background:var(--concrete)">
 <div class="shell">
-<div class="head rv"><div><p class="eyebrow">Why precast</p><h2>Programme certainty, <em>moved into a factory.</em></h2></div>
+<div class="head rv"><div><p class="eyebrow">Why Bhaarat Precast</p><h2>Programme certainty, <em>moved into a factory.</em></h2></div>
 <p>Cast-in-situ ties your programme to the weather, the labour market and the site. Precast moves that risk into a controlled environment.</p></div>
-<div class="strip__g rv">
-<div class="sp"><span class="sp__n">01</span><div><h3>Design certainty</h3><p>Elements engineered, detailed and approved before casting begins.</p></div></div>
-<div class="sp"><span class="sp__n">02</span><div><h3>Factory control</h3><p>Curing, cover and finish held constant regardless of monsoon or site labour.</p></div></div>
-<div class="sp"><span class="sp__n">03</span><div><h3>Speed on site</h3><p>Casting runs in parallel with foundations; erection is measured in weeks.</p></div></div>
+<ul class="whyb rv">
+<li><span>01</span>Speed of Construction</li>
+<li><span>02</span>Superior Quality &amp; Uniformity</li>
+<li><span>03</span>Significant Reduction in Safety Risk</li>
+<li><span>04</span>Significant Reduction in Construction Waste</li>
+<li><span>05</span>Reduced Cost of Construction</li>
+<li><span>06</span>Durability &amp; Strength</li>
+<li><span>07</span>No Weather Dependency</li>
+<li><span>08</span>Fire Resistance</li>
+<li><span>09</span>Thermal Insulation &amp; Acoustic Insulation</li>
+<li><span>10</span>Sustainability / Eco-Friendly</li>
+<li><span>11</span>Scalability</li>
+</ul>
 </div>
-<a class="btn btn--accent" style="margin-top:32px" href="/">Back to Bhaarat Precast <svg><use href="#i-arr"/></svg></a>
+</section>
+
+<section class="ind">
+<div class="shell">
+<div class="head rv"><div><p class="eyebrow">Product application</p><h2>Where our precast <em>products are used.</em></h2></div></div>
+<div class="ind__g ind__g--5 rv">
+<div class="ii"><svg><use href="#i-layers"/></svg><h3>Residential Buildings</h3></div>
+<div class="ii"><svg><use href="#i-rupee"/></svg><h3>Commercial Buildings</h3></div>
+<div class="ii"><svg><use href="#i-factory"/></svg><h3>Industrial Buildings</h3></div>
+<div class="ii"><svg><use href="#i-health"/></svg><h3>Hospital Buildings</h3></div>
+<div class="ii"><svg><use href="#i-school"/></svg><h3>Institutes &amp; Hostels / Accommodation Buildings</h3></div>
+<div class="ii"><svg><use href="#i-hotel"/></svg><h3>Hotel Buildings</h3></div>
+<div class="ii"><svg><use href="#i-home"/></svg><h3>Villas / Row Houses / Farm Houses</h3></div>
+<div class="ii"><svg><use href="#i-server"/></svg><h3>Data Centres</h3></div>
+<div class="ii"><svg><use href="#i-trophy"/></svg><h3>Sports Arenas</h3></div>
+<div class="ii"><svg><use href="#i-plane"/></svg><h3>Airports</h3></div>
+</div>
+<a class="btn btn--accent" style="margin-top:40px" href="/">Back to Bhaarat Precast <svg><use href="#i-arr"/></svg></a>
 </div>
 </section></main>
 
