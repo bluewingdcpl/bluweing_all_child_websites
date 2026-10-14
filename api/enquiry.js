@@ -1,6 +1,7 @@
 const { put } = require('@vercel/blob');
 const { sendMail } = require('./_lib/mailer');
 const { recipientFor } = require('./_lib/recipients');
+const { requireAuth } = require('./_lib/auth');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_RESUME_BYTES = 5 * 1024 * 1024;
@@ -32,22 +33,71 @@ async function readBody(req) {
   return body || {};
 }
 
-async function verifyRecaptcha(token) {
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
-  if (!secret) return true; // not configured yet — don't block submissions
-  if (!token) return false;
-
+async function siteverify(secret, token) {
   const params = new URLSearchParams({ secret, response: token });
   const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params.toString(),
   });
-  const result = await res.json();
-  return result.success === true && (result.score === undefined || result.score >= 0.5);
+  return res.json();
+}
+
+const BAD_SECRET = ['invalid-input-secret', 'missing-input-secret'];
+
+// Returns { ok, reason }. A wrong RECAPTCHA_SECRET_KEY or Google being
+// unreachable is our problem, not spam, so those let the lead through and log.
+async function verifyRecaptcha(token) {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) return { ok: true, reason: 'not-configured' };
+  if (!token) return { ok: false, reason: 'missing-token' };
+
+  let result;
+  try {
+    result = await siteverify(secret, token);
+  } catch (e) {
+    console.error('reCAPTCHA verify unavailable:', e.message);
+    return { ok: true, reason: 'verify-unavailable' };
+  }
+  const codes = result['error-codes'] || [];
+  if (codes.some((c) => BAD_SECRET.includes(c))) {
+    console.error('RECAPTCHA_SECRET_KEY is invalid; submissions are not spam-checked until it is fixed.');
+    return { ok: true, reason: 'invalid-secret' };
+  }
+  if (result.success !== true) {
+    console.warn('reCAPTCHA rejected:', codes.join(','), result.hostname || '');
+    return { ok: false, reason: codes.join(',') || 'failed' };
+  }
+  if (result.score !== undefined && result.score < 0.5) {
+    console.warn('reCAPTCHA low score:', result.score, result.hostname || '');
+    return { ok: false, reason: 'low-score' };
+  }
+  return { ok: true };
+}
+
+// Admin-only setup check (GET /api/enquiry?check): is each piece configured?
+async function setupCheck(req, res) {
+  if (!requireAuth(req, res)) return;
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  let recaptcha = 'not-set';
+  if (secret) {
+    try {
+      const codes = (await siteverify(secret, 'setup-check'))['error-codes'] || [];
+      recaptcha = codes.some((c) => BAD_SECRET.includes(c)) ? 'invalid-secret' : 'ok';
+    } catch (e) {
+      recaptcha = 'unreachable';
+    }
+  }
+  res.setHeader('Cache-Control', 'no-store');
+  res.status(200).json({
+    smtp: ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'].filter((k) => !process.env[k]).map((k) => k + ' missing').join(', ') || 'ok',
+    storage: process.env.BLOB_READ_WRITE_TOKEN ? 'ok' : 'BLOB_READ_WRITE_TOKEN missing',
+    recaptcha,
+  });
 }
 
 module.exports = async (req, res) => {
+  if (req.method === 'GET' && (req.query || {}).check !== undefined) return setupCheck(req, res);
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
@@ -92,8 +142,8 @@ module.exports = async (req, res) => {
     }
 
     const humanCheck = await verifyRecaptcha(body.recaptchaToken);
-    if (!humanCheck) {
-      return res.status(400).json({ error: 'Spam check failed. Please try again.' });
+    if (!humanCheck.ok) {
+      return res.status(400).json({ error: 'Spam check failed. Please try again.', reason: humanCheck.reason });
     }
 
     const entry = {
