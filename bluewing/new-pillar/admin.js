@@ -124,6 +124,70 @@
     showLogin();
   });
 
+  /* ---------- forgot / reset password ---------- */
+  function showCard(id) {
+    ['login-form', 'forgot-form', 'reset-form'].forEach(function (f) { $('#' + f).hidden = f !== id; });
+  }
+  function showMsg(el, text, ok) {
+    el.textContent = text;
+    el.classList.toggle('ok-msg', !!ok);
+    el.hidden = false;
+  }
+
+  // The emailed link opens /new-pillar/?reset=<token>; drop it from the address bar right away.
+  var resetToken = new URLSearchParams(location.search).get('reset');
+  if (resetToken) history.replaceState(null, '', location.pathname);
+
+  $('#forgot-link').addEventListener('click', function () {
+    $('#forgot-username').value = $('#login-username').value.trim();
+    $('#forgot-msg').hidden = true;
+    showCard('forgot-form');
+  });
+  $all('[data-back-to-login]').forEach(function (b) {
+    b.addEventListener('click', function () { showCard('login-form'); });
+  });
+
+  $('#forgot-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var msg = $('#forgot-msg');
+    msg.hidden = true;
+    var btn = $('#forgot-btn');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      var r = await api('/api/login', { method: 'POST', body: JSON.stringify({ action: 'forgot', username: $('#forgot-username').value.trim() }) });
+      showMsg(msg, r.message, true);
+    } catch (err) {
+      showMsg(msg, err.message || 'Could not send the reset link');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Send reset link';
+    }
+  });
+
+  $('#reset-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var msg = $('#reset-msg');
+    msg.hidden = true;
+    var password = $('#reset-password').value;
+    if (password !== $('#reset-confirm').value) {
+      showMsg(msg, 'The two passwords do not match.');
+      return;
+    }
+    var btn = $('#reset-btn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      await api('/api/login', { method: 'POST', body: JSON.stringify({ action: 'reset', token: resetToken, password: password }) });
+      resetToken = null;
+      showCard('login-form');
+      showApp();
+      initAppData();
+      toast('Password updated');
+    } catch (err) {
+      showMsg(msg, err.message || 'Could not update the password');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Set new password';
+    }
+  });
+
   /* ---------- tabs ---------- */
   $all('.nav-item').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -1228,5 +1292,10 @@
     loadEnquiries().catch(function (e) { toast(e.message, true); });
   }
 
-  checkSession();
+  if (resetToken) {
+    showLogin();
+    showCard('reset-form');
+  } else {
+    checkSession();
+  }
 })();

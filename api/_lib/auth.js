@@ -1,12 +1,19 @@
 const jwt = require('jsonwebtoken');
 
-const SECRET = process.env.JWT_SECRET || 'bluewing-fallback-secret-change-me-738483';
+// No fallback: the repo is public, so a built-in secret would let anyone forge
+// admin sessions and password-reset links.
+const SECRET = process.env.JWT_SECRET;
 const COOKIE_NAME = 'bw_admin_session';
 
 const SESSION_MAX_AGE = 24 * 60 * 60; // 24 hours, renewed on activity
 
+function getSecret() {
+  if (!SECRET) throw new Error('JWT_SECRET is not configured. Set it in the Vercel project environment variables.');
+  return SECRET;
+}
+
 function signSession(username) {
-  return jwt.sign({ u: username }, SECRET, { expiresIn: SESSION_MAX_AGE });
+  return jwt.sign({ u: username }, getSecret(), { expiresIn: SESSION_MAX_AGE });
 }
 
 function parseCookies(req) {
@@ -27,7 +34,7 @@ function isAuthed(req, res) {
   try {
     const cookies = parseCookies(req);
     const token = cookies[COOKIE_NAME];
-    if (!token) return false;
+    if (!token || !SECRET) return false;
     const payload = jwt.verify(token, SECRET);
     if (res) {
       // Sliding expiration: any authenticated activity renews the 24h window.
@@ -64,6 +71,7 @@ function clearSessionCookie(res) {
 }
 
 module.exports = {
+  getSecret,
   signSession,
   isAuthed,
   requireAuth,

@@ -31,7 +31,10 @@ label textarea{resize:vertical}
 .login-card .brand-logo{width:180px;height:auto;display:block;margin:0 0 22px}
 .login-card .sub{margin:0 0 24px;color:var(--steel);font-size:13px}
 .login-card button{width:100%;margin-top:8px;padding:11px}
+.login-card .link-btn{display:block;width:auto;margin:16px auto 0;padding:0;background:none;border:0;color:var(--steel);font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer}
+.login-card .link-btn:hover{color:var(--ink)}
 .error-msg{color:var(--accent);font-size:13px;margin-top:12px}
+.error-msg.ok-msg{color:#1f7a3d}
 
 /* layout */
 .app{display:flex;min-height:100vh}
