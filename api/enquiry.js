@@ -1,5 +1,6 @@
 const { put } = require('@vercel/blob');
 const { sendMail } = require('./_lib/mailer');
+const { recipientFor } = require('./_lib/recipients');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_RESUME_BYTES = 5 * 1024 * 1024;
@@ -12,10 +13,6 @@ const REQUIRED_FIELDS = {
   'sygnific-enquiry': ['name', 'company', 'email', 'phone', 'message'],
 };
 
-// Sygnific Infra enquiries go to Sygnific's own inboxes instead of SMTP_TO.
-const RECIPIENTS = {
-  'sygnific-enquiry': process.env.SYGNIFIC_SMTP_TO || 'info@sygnificinfra.com, mayur.d@sygnificinfra.com',
-};
 
 const LABELS = {
   name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', interest: 'Interest',
@@ -125,13 +122,17 @@ module.exports = async (req, res) => {
           'job-application': 'New job application',
           'project-enquiry': 'New project enquiry',
           'sygnific-enquiry': 'New Sygnific Infra enquiry',
+          'bhaarat-enquiry': 'New Bhaarat Precast enquiry',
         };
-        const title = titles[formType];
+        // Bhaarat's contact form is saved as a project enquiry but has its own recipients.
+        const host = String(req.headers['x-forwarded-host'] || req.headers.host || '');
+        const mailKey = formType === 'project-enquiry' && /bhaarat/i.test(host) ? 'bhaarat-enquiry' : formType;
+        const title = titles[mailKey];
         await sendMail({
           subject: `${title} — ${entry.fields.name || entry.fields.company || 'BlueWing website'}`,
           html: `<h2>${title}</h2><table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">${rows}</table>`,
           replyTo: entry.fields.email,
-          to: RECIPIENTS[formType],
+          to: (await recipientFor(mailKey)) || undefined,
         });
       } catch (err) {
         emailError = err.message;

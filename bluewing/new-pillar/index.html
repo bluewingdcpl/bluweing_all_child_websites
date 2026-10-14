@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>BlueWing Admin</title>
-<link rel="stylesheet" href="/new-pillar/admin.css?v=3">
+<link rel="stylesheet" href="/new-pillar/admin.css?v=4">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -140,6 +140,7 @@
         <button class="subtab-item" data-subtab="vendor-registration">Vendor registration</button>
         <button class="subtab-item" data-subtab="job-application">Job application</button>
         <button class="subtab-item" data-subtab="sygnific-enquiry">Sygnific Infra enquiry</button>
+        <button class="subtab-item" data-subtab="email-recipients">Email recipients</button>
       </div>
       <div class="subtab-panel is-active" id="subtab-project-enquiry">
         <div class="export-row">
@@ -196,6 +197,13 @@
           <button class="btn btn-sm" data-export-pdf="sygnific-enquiry">Export PDF</button>
         </div>
         <div class="list" id="enquiries-sygnific-list"></div>
+      </div>
+      <div class="subtab-panel" id="subtab-email-recipients">
+        <form id="recipients-form" class="recipients-form">
+          <p class="recipients-note">Choose who receives each website form by email. Separate several addresses with a comma. Leave a box empty to use the default shown under it.</p>
+          <div id="recipients-fields"><div class="empty-note">Loading…</div></div>
+          <button type="submit" class="btn btn-primary" id="recipients-save">Save email recipients</button>
+        </form>
       </div>
     </section>
 
@@ -441,6 +449,6 @@
 
 <div class="toast" id="toast" hidden></div>
 
-<script src="/new-pillar/admin.js?v=9"></script>
+<script src="/new-pillar/admin.js?v=10"></script>
 </body>
 </html>

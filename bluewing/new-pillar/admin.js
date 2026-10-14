@@ -1281,6 +1281,43 @@
     }
   });
 
+  /* ---------- form email recipients ---------- */
+  function renderRecipients(forms) {
+    $('#recipients-fields').innerHTML = forms.map(function (f) {
+      var now = f.value || f.default;
+      return '<label>' + esc(f.label) +
+        '<input type="text" data-recipient="' + esc(f.key) + '" value="' + esc(f.value) + '" placeholder="' + esc(f.default || 'name@example.com') + '">' +
+        '<span class="recipient-now">' + (now
+          ? 'Emails go to: <b>' + esc(now) + '</b>' + (f.value ? '' : ' (default)')
+          : 'No email address set') + '</span>' +
+        '</label>';
+    }).join('');
+  }
+
+  async function loadRecipients() {
+    try {
+      renderRecipients(await api('/api/submissions?recipients'));
+    } catch (err) {
+      $('#recipients-fields').innerHTML = '<div class="empty-note">' + esc(err.message) + '</div>';
+    }
+  }
+
+  $('#recipients-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var recipients = {};
+    $all('[data-recipient]').forEach(function (input) { recipients[input.dataset.recipient] = input.value.trim(); });
+    var btn = $('#recipients-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      renderRecipients(await api('/api/submissions?recipients', { method: 'PUT', body: JSON.stringify({ recipients: recipients }) }));
+      toast('Email recipients saved');
+    } catch (err) {
+      toast(err.message, true);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save email recipients';
+    }
+  });
+
   /* ---------- init ---------- */
   function initAppData() {
     loadLogos().catch(function (e) { toast(e.message, true); });
@@ -1290,6 +1327,7 @@
     loadAuthors().catch(function (e) { toast(e.message, true); });
     loadMediaTab().catch(function (e) { toast(e.message, true); });
     loadEnquiries().catch(function (e) { toast(e.message, true); });
+    loadRecipients();
   }
 
   if (resetToken) {

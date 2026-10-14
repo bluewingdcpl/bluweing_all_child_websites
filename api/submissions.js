@@ -1,10 +1,34 @@
 const { list, del } = require('@vercel/blob');
 const { requireAuth } = require('./_lib/auth');
+const { listRecipients, saveRecipients } = require('./_lib/recipients');
+
+// Form email recipients (/api/submissions?recipients), kept here to stay
+// within the serverless function limit.
+async function recipients(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.method === 'GET') return res.status(200).json(await listRecipients());
+  if (req.method === 'PUT') {
+    let body = req.body;
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
+    try {
+      await saveRecipients((body || {}).recipients || {});
+    } catch (e) {
+      if (/not a valid email|At most/.test(e.message)) return res.status(400).json({ error: e.message });
+      throw e;
+    }
+    return res.status(200).json(await listRecipients());
+  }
+  return res.status(405).json({ error: 'Method not allowed' });
+}
 
 module.exports = async (req, res) => {
   if (!requireAuth(req, res)) return;
 
   try {
+    if ((req.query || {}).recipients !== undefined) return await recipients(req, res);
+
     if (!process.env.BLOB_READ_WRITE_TOKEN) {
       return res.status(500).json({ error: 'Storage is not configured yet. Enable Vercel Blob storage for this project.' });
     }
