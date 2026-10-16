@@ -67,13 +67,13 @@ module.exports = async (req, res) => {
       try {
         const files = (await listFiles(UPLOAD_DIR + '/')).filter((p) => IMAGE_RE.test(p));
         const seen = new Set(media.map((m) => m.url));
-        const uploads = files.filter(isAdminUpload)
+        // Images already in the index are used on the site: listed once, as site images.
+        const inIndex = (p) => seen.has(p.slice('bluewing'.length));
+        const uploads = files.filter((p) => isAdminUpload(p) && !inIndex(p))
           .sort((a, b) => b.split('/').pop().localeCompare(a.split('/').pop()))
           .map((p) => ({ url: siteUrl(req, p), source: 'upload', preview: rawUrl(p) }));
-        const extra = files.filter((p) => !isAdminUpload(p))
-          .map((p) => p.slice('bluewing'.length))
-          .filter((url) => !seen.has(url))
-          .map((url) => ({ url, source: 'site' }));
+        const extra = files.filter((p) => !isAdminUpload(p) && !inIndex(p))
+          .map((p) => ({ url: p.slice('bluewing'.length), source: 'site' }));
         media.unshift(...uploads);
         media.push(...extra);
       } catch (e) {
@@ -106,6 +106,10 @@ module.exports = async (req, res) => {
       if (!url) return res.status(400).json({ error: 'url is required' });
       const repoPath = repoPathFor(req, url);
       if (repoPath && isAdminUpload(repoPath)) {
+        const { data: index } = await readJson('data/media-index.json', []);
+        if (index.some((m) => m.url === repoPath.slice('bluewing'.length))) {
+          return res.status(400).json({ error: 'This image is used on the website, so it cannot be deleted here.' });
+        }
         await deleteFile(repoPath, `admin: delete ${repoPath.split('/').pop()}`);
         return res.status(200).json({ ok: true });
       }
