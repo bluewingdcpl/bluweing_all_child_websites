@@ -80,4 +80,49 @@ async function writeJson(path, data, message) {
   return json;
 }
 
-module.exports = { readJson, writeJson };
+// Public URL GitHub serves a repo file from straight after it is committed
+// (the site itself only has it after the next deploy).
+function rawUrl(path) {
+  return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}`;
+}
+
+let treeCache = null;
+
+// Adds a new file (base64 content) to the repo.
+async function createFile(path, base64, message) {
+  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...headers(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: base64, branch: BRANCH }),
+  });
+  if (!res.ok) throw new Error(`GitHub upload failed (${res.status}): ${await res.text()}`);
+  treeCache = null;
+  return res.json();
+}
+
+async function deleteFile(path, message) {
+  const meta = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`, { headers: headers() });
+  if (meta.status === 404) return;
+  if (!meta.ok) throw new Error(`GitHub read failed (${meta.status}): ${await meta.text()}`);
+  const { sha } = await meta.json();
+  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'DELETE',
+    headers: { ...headers(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, sha, branch: BRANCH }),
+  });
+  if (!res.ok) throw new Error(`GitHub delete failed (${res.status}): ${await res.text()}`);
+  treeCache = null;
+}
+
+// Paths of all files under a folder, from one call for the whole repo tree.
+async function listFiles(prefix) {
+  if (!treeCache || Date.now() - treeCache.at > CACHE_TTL_MS) {
+    const res = await fetch(`${API}/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`, { headers: headers() });
+    if (!res.ok) throw new Error(`GitHub list failed (${res.status}): ${await res.text()}`);
+    const json = await res.json();
+    treeCache = { at: Date.now(), paths: json.tree.filter((t) => t.type === 'blob').map((t) => t.path) };
+  }
+  return treeCache.paths.filter((p) => p.startsWith(prefix));
+}
+
+module.exports = { readJson, writeJson, rawUrl, createFile, deleteFile, listFiles };

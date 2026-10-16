@@ -1,6 +1,7 @@
 const { list, del } = require('@vercel/blob');
-const { readJson, writeJson } = require('./_lib/github');
+const { readJson, writeJson, listFiles, deleteFile, rawUrl } = require('./_lib/github');
 const { requireAuth } = require('./_lib/auth');
+const { UPLOAD_DIR, IMAGE_RE, siteUrl, repoPathFor, isAdminUpload } = require('./_lib/repo-uploads');
 
 // Company logos set from the admin panel (/api/media?logos). The websites read
 // them publicly; an empty value means "use the logo built into the page".
@@ -61,6 +62,24 @@ module.exports = async (req, res) => {
       const { data: siteImages } = await readJson('data/media-index.json', []);
       const media = siteImages.map((m) => ({ url: m.url, source: 'site' }));
 
+      // Everything in bluewing/assets/uploads: admin uploads first (newest first),
+      // then site images that are not in the index yet.
+      try {
+        const files = (await listFiles(UPLOAD_DIR + '/')).filter((p) => IMAGE_RE.test(p));
+        const seen = new Set(media.map((m) => m.url));
+        const uploads = files.filter(isAdminUpload)
+          .sort((a, b) => b.split('/').pop().localeCompare(a.split('/').pop()))
+          .map((p) => ({ url: siteUrl(req, p), source: 'upload', preview: rawUrl(p) }));
+        const extra = files.filter((p) => !isAdminUpload(p))
+          .map((p) => p.slice('bluewing'.length))
+          .filter((url) => !seen.has(url))
+          .map((url) => ({ url, source: 'site' }));
+        media.unshift(...uploads);
+        media.push(...extra);
+      } catch (e) {
+        console.error('repo uploads list failed:', e.message);
+      }
+
       if (process.env.BLOB_READ_WRITE_TOKEN) {
         const items = [];
         let cursor;
@@ -83,13 +102,18 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'DELETE') {
-      if (!process.env.BLOB_READ_WRITE_TOKEN) {
-        return res.status(500).json({ error: 'Image storage is not configured yet.' });
-      }
       const { url } = req.query || {};
       if (!url) return res.status(400).json({ error: 'url is required' });
+      const repoPath = repoPathFor(req, url);
+      if (repoPath && isAdminUpload(repoPath)) {
+        await deleteFile(repoPath, `admin: delete ${repoPath.split('/').pop()}`);
+        return res.status(200).json({ ok: true });
+      }
       if (!url.includes('blob.vercel-storage.com')) {
         return res.status(400).json({ error: 'Only uploaded images can be deleted, not images used elsewhere on the site.' });
+      }
+      if (!process.env.BLOB_READ_WRITE_TOKEN) {
+        return res.status(500).json({ error: 'Image storage is not configured yet.' });
       }
       await del(url);
       return res.status(200).json({ ok: true });

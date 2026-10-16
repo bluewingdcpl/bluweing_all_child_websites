@@ -51,26 +51,63 @@
     });
   }
 
+  // A base64 JSON POST must stay under the serverless request limit (4.5 MB).
+  var MAX_POST_BYTES = 3 * 1024 * 1024;
+
+  // Shrinks large photos in the browser (max 2560 px, WebP) so they fit the upload limit.
+  function shrinkImage(file, maxSide, quality) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+      var src = URL.createObjectURL(file);
+      img.onload = function () {
+        URL.revokeObjectURL(src);
+        var scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.naturalWidth * scale);
+        canvas.height = Math.round(img.naturalHeight * scale);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function (blob) {
+          if (!blob || blob.size >= file.size) return resolve(file);
+          resolve(new File([blob], file.name.replace(/\.[^.]+$/, '') + '.webp', { type: 'image/webp' }));
+        }, 'image/webp', quality);
+      };
+      img.onerror = function () { URL.revokeObjectURL(src); resolve(file); };
+      img.src = src;
+    });
+  }
+
   async function uploadFile(file) {
+    var isVideo = file.type.indexOf('video/') === 0;
+    if (!isVideo && /^image\/(jpeg|png|webp)$/.test(file.type) && file.size > 1.5 * 1024 * 1024) {
+      file = await shrinkImage(file, 2560, 0.85);
+      if (file.size > MAX_POST_BYTES) file = await shrinkImage(file, 1920, 0.75);
+    }
     // Videos (and anything else too big for a base64 JSON POST) go straight
     // to Blob storage from the browser, bypassing the serverless function's
     // request-size limit entirely.
-    var isVideo = file.type.indexOf('video/') === 0;
-    if (isVideo || file.size > 4 * 1024 * 1024) {
+    if (isVideo || file.size > MAX_POST_BYTES) {
       if (!window.__bwBlobUpload) throw new Error('Upload helper failed to load — please refresh the page and try again.');
       var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
       var key = 'uploads/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '-' + safeName;
-      var blob = await window.__bwBlobUpload(key, file, {
-        access: 'public',
-        handleUploadUrl: '/api/blob-upload',
-      });
-      return blob.url;
+      try {
+        var blob = await window.__bwBlobUpload(key, file, {
+          access: 'public',
+          handleUploadUrl: '/api/blob-upload',
+        });
+        return blob.url;
+      } catch (err) {
+        if (/token|blob|storage/i.test(err.message || '')) {
+          throw new Error((isVideo ? 'Videos' : 'Files over 3 MB') + ' need Vercel Blob storage. Connect a Blob store to the project in Vercel, or upload a smaller image.');
+        }
+        throw err;
+      }
     }
     var dataBase64 = await fileToBase64(file);
     var result = await api('/api/upload', {
       method: 'POST',
       body: JSON.stringify({ filename: file.name, dataBase64: dataBase64, contentType: file.type }),
     });
+    if (result.stored === 'repo') toast('Uploaded. It shows on the live website in about a minute.');
     return result.url;
   }
 
@@ -343,7 +380,7 @@
       } else {
         gridEl.innerHTML = allMedia.map(function (m) {
           var isSel = selected.indexOf(m.url) !== -1;
-          return '<div class="media-item' + (isSel ? ' is-selected' : '') + '" data-url="' + esc(m.url) + '">' + mediaThumb(m.url) + '</div>';
+          return '<div class="media-item' + (isSel ? ' is-selected' : '') + '" data-url="' + esc(m.url) + '">' + mediaThumb(m.preview || m.url) + '</div>';
         }).join('');
         $all('.media-item', gridEl).forEach(function (el) {
           el.addEventListener('click', function () {
@@ -973,7 +1010,7 @@
         return;
       }
       gridEl.innerHTML = media.map(function (m) {
-        return '<div class="media-item">' + mediaThumb(m.url) +
+        return '<div class="media-item">' + mediaThumb(m.preview || m.url) +
           '<button type="button" class="copy-link" data-url="' + esc(m.url) + '">Copy link</button>' +
           (m.source === 'upload' ? '<button type="button" class="rm" data-url="' + esc(m.url) + '">Delete</button>' : '') +
           '</div>';
@@ -1213,8 +1250,8 @@
   /* ---------- company switcher (sidebar logo) ---------- */
   var COMPANIES = {
     bluewing: { logo: '/assets/BlueWing-logo-2026.svg', name: 'BlueWing Group' },
-    sygnificinfra: { logo: 'https://faak0js5bca1hkm3.public.blob.vercel-storage.com/uploads/1790589781391-z23if3-sy-new-logo-flCmjGVEZAr2ws3v25JHq9RGadYQfk.png', name: 'Sygnific Infra' },
-    bhaaratprecast: { logo: 'https://bluewing.brandismtechnologies.in/wp-content/uploads/2026/06/bh-new-logo.png', name: 'Bhaarat Precast' },
+    sygnificinfra: { logo: '/assets/uploads/2026/09/1790589781391-z23if3-sy-new-logo-flCmjGVEZAr2ws3v25JHq9RGadYQfk.png', name: 'Sygnific Infra' },
+    bhaaratprecast: { logo: '/assets/uploads/2026/06/bh-new-logo.png', name: 'Bhaarat Precast' },
   };
 
   // Logos uploaded from here replace the built-in logo on that company's website
