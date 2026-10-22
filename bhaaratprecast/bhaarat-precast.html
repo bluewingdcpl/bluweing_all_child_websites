@@ -469,6 +469,12 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .ii h3{font-size:1.0rem;line-height:1.35;max-width:16ch}
 @media(max-width:1000px){.ind__g{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.ind__g{grid-template-columns:1fr}.ii{min-height:auto;gap:16px}}
+/* 7 industries, all the same size: one row on desktop; in two columns the spare
+   cell is filled with a blank tile so the grid lines stay even */
+.ind__g--7{grid-template-columns:repeat(7,1fr)}
+.ind__g--7 .ii{padding-inline:clamp(18px,1.6vw,26px)}
+@media(max-width:1000px){.ind__g--7{grid-template-columns:1fr 1fr}.ind__g--7::after{content:"";background:var(--ink)}}
+@media(max-width:520px){.ind__g--7{grid-template-columns:1fr}.ind__g--7::after{display:none}}
 
 /* ── FAQ ───────────────────────────────────────────────── */
 .faq{padding-block:var(--sec-y)}
@@ -1045,7 +1051,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <p>A state-of-the-art precast manufacturing facility, engineered to global standards.</p>
 <div class="stmt__m">
 <div><span>Location</span><b>Ahmedabad</b></div>
-<div><span>Machinery</span><b>German-engineered</b></div>
+<div><span>Machinery</span><b>Europe Based</b></div>
 </div>
 </div>
 </div>
@@ -1091,11 +1097,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 </div>
 </div>
 <div class="comp__set">
-<p class="comp__h">Architectural &amp; custom components</p>
+<p class="comp__h">Custom components</p>
 <div class="comp__g">
-<a class="cc" href="precast-products.html">Facade Panels<svg><use href="#i-arr"/></svg></a>
-<a class="cc" href="precast-products.html">Architectural Elements<svg><use href="#i-arr"/></svg></a>
-<a class="cc" href="precast-products.html">Customised Structural Modules<svg><use href="#i-arr"/></svg></a>
+<a class="cc" href="precast-products.html">Customized Structural Modules<svg><use href="#i-arr"/></svg></a>
 </div>
 </div>
 </div>
@@ -1110,8 +1114,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <p>The facility has been designed to meet global standards in precision manufacturing, quality assurance and production efficiency.</p>
 </div>
 <div class="strip__g rv" style="background:var(--line)">
-<div class="sp"><div><h3>State-of-the-art precast production plant</h3></div></div>
-<div class="sp"><div><h3>Advanced German-engineered machinery</h3></div></div>
+<div class="sp"><div><h3>State-of-the-art precast Manufacturing Unit</h3></div></div>
+<div class="sp"><div><h3>Advanced European machinery</h3></div></div>
 <div class="sp"><div><h3>Factory-controlled manufacturing environment</h3></div></div>
 <div class="sp"><div><h3>High production efficiency and consistent output</h3></div></div>
 <div class="sp"><div><h3>Quality monitoring across every stage of production</h3></div></div>
@@ -1127,15 +1131,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div><p class="eyebrow">Industries we serve</p><h2>Supporting high-performance <em>infrastructure projects.</em></h2></div>
 <p>Bhaarat Precast solutions are designed to support complex, large-scale construction projects across multiple sectors.</p>
 </div>
-<div class="ind__g rv">
-<div class="ii"><svg><use href="#i-hotel"/></svg><h3>Hotels &amp; Hospitality</h3></div>
-<div class="ii"><svg><use href="#i-server"/></svg><h3>Data Centers</h3></div>
-<div class="ii"><svg><use href="#i-trophy"/></svg><h3>Sports Complexes</h3></div>
-<div class="ii"><svg><use href="#i-health"/></svg><h3>Hospitals &amp; Healthcare</h3></div>
-<div class="ii"><svg><use href="#i-factory"/></svg><h3>Industrial Plants</h3></div>
+<div class="ind__g ind__g--7 rv">
+<div class="ii"><svg><use href="#i-school"/></svg><h3>Institutes &amp; Hostels</h3></div>
+<div class="ii"><svg><use href="#i-health"/></svg><h3>Hospitals</h3></div>
+<div class="ii"><svg><use href="#i-hotel"/></svg><h3>Hotels</h3></div>
+<div class="ii"><svg><use href="#i-factory"/></svg><h3>Industries</h3></div>
 <div class="ii"><svg><use href="#i-plane"/></svg><h3>Airports</h3></div>
-<div class="ii"><svg><use href="#i-school"/></svg><h3>Institutional Buildings</h3></div>
-<div class="ii"><svg><use href="#i-home"/></svg><h3>Hostels &amp; Residential</h3></div>
+<div class="ii"><svg><use href="#i-server"/></svg><h3>Data Center</h3></div>
+<div class="ii"><svg><use href="#i-trophy"/></svg><h3>Sports Complex</h3></div>
 </div>
 </div>
 </section>
@@ -1151,7 +1154,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div class="wc"><svg class="wc__ic"><use href="#i-layers"/></svg><h3>Design certainty</h3><p>Elements are engineered, detailed and approved before casting, so tolerances are known and clashes are resolved on paper rather than on site.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-factory"/></svg><h3>Factory-controlled production</h3><p>Curing, cover and finish quality are held constant regardless of monsoon, temperature or site labour availability.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-cal"/></svg><h3>Speed in execution</h3><p>Casting runs in parallel with foundations, so the structure rises as soon as the substructure is ready.</p></div>
-<div class="wc"><svg class="wc__ic"><use href="#i-cog"/></svg><h3>Advanced German technology</h3><p>German-engineered machinery drives dimensional accuracy and repeatability across every production run.</p></div>
+<div class="wc"><svg class="wc__ic"><use href="#i-cog"/></svg><h3>Advanced European Machinery</h3><p>European machinery drives dimensional accuracy and repeatability across every production run.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-truck"/></svg><h3>Production at scale</h3><p>High production efficiency and consistent output, engineered for transport and lift from the first drawing.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-globe"/></svg><h3>Reduced material waste</h3><p>Controlled batching and reusable moulds cut wet-trade wastage and leave a cleaner, safer site.</p></div>
 </div>
