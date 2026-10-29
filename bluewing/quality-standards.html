@@ -845,13 +845,13 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 @media(max-width:760px){.proto{grid-template-columns:1fr}}
 
 /* ── Badge row (certifications) ────────────────────────── */
-.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px);
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);
   margin-top:clamp(36px,4vw,56px)}
 .badge{border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,2.4vw,30px);text-align:center}
 .badge svg{width:30px;height:30px;color:var(--accent);stroke-width:1.4;margin:0 auto 14px}
 .badge b{display:block;font-family:var(--f-display);font-size:1.05rem;font-weight:600;margin-bottom:5px}
 .badge span{font-size:var(--fs-xs);color:var(--steel)}
-@media(max-width:900px){.badges{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.badges{grid-template-columns:1fr}}
 
 /* ── Precast product spec rows ─────────────────────────── */
 .prod{padding-block:var(--sec-y)}
@@ -1105,13 +1105,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <section class="abt gfx">
 <div class="shell">
 <div class="rv" style="max-width:56ch">
-<span class="mark">ISO</span>
-<p class="eyebrow">ISO 9001:2015</p>
-<h2 style="font-size:var(--fs-h2);margin:16px 0 20px">Quality is a system, <em style="font-style:normal;color:var(--accent)">not an intention.</em></h2>
-<p style="color:var(--steel)">The certification is not the point; the operating discipline behind it is. Ask for our ITPs and material approval registers during tender — they are the real test of any contractor's quality claim.</p>
+<h2 style="font-size:var(--fs-h2);margin:0">Quality is a system, <em style="font-style:normal;color:var(--accent)">not an intention.</em></h2>
 </div>
 <div class="badges rv">
-<div class="badge"><svg><use href="#i-award"/></svg><b>ISO 9001:2015</b><span>Certified quality management system</span></div>
 <div class="badge"><svg><use href="#i-check"/></svg><b>Hold points</b><span>Work stops until inspection is signed off</span></div>
 <div class="badge"><svg><use href="#i-cog"/></svg><b>Third-party testing</b><span>Concrete, steel and critical assemblies</span></div>
 <div class="badge"><svg><use href="#i-eye"/></svg><b>Full traceability</b><span>Every batch back to an approved source</span></div>
