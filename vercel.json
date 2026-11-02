@@ -18,7 +18,7 @@
     },
     { "source": "/blog", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/blog/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
-    { "source": "/category/:path*", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/category/:path(.*)", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project", "permanent": true },
     { "source": "/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project", "permanent": true },
     { "source": "/educational-campus-construction-building-around-the-academic-calendar", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/educational-campus-construction-building-around-the-academic-calendar", "permanent": true },
