@@ -18,7 +18,18 @@
     },
     { "source": "/blog", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/blog/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
-    { "source": "/category/:path(.*)", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/category", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/category/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/category/construction-techniques/precast-construction/:rest(.*)", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/category/precast-construction", "permanent": true },
+    { "source": "/category/construction-techniques/precast-construction", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/category/precast-construction", "permanent": true },
+    { "source": "/category/:slug", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/category/:slug", "permanent": true },
+    { "source": "/category/:slug/:rest(.*)", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/category/:slug", "permanent": true },
+    { "source": "/tag", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/tag/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/tag/post-tension-slabs-2", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/tag/post-tension-slabs", "permanent": true },
+    { "source": "/tag/post-tension-slabs-2/:rest(.*)", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/tag/post-tension-slabs", "permanent": true },
+    { "source": "/tag/:slug", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/tag/:slug", "permanent": true },
+    { "source": "/tag/:slug/:rest(.*)", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/tag/:slug", "permanent": true },
     { "source": "/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project", "permanent": true },
     { "source": "/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/turnkey-epc-or-contractor-managed-which-delivery-model-fits-your-project", "permanent": true },
     { "source": "/educational-campus-construction-building-around-the-academic-calendar", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog/educational-campus-construction-building-around-the-academic-calendar", "permanent": true },
@@ -210,6 +221,10 @@
     {
       "source": "/",
       "destination": "/bluewing/index.html"
+    },
+    {
+      "source": "/blog/:type(category|tag)/:slug",
+      "destination": "/bluewing/blog-archive.html"
     },
     {
       "source": "/blog/:slug([a-z0-9]+(?:-[a-z0-9]+)*)",

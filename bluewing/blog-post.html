@@ -923,6 +923,21 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
   text-transform:uppercase;color:var(--steel-2)}
 .byline--end{margin:40px 0 0;padding:20px 24px;border:0;background:var(--concrete);border-radius:var(--r)}
 .rt__body .byline img{max-width:none;max-height:none;margin:0;cursor:default}
+/* category badge above the article, tag chips below it */
+.post-meta,.post-tags{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.post-meta{margin:0 0 24px}
+.post-tags{margin-top:40px}
+.post-meta[hidden],.post-tags[hidden]{display:none}
+.post-meta__l,.post-tags__l{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--steel-2);margin-right:6px}
+.post-cat{display:inline-flex;padding:6px 14px;border-radius:999px;background:var(--accent);color:#fff;font-size:var(--fs-sm);font-weight:500}
+.post-tag{display:inline-flex;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);
+  color:var(--steel);font-size:var(--fs-sm)}
+.rt__body a.post-cat,.rt__body a.post-tag{text-decoration:none;transition:background var(--d2) var(--ease),color var(--d2) var(--ease),border-color var(--d2) var(--ease)}
+.rt__body a.post-cat,.rt__body a.post-cat:hover{color:#fff}
+.rt__body a.post-cat:hover{background:var(--ink)}
+.rt__body a.post-tag{color:var(--steel)}
+.rt__body a.post-tag:hover{color:var(--accent);border-color:var(--accent)}
 .tagrow{display:flex;flex-wrap:wrap;gap:8px}
 .rt__body .acc{border-top:1px solid var(--line)}
 .rt__body .acc__p ul{margin:0 0 18px}
@@ -1129,16 +1144,17 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <p class="eyebrow" id="bp-category2">Blog</p>
 <h2>Share this article</h2>
 <p>Republication with attribution is welcome.</p>
-<p id="bp-tags" style="margin-top:14px;font-size:var(--fs-sm);color:var(--steel)"></p>
 <a class="btn btn--accent" style="margin-top:22px" href="/contact-us.html">Talk to our team <svg><use href="#i-arr"/></svg></a>
 </div>
 <div class="rt__body">
 <div id="bp-media" style="margin-bottom:24px"></div>
+<div class="post-meta" id="bp-meta" hidden></div>
 <div id="bp-content"></div>
 <div id="bp-faq-section" style="display:none">
 <h3>FAQs</h3>
 <div class="acc" id="bp-faq-list"></div>
 </div>
+<div class="post-tags" id="bp-tag-list" hidden></div>
 <div class="byline byline--end" id="bp-byline" style="display:none"></div>
 </div>
 </div>
@@ -1525,8 +1541,24 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
     document.getElementById('bp-category2').textContent = p.category || 'Blog';
     document.getElementById('bp-lead').textContent = p.excerpt || '';
     document.getElementById('bp-content').innerHTML = p.content || '';
+    // category badges and tag chips link to their archive pages (/blog/category/<slug>, /blog/tag/<slug>)
+    function slugify(s) {
+      return String(s || '').toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+    var cats = (Array.isArray(p.categories) && p.categories.length) ? p.categories : (p.category ? [p.category] : []);
+    if (cats.length) {
+      var meta = document.getElementById('bp-meta');
+      meta.innerHTML = '<span class="post-meta__l">' + (cats.length > 1 ? 'Categories' : 'Category') + '</span>' + cats.map(function (c) {
+        return '<a class="post-cat" href="/blog/category/' + slugify(c) + '">' + esc(c) + '</a>';
+      }).join('');
+      meta.hidden = false;
+    }
     if (Array.isArray(p.tags) && p.tags.length) {
-      document.getElementById('bp-tags').textContent = 'Tags: ' + p.tags.join(', ');
+      var tagList = document.getElementById('bp-tag-list');
+      tagList.innerHTML = '<span class="post-tags__l">Tags</span>' + p.tags.map(function (t) {
+        return '<a class="post-tag" href="/blog/tag/' + slugify(t) + '">' + esc(t) + '</a>';
+      }).join('');
+      tagList.hidden = false;
     }
     renderMedia(p);
 

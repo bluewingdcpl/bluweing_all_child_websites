@@ -230,14 +230,19 @@
       </label>
 
       <div class="row-2">
-        <label>Category
-          <input type="text" id="blog-category" list="blog-category-list" placeholder="e.g. Construction Industry">
-          <datalist id="blog-category-list"></datalist>
+        <label>Main category (shown on the blog card)
+          <select id="blog-category-select"></select>
+          <input type="text" id="blog-category" placeholder="New category name, e.g. Interior Fit-out" hidden>
         </label>
         <label>Tags (comma separated)
           <input type="text" id="blog-tags" placeholder="e.g. precast, ahmedabad, epc">
         </label>
       </div>
+
+      <fieldset class="media-type-fs">
+        <legend>More categories (the post is also listed under these)</legend>
+        <div class="media-type-opts" id="blog-more-categories"></div>
+      </fieldset>
 
       <label>Author
         <select id="blog-author"><option value="">No author</option></select>
@@ -315,8 +320,8 @@
           </select>
         </label>
         <label>Category
-          <input type="text" id="project-category" list="project-category-list" placeholder="e.g. Residential">
-          <datalist id="project-category-list"></datalist>
+          <select id="project-category-select"></select>
+          <input type="text" id="project-category" placeholder="New category name, e.g. Residential" hidden>
         </label>
       </div>
       <label>Tags (comma separated)
@@ -459,6 +464,6 @@
 
 <div class="toast" id="toast" hidden></div>
 
-<script src="/new-pillar/admin.js?v=12"></script>
+<script src="/new-pillar/admin.js?v=14"></script>
 </body>
 </html>

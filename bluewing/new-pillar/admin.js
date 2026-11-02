@@ -525,7 +525,7 @@
       var img = p.coverImage || (p.media && p.media[0] && p.media[0].url) || '';
       return '<div class="item-card">' +
         (img ? '<img src="' + esc(img) + '">' : '<div style="width:56px;height:56px;background:#eee;border-radius:8px"></div>') +
-        '<div class="info"><h4>' + esc(p.title) + '</h4><p>' + esc(p.category || 'Uncategorised') + (p.tags && p.tags.length ? ' · ' + esc(p.tags.join(', ')) : '') + '</p></div>' +
+        '<div class="info"><h4>' + esc(p.title) + '</h4><p>' + esc(postCategories(p).join(', ') || 'Uncategorised') + (p.tags && p.tags.length ? ' · ' + esc(p.tags.join(', ')) : '') + '</p></div>' +
         '<span class="badge' + (p.published !== false ? ' on' : '') + '">' + (p.published !== false ? 'Published' : 'Draft') + '</span>' +
         '<div class="actions">' +
         '<button class="btn btn-sm" data-edit="' + p.id + '">Edit</button>' +
@@ -547,15 +547,62 @@
     });
   }
 
-  function refreshCategoryList(datalistId, items, field) {
-    var vals = Array.from(new Set(items.map(function (i) { return i[field]; }).filter(Boolean)));
-    $(datalistId).innerHTML = vals.map(function (v) { return '<option value="' + esc(v) + '">'; }).join('');
+  // Category picker: a dropdown of the categories already in use plus "+ Add new category",
+  // which shows a text box for the new name. The text input always holds the chosen value.
+  var NEW_CATEGORY = '__new__';
+  // Blog posts can be in several categories (main one first); projects only have `category`.
+  function postCategories(p) {
+    return (p.categories && p.categories.length ? p.categories : [p.category]).filter(Boolean);
   }
+  function categoryNames(items) {
+    var names = [];
+    items.forEach(function (i) { names = names.concat(postCategories(i)); });
+    return Array.from(new Set(names)).sort(function (a, b) { return a.localeCompare(b); });
+  }
+  function fillCategoryPicker(selectSel, inputSel, items, current) {
+    var vals = categoryNames(items);
+    if (current && vals.indexOf(current) === -1) vals.push(current);
+    vals.sort(function (a, b) { return a.localeCompare(b); });
+    var sel = $(selectSel), input = $(inputSel);
+    sel.innerHTML = '<option value="">Select a category</option>' +
+      vals.map(function (v) { return '<option value="' + esc(v) + '">' + esc(v) + '</option>'; }).join('') +
+      '<option value="' + NEW_CATEGORY + '">+ Add new category…</option>';
+    sel.value = current || '';
+    input.value = current || '';
+    input.hidden = true;
+  }
+  function setupCategoryPicker(selectSel, inputSel) {
+    var sel = $(selectSel), input = $(inputSel);
+    sel.addEventListener('change', function () {
+      var adding = sel.value === NEW_CATEGORY;
+      input.hidden = !adding;
+      input.value = adding ? '' : sel.value;
+      if (adding) input.focus();
+    });
+  }
+  function categoryMissing(selectSel, inputSel) {
+    return $(selectSel).value === NEW_CATEGORY && !$(inputSel).value.trim();
+  }
+  setupCategoryPicker('#blog-category-select', '#blog-category');
+  setupCategoryPicker('#project-category-select', '#project-category');
+
+  // "More categories" checkboxes: every blog category except the main one.
+  function renderMoreCategories(checked) {
+    var main = $('#blog-category').value.trim();
+    var names = categoryNames(blogPosts);
+    checked.forEach(function (c) { if (names.indexOf(c) === -1) names.push(c); });
+    $('#blog-more-categories').innerHTML = names.filter(function (c) { return c !== main; }).map(function (c) {
+      return '<label class="radio-pill"><input type="checkbox" value="' + esc(c) + '"' + (checked.indexOf(c) !== -1 ? ' checked' : '') + '> ' + esc(c) + '</label>';
+    }).join('');
+  }
+  function moreCategoriesChecked() {
+    return $all('#blog-more-categories input:checked').map(function (i) { return i.value; });
+  }
+  $('#blog-category-select').addEventListener('change', function () { renderMoreCategories(moreCategoriesChecked()); });
 
   async function loadBlog() {
     blogPosts = await api('/api/blog');
     renderBlogList();
-    refreshCategoryList('#blog-category-list', blogPosts, 'category');
   }
 
   var faqState = [];
@@ -592,7 +639,9 @@
     $('#blog-id').value = post ? post.id : '';
     $('#blog-title').value = post ? post.title : '';
     $('#blog-excerpt').value = post ? post.excerpt : '';
-    $('#blog-category').value = post ? post.category : '';
+    var cats = post ? postCategories(post) : [];
+    fillCategoryPicker('#blog-category-select', '#blog-category', blogPosts, cats[0] || '');
+    renderMoreCategories(cats.slice(1));
     $('#blog-tags').value = post && post.tags ? post.tags.join(', ') : '';
     $('#blog-author').value = post ? (post.authorId || '') : '';
     $('#blog-seo-title').value = post ? (post.seoTitle || '') : '';
@@ -615,12 +664,16 @@
   $('#blog-save-btn').addEventListener('click', async function () {
     var title = $('#blog-title').value.trim();
     if (!title) { toast('Title is required', true); return; }
+    if (categoryMissing('#blog-category-select', '#blog-category')) { toast('Type the new category name', true); return; }
+    var categories = [$('#blog-category').value.trim()].concat(moreCategoriesChecked()).filter(Boolean);
+    categories = categories.filter(function (c, i) { return categories.indexOf(c) === i; });
     var payload = {
       id: $('#blog-id').value || undefined,
       title: title,
       excerpt: $('#blog-excerpt').value.trim(),
       content: getBlogRTE().getHTML(),
-      category: $('#blog-category').value.trim(),
+      category: categories[0] || '',
+      categories: categories,
       tags: $('#blog-tags').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
       faqs: faqState.filter(function (f) { return f.question.trim() && f.answer.trim(); }),
       authorId: $('#blog-author').value,
@@ -745,7 +798,6 @@
   async function loadProjects() {
     projects = await api('/api/projects');
     renderProjectsList();
-    refreshCategoryList('#project-category-list', projects, 'category');
   }
 
   function openProjectModal(p) {
@@ -753,7 +805,7 @@
     $('#project-id').value = p ? p.id : '';
     $('#project-title').value = p ? p.title : '';
     $('#project-status').value = p ? p.status : 'Ongoing';
-    $('#project-category').value = p ? p.category : '';
+    fillCategoryPicker('#project-category-select', '#project-category', projects, p ? p.category : '');
     $('#project-tags').value = p && p.tags ? p.tags.join(', ') : '';
     $('#project-photo-caption').value = p ? (p.photoCaption || '') : '';
     $('#project-photo-credit').value = p ? (p.photoCredit || '') : '';
@@ -771,6 +823,7 @@
   $('#project-save-btn').addEventListener('click', async function () {
     var title = $('#project-title').value.trim();
     if (!title) { toast('Title is required', true); return; }
+    if (categoryMissing('#project-category-select', '#project-category')) { toast('Type the new category name', true); return; }
     var payload = {
       id: $('#project-id').value || undefined,
       title: title,

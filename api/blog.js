@@ -11,6 +11,12 @@ function slugify(str) {
     .replace(/(^-|-$)+/g, '');
 }
 
+// A post's categories, main one first. `category` keeps the main one for the cards and breadcrumb.
+function categoriesOf(post) {
+  const list = Array.isArray(post.categories) ? post.categories : [post.category];
+  return Array.from(new Set(list.map((c) => String(c || '').trim()).filter(Boolean)));
+}
+
 async function readBody(req) {
   let body = req.body;
   if (typeof body === 'string') {
@@ -55,13 +61,15 @@ module.exports = async (req, res) => {
       while (posts.some((p) => p.slug === slug)) {
         slug = `${baseSlug}-${n++}`;
       }
+      const categories = categoriesOf(body);
       const post = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
         title: body.title,
         slug,
         excerpt: body.excerpt || '',
         content: body.content || '',
-        category: body.category || '',
+        category: categories[0] || '',
+        categories,
         tags: Array.isArray(body.tags) ? body.tags : [],
         faqs: Array.isArray(body.faqs) ? body.faqs.filter((f) => f && f.question && f.answer) : [],
         authorId: body.authorId || '',
@@ -93,10 +101,13 @@ module.exports = async (req, res) => {
           slug = `${baseSlug}-${n++}`;
         }
       }
+      const categories = (Array.isArray(body.categories) || body.category !== undefined) ? categoriesOf(body) : categoriesOf(existing);
       posts[idx] = {
         ...existing,
         ...body,
         slug,
+        category: categories[0] || '',
+        categories,
         tags: Array.isArray(body.tags) ? body.tags : existing.tags,
         faqs: Array.isArray(body.faqs) ? body.faqs.filter((f) => f && f.question && f.answer) : existing.faqs,
         media: Array.isArray(body.media) ? body.media : existing.media,
