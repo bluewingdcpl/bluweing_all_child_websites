@@ -178,12 +178,15 @@
     "title": "Money Plant Residency",
     "slug": "money-plant-residency",
     "status": "Completed",
-    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+    "content": "<p>A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.</p>",
     "category": "Residential",
     "tags": [],
     "images": [
       {
-        "url": "/assets/uploads/2026/09/1789452241950-phs79x-cooming_soon-G7nWOIP2Do83qQqaaLsdTaULRCSB1i.png"
+        "url": "/assets/uploads/2026/11/money-plant-residency-1.webp"
+      },
+      {
+        "url": "/assets/uploads/2026/11/money-plant-residency-2.webp"
       }
     ],
     "photoCaption": "",
@@ -229,7 +232,7 @@
       ]
     },
     "date": "2026-09-15",
-    "published": false
+    "published": true
   },
   {
     "id": "mu2ah1vc3r846",
@@ -352,12 +355,15 @@
     "title": "Shivam Elegance",
     "slug": "shivam-elegance",
     "status": "Completed",
-    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+    "content": "<p>A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.</p>",
     "category": "Residential",
     "tags": [],
     "images": [
       {
-        "url": "/assets/uploads/2026/09/1789452241950-phs79x-cooming_soon-G7nWOIP2Do83qQqaaLsdTaULRCSB1i.png"
+        "url": "/assets/uploads/2026/11/shivam-elegance-1.webp"
+      },
+      {
+        "url": "/assets/uploads/2026/11/shivam-elegance-2.webp"
       }
     ],
     "photoCaption": "",
@@ -403,7 +409,7 @@
       ]
     },
     "date": "2026-09-15",
-    "published": false
+    "published": true
   },
   {
     "id": "mu2ah1vcdz1m3",
@@ -932,12 +938,15 @@
     "title": "Anmol One",
     "slug": "anmol-one",
     "status": "Ongoing",
-    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+    "content": "<p>A commercial project balancing operational requirements, user experience and long-term durability.</p>",
     "category": "Commercial",
     "tags": [],
     "images": [
       {
-        "url": "/assets/uploads/2026/09/1789452241950-phs79x-cooming_soon-G7nWOIP2Do83qQqaaLsdTaULRCSB1i.png"
+        "url": "/assets/uploads/2026/11/anmol-one-1.webp"
+      },
+      {
+        "url": "/assets/uploads/2026/11/anmol-one-2.webp"
       }
     ],
     "photoCaption": "",
@@ -983,19 +992,22 @@
       ]
     },
     "date": "2026-09-15",
-    "published": false
+    "published": true
   },
   {
     "id": "mu2a16ggimtf9",
     "title": "Swarnim Greens",
     "slug": "swarnim-greens",
     "status": "Ongoing",
-    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+    "content": "<p>A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.</p>",
     "category": "Residential",
     "tags": [],
     "images": [
       {
-        "url": "/assets/uploads/2026/09/1789452241950-phs79x-cooming_soon-G7nWOIP2Do83qQqaaLsdTaULRCSB1i.png"
+        "url": "/assets/uploads/2026/11/swarnim-greens-1.webp"
+      },
+      {
+        "url": "/assets/uploads/2026/11/swarnim-greens-2.webp"
       }
     ],
     "photoCaption": "",
@@ -1041,7 +1053,7 @@
       ]
     },
     "date": "2026-09-15",
-    "published": false
+    "published": true
   },
   {
     "id": "mu2a16ggrj8x6",
