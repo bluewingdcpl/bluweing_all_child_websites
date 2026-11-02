@@ -692,7 +692,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .bw-lightbox.is-open{display:flex}
 .bw-lightbox img{max-width:90vw;max-height:90vh;border-radius:var(--r);object-fit:contain}
 .bw-lightbox .bw-lightbox-close{position:absolute;top:20px;right:24px;color:#fff;font-size:32px;line-height:1;background:none;border:none;cursor:pointer}
-@media(max-width:900px){.rt__in{grid-template-columns:1fr}.rt__side{position:static}}
+@media(max-width:900px){.rt__in{grid-template-columns:1fr}.rt__side{position:static}
+  /* mobile: category, share, tags and the CTA come after the whole article */
+  .rt__side{order:2}}
 
 /* ── Contact ───────────────────────────────────────────── */
 .ct{padding-block:var(--sec-y)}
