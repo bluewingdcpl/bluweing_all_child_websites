@@ -493,6 +493,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 /* ── Insights ──────────────────────────────────────────── */
 .ins{padding-block:var(--sec-y);background:var(--concrete)}
 .ins__g{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,44px)}
+.ins__more{display:flex;justify-content:center;margin-top:clamp(36px,4vw,56px)}
+.ins__more[hidden]{display:none}
 .art{display:flex;flex-direction:column}
 .art__im{aspect-ratio:3/2;overflow:hidden;border-radius:var(--r);background:var(--paper);margin-bottom:22px}
 .art__im img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
@@ -1115,16 +1117,32 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
     });
   }
-  fetch('/api/blog', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : []; }).then(function(posts){
+  function card(p){
+    var img = p.coverImage || (p.media && p.media[0] && p.media[0].url) || '';
+    var href = '/blog/' + encodeURIComponent(p.slug);
+    return '<a class="art" href="' + esc(href) + '">' +
+      '<div class="art__im">' + (img ? '<img decoding="async" src="' + esc(img) + '" alt="' + esc(p.title) + '" loading="lazy" width="600" height="400">' : '') + '</div>' +
+      '<div><p class="lbl">' + esc(p.category || 'Blog') + '</p><h3>' + esc(p.title) + '</h3></div></a>';
+  }
+  // Newest first, 12 at a time behind a "Load more" button.
+  var PAGE = 12, shown = 0, published = [];
+  var more = document.createElement('div');
+  more.className = 'ins__more';
+  more.innerHTML = '<button type="button" class="btn btn--out">Load more articles</button>';
+  function showMore(){
+    var next = published.slice(shown, shown + PAGE);
+    grid.insertAdjacentHTML('beforeend', next.map(card).join(''));
+    shown += next.length;
+    more.hidden = shown >= published.length;
+  }
+  more.querySelector('button').addEventListener('click', showMore);
+  fetch('/api/blog?list', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : []; }).then(function(posts){
     if (!Array.isArray(posts) || !posts.length) return;
-    var published = posts.filter(function(p){ return p.published !== false; });
-    grid.innerHTML = published.map(function(p){
-      var img = p.coverImage || (p.media && p.media[0] && p.media[0].url) || '';
-      var href = '/blog/' + encodeURIComponent(p.slug);
-      return '<a class="art" href="' + esc(href) + '">' +
-        '<div class="art__im">' + (img ? '<img decoding="async" src="' + esc(img) + '" alt="' + esc(p.title) + '" loading="lazy" width="600" height="400">' : '') + '</div>' +
-        '<div><p class="lbl">' + esc(p.category || 'Blog') + '</p><h3>' + esc(p.title) + '</h3></div></a>';
-    }).join('');
+    published = posts.filter(function(p){ return p.published !== false; })
+      .sort(function(a, b){ return String(b.date || '').localeCompare(String(a.date || '')); });
+    grid.innerHTML = '';
+    showMore();
+    grid.parentNode.insertBefore(more, grid.nextSibling);
   }).catch(function(){});
 })();
 </script>
@@ -1298,7 +1316,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       body.style.height = open ? body.scrollHeight + 'px' : '0px';
     };
     if (btn.getAttribute('aria-expanded') === 'true') requestAnimationFrame(function () { set(true); });
-    btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      // one item open at a time: opening this one closes the others in the same accordion
+      if (open) (btn.closest('.acc') || document).querySelectorAll('.acc__b[aria-expanded="true"]').forEach(function (o) {
+        if (o !== btn) { o.setAttribute('aria-expanded', 'false'); o.nextElementSibling.style.height = '0px'; }
+      });
+      set(open);
+    });
     addEventListener('resize', function () {
       if (btn.getAttribute('aria-expanded') === 'true') body.style.height = body.scrollHeight + 'px';
     });

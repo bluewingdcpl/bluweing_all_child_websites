@@ -24,7 +24,11 @@ module.exports = async (req, res) => {
     if (req.method === 'GET') {
       res.setHeader('Cache-Control', 'no-store');
       const { data: posts } = await readJson(PATH, []);
-      const { slug, id } = req.query || {};
+      const { slug, id, list } = req.query || {};
+      if (list !== undefined) {
+        // Blog list and related articles: everything but the article body.
+        return res.status(200).json(posts.map(({ content, faqs, ...card }) => card));
+      }
       if (slug) {
         const post = posts.find((p) => p.slug === slug);
         if (!post) return res.status(404).json({ error: 'Not found' });
@@ -67,6 +71,8 @@ module.exports = async (req, res) => {
         coverImage: body.coverImage || (Array.isArray(body.media) && body.media[0] ? body.media[0].url : ''),
         date: body.date || new Date().toISOString().slice(0, 10),
         published: body.published !== false,
+        seoTitle: body.seoTitle || '',
+        metaDescription: body.metaDescription || '',
       };
       posts.unshift(post);
       await writeJson(PATH, posts, `admin: add blog post "${post.title}"`);

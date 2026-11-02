@@ -677,6 +677,17 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .rt__body img{max-width:280px;max-height:220px;width:auto;height:auto;object-fit:cover;border-radius:var(--r);cursor:zoom-in;display:block;margin:16px 0}
 .rt__body iframe.ql-video{width:100%;max-width:640px;aspect-ratio:16/9;height:auto;border-radius:var(--r);border:0;display:block;margin:20px 0}
 .rt__body video{max-width:100%;border-radius:var(--r);display:block;margin:20px 0}
+.rt__body h4{font-size:1.12rem;margin:28px 0 12px;scroll-margin-top:110px}
+.rt__body ol{margin:0 0 20px;padding-left:22px;list-style:decimal}
+.rt__body ol li{padding-left:6px}
+.rt__body ol li::before{display:none}
+.rt__body ol li::marker{color:var(--accent);font-weight:600}
+.rt__body blockquote{margin:24px 0;padding:4px 0 4px 20px;border-left:2px solid var(--accent)}
+.rt__body .tbl{overflow-x:auto;margin:20px 0 24px}
+.rt__body table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.rt__body td,.rt__body th{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top;color:var(--steel)}
+.rt__body tr:first-child td,.rt__body th{background:var(--concrete);color:var(--ink)}
+.rt__body .cap{font-size:var(--fs-sm);margin-top:-8px}
 .bw-lightbox{position:fixed;inset:0;background:rgba(6,21,35,.92);display:none;align-items:center;justify-content:center;z-index:999;padding:30px;cursor:zoom-out}
 .bw-lightbox.is-open{display:flex}
 .bw-lightbox img{max-width:90vw;max-height:90vh;border-radius:var(--r);object-fit:contain}
@@ -908,6 +919,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .byline b{display:block;font-size:var(--fs-sm);font-weight:600}
 .byline span{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.14em;
   text-transform:uppercase;color:var(--steel-2)}
+.byline--end{margin:40px 0 0;padding:20px 24px;border:0;background:var(--concrete);border-radius:var(--r)}
+.rt__body .byline img{max-width:none;max-height:none;margin:0;cursor:default}
 .tagrow{display:flex;flex-wrap:wrap;gap:8px}
 .rt__body .acc{border-top:1px solid var(--line)}
 .rt__body .acc__p ul{margin:0 0 18px}
@@ -1112,8 +1125,6 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div class="shell rt__in">
 <div class="rt__side rv">
 <p class="eyebrow" id="bp-category2">Blog</p>
-<div class="byline" id="bp-byline" style="display:none"></div>
-
 <h2>Share this article</h2>
 <p>Republication with attribution is welcome.</p>
 <p id="bp-tags" style="margin-top:14px;font-size:var(--fs-sm);color:var(--steel)"></p>
@@ -1126,6 +1137,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <h3>FAQs</h3>
 <div class="acc" id="bp-faq-list"></div>
 </div>
+<div class="byline byline--end" id="bp-byline" style="display:none"></div>
 </div>
 </div>
 </section>
@@ -1307,7 +1319,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       body.style.height = open ? body.scrollHeight + 'px' : '0px';
     };
     if (btn.getAttribute('aria-expanded') === 'true') requestAnimationFrame(function () { set(true); });
-    btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      // one item open at a time: opening this one closes the others in the same accordion
+      if (open) (btn.closest('.acc') || document).querySelectorAll('.acc__b[aria-expanded="true"]').forEach(function (o) {
+        if (o !== btn) { o.setAttribute('aria-expanded', 'false'); o.nextElementSibling.style.height = '0px'; }
+      });
+      set(open);
+    });
     addEventListener('resize', function () {
       if (btn.getAttribute('aria-expanded') === 'true') body.style.height = body.scrollHeight + 'px';
     });
@@ -1477,11 +1496,27 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
   if (slug === 'blog-post.html') slug = '';
   if (!slug) { document.getElementById('bp-title').textContent = 'Article not found'; return; }
 
+  function setMeta(attr, key, value) {
+    var el = document.head.querySelector('meta[' + attr + '="' + key + '"]');
+    if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
+    el.setAttribute('content', value);
+  }
+
   fetch('/api/blog?slug=' + encodeURIComponent(slug), { cache: 'no-store' }).then(function(r){
     if (!r.ok) throw new Error('not found');
     return r.json();
   }).then(function(p){
-    document.title = p.title + ' — BlueWing Group';
+    // SEO title / meta description from the admin (imported from Yoast for the old posts)
+    var desc = p.metaDescription || p.excerpt || '';
+    document.title = p.seoTitle || (p.title + ' — BlueWing Group');
+    setMeta('name', 'description', desc);
+    setMeta('property', 'og:title', p.seoTitle || p.title);
+    setMeta('property', 'og:description', desc);
+    setMeta('property', 'og:url', 'https://www.bluewingconstruction.com/blog/' + p.slug);
+    if (p.coverImage) setMeta('property', 'og:image', new URL(p.coverImage, location.origin).href);
+    var canon = document.head.querySelector('link[rel="canonical"]');
+    if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
+    canon.href = 'https://www.bluewingconstruction.com/blog/' + p.slug;
     document.getElementById('bp-title').textContent = p.title;
     document.getElementById('bp-crumb').textContent = p.title;
     document.getElementById('bp-category').textContent = p.category || 'Blog';
@@ -1503,7 +1538,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
         body.style.height = open ? body.scrollHeight + 'px' : '0px';
       };
       if (btn.getAttribute('aria-expanded') === 'true') requestAnimationFrame(function () { set(true); });
-      btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') !== 'true';
+        // one item open at a time: opening this one closes the others in the same accordion
+        if (open) (btn.closest('.acc') || document).querySelectorAll('.acc__b[aria-expanded="true"]').forEach(function (o) {
+          if (o !== btn) { o.setAttribute('aria-expanded', 'false'); o.nextElementSibling.style.height = '0px'; }
+        });
+        set(open);
+      });
     });
 
     if (Array.isArray(p.faqs) && p.faqs.length) {
@@ -1533,7 +1575,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
           body.style.height = open ? body.scrollHeight + 'px' : '0px';
         };
         if (btn.getAttribute('aria-expanded') === 'true') requestAnimationFrame(function () { set(true); });
-        btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+        btn.addEventListener('click', function () {
+          var open = btn.getAttribute('aria-expanded') !== 'true';
+          // one item open at a time: opening this one closes the others in the same accordion
+          if (open) (btn.closest('.acc') || document).querySelectorAll('.acc__b[aria-expanded="true"]').forEach(function (o) {
+            if (o !== btn) { o.setAttribute('aria-expanded', 'false'); o.nextElementSibling.style.height = '0px'; }
+          });
+          set(open);
+        });
       });
     }
 
@@ -1549,8 +1598,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       }).catch(function(){});
     }
 
-    fetch('/api/blog', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : []; }).then(function(all){
-      var others = all.filter(function(o){ return o.slug !== p.slug && o.published !== false; }).slice(0, 3);
+    fetch('/api/blog?list', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : []; }).then(function(all){
+      var others = all.filter(function(o){ return o.slug !== p.slug && o.published !== false; })
+        .sort(function(a, b){ return String(b.date || '').localeCompare(String(a.date || '')); }).slice(0, 3);
       var relEl = document.getElementById('bp-related');
       if (!others.length) { relEl.closest('section').style.display = 'none'; return; }
       relEl.innerHTML = others.map(function(o){

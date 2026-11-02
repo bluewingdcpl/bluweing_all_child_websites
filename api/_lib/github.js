@@ -46,7 +46,16 @@ async function readJson(path, fallback, useCache = true) {
     }
     if (!res.ok) throw new Error(`GitHub read failed (${res.status}): ${await res.text()}`);
     const json = await res.json();
-    const content = Buffer.from(json.content, 'base64').toString('utf-8');
+    let content;
+    if (json.encoding === 'none' || (!json.content && json.size > 0)) {
+      // Files over 1 MB come back without inline content; fetch those raw.
+      const raw = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`,
+        { headers: { ...headers(), Accept: 'application/vnd.github.raw' } });
+      if (!raw.ok) throw new Error(`GitHub read failed (${raw.status}): ${await raw.text()}`);
+      content = await raw.text();
+    } else {
+      content = Buffer.from(json.content, 'base64').toString('utf-8');
+    }
     const result = { data: JSON.parse(content), sha: json.sha };
     cache.set(path, { result, at: Date.now(), etag: res.headers.get('etag') });
     return result;

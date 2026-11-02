@@ -8,6 +8,9 @@
 <link rel="canonical" href="https://www.bluewingconstruction.com/contact-us.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#061523">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BlueWing Group">
 <meta property="og:locale" content="en_IN">
@@ -1227,7 +1230,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       body.style.height = open ? body.scrollHeight + 'px' : '0px';
     };
     if (btn.getAttribute('aria-expanded') === 'true') requestAnimationFrame(function () { set(true); });
-    btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      // one item open at a time: opening this one closes the others in the same accordion
+      if (open) (btn.closest('.acc') || document).querySelectorAll('.acc__b[aria-expanded="true"]').forEach(function (o) {
+        if (o !== btn) { o.setAttribute('aria-expanded', 'false'); o.nextElementSibling.style.height = '0px'; }
+      });
+      set(open);
+    });
     addEventListener('resize', function () {
       if (btn.getAttribute('aria-expanded') === 'true') body.style.height = body.scrollHeight + 'px';
     });

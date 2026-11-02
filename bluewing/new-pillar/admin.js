@@ -595,6 +595,8 @@
     $('#blog-category').value = post ? post.category : '';
     $('#blog-tags').value = post && post.tags ? post.tags.join(', ') : '';
     $('#blog-author').value = post ? (post.authorId || '') : '';
+    $('#blog-seo-title').value = post ? (post.seoTitle || '') : '';
+    $('#blog-meta-description').value = post ? (post.metaDescription || '') : '';
     var mediaType = post ? (post.mediaType || 'grid') : 'grid';
     $all('input[name="blog-media-type"]').forEach(function (r) { r.checked = r.value === mediaType; });
     $('#blog-video-url').value = post ? (post.videoUrl || '') : '';
@@ -622,6 +624,8 @@
       tags: $('#blog-tags').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
       faqs: faqState.filter(function (f) { return f.question.trim() && f.answer.trim(); }),
       authorId: $('#blog-author').value,
+      seoTitle: $('#blog-seo-title').value.trim(),
+      metaDescription: $('#blog-meta-description').value.trim(),
       mediaType: $('input[name="blog-media-type"]:checked').value,
       media: blogUploader.getItems(),
       videoUrl: $('#blog-video-url').value.trim(),
