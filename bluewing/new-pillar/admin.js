@@ -1318,7 +1318,7 @@
     bluewing: { logo: '/assets/BlueWing-logo-2026.svg', name: 'BlueWing Group' },
     sygnificinfra: { logo: '/assets/uploads/2026/09/1790589781391-z23if3-sy-new-logo-flCmjGVEZAr2ws3v25JHq9RGadYQfk.png', name: 'Sygnific Infra' },
     bhaaratprecast: { logo: '/assets/uploads/2026/06/bh-new-logo.png', name: 'Bhaarat Precast' },
-    alutek: { logo: '/alutek/assets/alutek-logo.png', name: 'AluTek BES' },
+    alutek: { logo: 'https://alutek-bes.vercel.app/assets/alutek-logo.png', name: 'AluTek BES' },
   };
 
   // Logos uploaded from here replace the built-in logo on that company's website
