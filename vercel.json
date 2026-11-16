@@ -17,6 +17,7 @@
       "permanent": true
     },
     { "source": "/alutek", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "https://alutek-bes.vercel.app/", "permanent": false },
+    { "source": "/alutek/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "https://alutek-bes.vercel.app/", "permanent": false },
     { "source": "/alutek/:path*", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "https://alutek-bes.vercel.app/:path*", "permanent": false },
     { "source": "/blog", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/blog/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/blog.html", "permanent": true },
