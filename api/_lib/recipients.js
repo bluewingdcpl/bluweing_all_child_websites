@@ -13,6 +13,7 @@ const FORMS = [
   { key: 'job-application', label: 'BlueWing: Careers page, Job application' },
   { key: 'bhaarat-enquiry', label: 'Bhaarat Precast: Contact page' },
   { key: 'sygnific-enquiry', label: 'Sygnific Infra: Contact form' },
+  { key: 'alutek-enquiry', label: 'AluTek BES: Contact page' },
 ];
 
 function defaults() {
@@ -23,6 +24,7 @@ function defaults() {
     'job-application': main,
     'bhaarat-enquiry': main,
     'sygnific-enquiry': process.env.SYGNIFIC_SMTP_TO || 'info@sygnificinfra.com, mayur.d@sygnificinfra.com',
+    'alutek-enquiry': main,
   };
 }
 

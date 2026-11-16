@@ -6,7 +6,7 @@ const { UPLOAD_DIR, IMAGE_RE, siteUrl, repoPathFor, isAdminUpload } = require('.
 // Company logos set from the admin panel (/api/media?logos). The websites read
 // them publicly; an empty value means "use the logo built into the page".
 const LOGOS_PATH = 'data/logos.json';
-const COMPANIES = ['bluewing', 'sygnificinfra', 'bhaaratprecast'];
+const COMPANIES = ['bluewing', 'sygnificinfra', 'bhaaratprecast', 'alutek'];
 
 function pickLogos(data) {
   const out = {};

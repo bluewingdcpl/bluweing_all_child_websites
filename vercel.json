@@ -16,6 +16,7 @@
       "destination": "/blog/:slug",
       "permanent": true
     },
+    { "source": "/alutek", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/alutek/", "permanent": false },
     { "source": "/blog", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/blog/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/category", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific" } }], "destination": "/blog.html", "permanent": true },
@@ -217,6 +218,14 @@
       "source": "/:path((?!api/).*)",
       "has": [{ "type": "host", "value": { "re": "bhaarat" } }],
       "destination": "/bhaaratprecast/:path"
+    },
+    {
+      "source": "/alutek/",
+      "destination": "/alutek/index.html"
+    },
+    {
+      "source": "/alutek/:path((?!api/).*)",
+      "destination": "/alutek/:path"
     },
     {
       "source": "/",

@@ -12,6 +12,7 @@ const REQUIRED_FIELDS = {
   'vendor-registration': ['company', 'name', 'email', 'phone', 'category', 'city'],
   'job-application': ['name', 'email', 'phone', 'company', 'applyFor'],
   'sygnific-enquiry': ['name', 'company', 'email', 'phone', 'message'],
+  'alutek-enquiry': ['name', 'email', 'phone'],
 };
 
 
@@ -105,7 +106,7 @@ module.exports = async (req, res) => {
 
   try {
     const body = await readBody(req);
-    const formType = ['vendor-registration', 'job-application', 'sygnific-enquiry'].includes(body.formType) ? body.formType : 'project-enquiry';
+    const formType = ['vendor-registration', 'job-application', 'sygnific-enquiry', 'alutek-enquiry'].includes(body.formType) ? body.formType : 'project-enquiry';
     const required = REQUIRED_FIELDS[formType];
 
     for (const field of required) {
@@ -173,6 +174,7 @@ module.exports = async (req, res) => {
           'project-enquiry': 'New project enquiry',
           'sygnific-enquiry': 'New Sygnific Infra enquiry',
           'bhaarat-enquiry': 'New Bhaarat Precast enquiry',
+          'alutek-enquiry': 'New AluTek BES enquiry',
         };
         // Bhaarat's contact form is saved as a project enquiry but has its own recipients.
         const host = String(req.headers['x-forwarded-host'] || req.headers.host || '');

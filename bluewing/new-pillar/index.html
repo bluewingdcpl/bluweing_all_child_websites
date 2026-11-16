@@ -65,6 +65,7 @@
       <option value="bluewing">BlueWing</option>
       <option value="sygnificinfra">Sygnific Infra</option>
       <option value="bhaaratprecast">Bhaarat Precast</option>
+      <option value="alutek">AluTek BES</option>
     </select>
     <div class="logo-actions">
       <button type="button" class="btn btn-sm" id="logo-upload-btn">Upload / Edit logo</button>
@@ -143,6 +144,7 @@
         <button class="subtab-item" data-subtab="vendor-registration">Vendor registration</button>
         <button class="subtab-item" data-subtab="job-application">Job application</button>
         <button class="subtab-item" data-subtab="sygnific-enquiry">Sygnific Infra enquiry</button>
+        <button class="subtab-item" data-subtab="alutek-enquiry">AluTek BES enquiry</button>
         <button class="subtab-item" data-subtab="email-recipients">Email recipients</button>
       </div>
       <div class="subtab-panel is-active" id="subtab-project-enquiry">
@@ -200,6 +202,20 @@
           <button class="btn btn-sm" data-export-pdf="sygnific-enquiry">Export PDF</button>
         </div>
         <div class="list" id="enquiries-sygnific-list"></div>
+      </div>
+      <div class="subtab-panel" id="subtab-alutek-enquiry">
+        <div class="export-row">
+          <select class="export-date-filter" data-date-filter="alutek-enquiry">
+            <option value="all">All time</option>
+            <option value="today">Today</option>
+            <option value="7d">Last 7 days</option>
+            <option value="30d">Last 30 days</option>
+            <option value="month">This month</option>
+          </select>
+          <button class="btn btn-sm" data-export-csv="alutek-enquiry">Export Excel (CSV)</button>
+          <button class="btn btn-sm" data-export-pdf="alutek-enquiry">Export PDF</button>
+        </div>
+        <div class="list" id="enquiries-alutek-list"></div>
       </div>
       <div class="subtab-panel" id="subtab-email-recipients">
         <form id="recipients-form" class="recipients-form">
@@ -464,6 +480,6 @@
 
 <div class="toast" id="toast" hidden></div>
 
-<script src="/new-pillar/admin.js?v=15"></script>
+<script src="/new-pillar/admin.js?v=16"></script>
 </body>
 </html>
