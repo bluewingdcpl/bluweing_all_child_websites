@@ -720,7 +720,7 @@
   function getProjectRTE() { if (!projectRTE) projectRTE = createRTE($('#project-content-rte')); return projectRTE; }
   var projectUploader = createImageUploader($('#project-images-add-btn'), $('#project-images-thumbs'), [], { multiple: true, featurable: true });
   var projects = [];
-  var tableState = { headers: ['Field', 'Value'], rows: [['Status', 'Ongoing'], ['Location', 'Gujarat, India']] };
+  var tableState = { headers: ['Project Particulars', 'Specifications'], rows: [['Status', 'Ongoing'], ['Location', 'Gujarat, India']] };
 
   function renderTableEditor() {
     var t = $('#project-table-editor');
@@ -812,7 +812,7 @@
     projectUploader.setItems(p ? (p.images || []) : []);
     tableState = p && p.table && p.table.headers && p.table.headers.length
       ? { headers: p.table.headers.slice(), rows: p.table.rows.map(function (r) { return r.slice(); }) }
-      : { headers: ['Field', 'Value'], rows: [['Status', 'Ongoing'], ['Location', 'Gujarat, India']] };
+      : { headers: ['Project Particulars', 'Specifications'], rows: [['Status', 'Ongoing'], ['Location', 'Gujarat, India']] };
     renderTableEditor();
     $('#project-published').checked = !p || p.published !== false;
     openModal('project-modal');
