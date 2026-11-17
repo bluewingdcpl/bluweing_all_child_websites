@@ -956,11 +956,15 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <style>.brand__mark--img{height:46px}.hdr.stuck .brand__mark--img{height:40px}.brand__mark--sm.brand__mark--img{height:40px}.ftr__lg--img{height:56px}</style>
 <style>.cta__panel{display:grid;gap:22px}.cta__row{display:flex;gap:16px;align-items:flex-start}.cta__row svg{width:22px;height:22px;flex:none;margin-top:2px;color:var(--accent)}.cta__row b{display:block;margin-bottom:4px}.cta__row span{display:block;font-size:var(--fs-sm);color:var(--on-dark)}</style>
 <style>
-/* "Who We Are" has no photo yet: a faded logo and "Coming soon" hold the space */
-.ph-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;width:100%;
-  aspect-ratio:4/3.4;background:var(--concrete);border-radius:var(--r)}
-.ph-img img{width:46%;max-width:280px;height:auto;opacity:.18}
-.ph-img span{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.22em;text-transform:uppercase;color:var(--steel)}
+/* banner photo (A01 in the client's image deck) behind the flat hero, darkened so the text stays readable */
+.co-hero--photo .co-hero__veil{background:linear-gradient(96deg,rgba(6,21,35,.86) 0%,rgba(6,21,35,.66) 55%,rgba(6,21,35,.52) 100%)}
+.co-hero--photo .co-hero__in{z-index:1}
+.co-hero--photo .credit{position:absolute;right:clamp(16px,3vw,40px);bottom:12px;z-index:1;margin:0;color:rgba(255,255,255,.55)}
+.co-hero--photo .credit a{color:inherit}
+/* the photos are from Wikimedia Commons: their licences (CC BY / CC BY-SA) require this credit line */
+.credit{margin-top:8px;font-size:11px;line-height:1.5;color:var(--steel)}
+.credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.abt__fig .credit{position:relative;z-index:1;text-align:right}
 /* product photos fill their frames (the Bhaarat product rule letterboxes cut-out product shots) */
 .prow__fig img{object-fit:cover;padding:0}
 .prow{scroll-margin-top:110px}
@@ -1060,7 +1064,10 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 
 <main id="main">
 <!-- ══ HERO ════════════════════════════════════════════════ -->
-<section class="co-hero co-hero--flat">
+<section class="co-hero co-hero--flat co-hero--photo">
+<div class="co-hero__bg"><img decoding="async" class="on" src="assets/images/hero-office-blue-hour.webp" alt="Contemporary glass-and-aluminium office building at dusk" width="1600" height="1067" fetchpriority="high"></div>
+<span class="co-hero__veil" aria-hidden="true"></span>
+<p class="credit">Photo: Dietmar Rabich, <a href="https://commons.wikimedia.org/wiki/File:M%C3%BCnster,_LVM,_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
 <div class="shell co-hero__in">
 <div class="co-hero__cp">
 <h1>Integrated Façade and Building Envelope Solutions <b>for Modern Architecture.</b></h1>
@@ -1079,7 +1086,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <!-- ══ WHO WE ARE ══════════════════════════════════════════ -->
 <section class="abt">
 <div class="shell abt__in">
-<div class="abt__fig rv"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="abt__fig rv"><img decoding="async" src="assets/images/who-we-are-corporate-building.webp" alt="Contemporary building with glazed upper levels and aluminium fins" loading="lazy" width="1200" height="1020"><p class="credit">Photo: DYVER, <a href="https://commons.wikimedia.org/wiki/File:Institutsgeb%C3%A4ude_der_Geowissenschaften_an_der_Olshausenstra%C3%9Fe,_Kiel-Ravensberg_-_02.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, cropped</p></div>
 <div class="rv">
 <p class="eyebrow">Who We Are</p>
 <h2>Building Better Envelopes <em>for Modern Architecture</em></h2>
