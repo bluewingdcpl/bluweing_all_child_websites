@@ -986,15 +986,19 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 </style>
 <style>.brand__mark--img{height:46px}.hdr.stuck .brand__mark--img{height:40px}.brand__mark--sm.brand__mark--img{height:40px}.ftr__lg--img{height:56px}</style>
 <style>
-/* AluTek: until the photos are chosen, photo spaces show a faded logo and "Coming soon" */
+/* "Who We Are" has no photo yet: a faded logo and "Coming soon" hold the space */
 .ph-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;width:100%;
-  background:var(--concrete);border-radius:var(--r)}
-/* the faded logo is not a product photo: undo the photo box rules (.prow__fig img, .abt__fig img) */
-.ph-img img{width:46%;max-width:280px;height:auto;opacity:.18;aspect-ratio:auto;padding:0;background:none;border-radius:0}
+  aspect-ratio:4/3.4;background:var(--concrete);border-radius:var(--r)}
+.ph-img img{width:46%;max-width:280px;height:auto;opacity:.18}
 .ph-img span{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.22em;text-transform:uppercase;color:var(--steel)}
-.abt__fig .ph-img{aspect-ratio:4/3.4}
-.prow__fig .ph-img{aspect-ratio:4/3}
+/* product photos fill their frames (the Bhaarat product rule letterboxes cut-out product shots) */
+.prow__fig img{object-fit:cover;padding:0}
 .prow{scroll-margin-top:110px}
+/* four services in one row, with tighter cards */
+.why__g--4{grid-template-columns:repeat(4,1fr)}
+.why__g--4 .wc{padding:clamp(20px,2vw,28px)}
+@media(max-width:1100px){.why__g--4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.why__g--4{grid-template-columns:1fr}}
 /* six building segments, each with a line of description */
 .ind__g--3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:1000px){.ind__g--3{grid-template-columns:1fr 1fr}}
@@ -1097,7 +1101,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <li>Stick Curtain Wall</li>
 </ul>
 </div>
-<div class="prow__fig"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="prow__fig"><img decoding="async" src="assets/images/curtain-wall-systems.webp" alt="Curtain Wall Systems" loading="lazy" width="1200" height="900"></div>
 </article><article class="prow rv" id="doors-windows">
 <div>
 <h2>Aluminium Doors &amp; Windows</h2>
@@ -1112,7 +1116,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <li>Specialised Aluminium Openings</li>
 </ul>
 </div>
-<div class="prow__fig"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="prow__fig"><img decoding="async" src="assets/images/aluminium-doors-windows.webp" alt="Aluminium Doors &amp; Windows" loading="lazy" width="1200" height="900"></div>
 </article><article class="prow rv" id="glazing">
 <div>
 <h2>Architectural Glazing Solutions</h2>
@@ -1126,7 +1130,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <li>Specialised Glass Assemblies</li>
 </ul>
 </div>
-<div class="prow__fig"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="prow__fig"><img decoding="async" src="assets/images/architectural-glazing.webp" alt="Architectural Glazing Solutions" loading="lazy" width="1200" height="900"></div>
 </article><article class="prow rv" id="canopies-skylights">
 <div>
 <h2>Canopies &amp; Skylights</h2>
@@ -1140,7 +1144,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <li>Aluminium Skylight Systems</li>
 </ul>
 </div>
-<div class="prow__fig"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="prow__fig"><img decoding="async" src="assets/images/canopies-skylights.webp" alt="Canopies &amp; Skylights" loading="lazy" width="1200" height="900"></div>
 </article><article class="prow rv" id="cladding">
 <div>
 <h2>Aluminium Cladding Systems</h2>
@@ -1152,7 +1156,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <li>Architectural Metal Cladding Solutions</li>
 </ul>
 </div>
-<div class="prow__fig"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="prow__fig"><img decoding="async" src="assets/images/aluminium-cladding.webp" alt="Aluminium Cladding Systems" loading="lazy" width="1200" height="900"></div>
 </article><article class="prow rv" id="louvers-fins">
 <div>
 <h2>Louvers &amp; Architectural Fins</h2>
@@ -1165,7 +1169,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <li>External Shading Elements</li>
 </ul>
 </div>
-<div class="prow__fig"><span class="ph-img"><img src="assets/alutek-logo.png" alt="" width="1718" height="513" loading="lazy" decoding="async"><span>Coming soon</span></span></div>
+<div class="prow__fig"><img decoding="async" src="assets/images/louvers-architectural-fins.webp" alt="Louvers &amp; Architectural Fins" loading="lazy" width="1200" height="900"></div>
 </article>
 </div>
 </section></main>

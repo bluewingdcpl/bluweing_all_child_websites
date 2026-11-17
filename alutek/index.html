@@ -956,15 +956,19 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <style>.brand__mark--img{height:46px}.hdr.stuck .brand__mark--img{height:40px}.brand__mark--sm.brand__mark--img{height:40px}.ftr__lg--img{height:56px}</style>
 <style>.cta__panel{display:grid;gap:22px}.cta__row{display:flex;gap:16px;align-items:flex-start}.cta__row svg{width:22px;height:22px;flex:none;margin-top:2px;color:var(--accent)}.cta__row b{display:block;margin-bottom:4px}.cta__row span{display:block;font-size:var(--fs-sm);color:var(--on-dark)}</style>
 <style>
-/* AluTek: until the photos are chosen, photo spaces show a faded logo and "Coming soon" */
+/* "Who We Are" has no photo yet: a faded logo and "Coming soon" hold the space */
 .ph-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;width:100%;
-  background:var(--concrete);border-radius:var(--r)}
-/* the faded logo is not a product photo: undo the photo box rules (.prow__fig img, .abt__fig img) */
-.ph-img img{width:46%;max-width:280px;height:auto;opacity:.18;aspect-ratio:auto;padding:0;background:none;border-radius:0}
+  aspect-ratio:4/3.4;background:var(--concrete);border-radius:var(--r)}
+.ph-img img{width:46%;max-width:280px;height:auto;opacity:.18}
 .ph-img span{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.22em;text-transform:uppercase;color:var(--steel)}
-.abt__fig .ph-img{aspect-ratio:4/3.4}
-.prow__fig .ph-img{aspect-ratio:4/3}
+/* product photos fill their frames (the Bhaarat product rule letterboxes cut-out product shots) */
+.prow__fig img{object-fit:cover;padding:0}
 .prow{scroll-margin-top:110px}
+/* four services in one row, with tighter cards */
+.why__g--4{grid-template-columns:repeat(4,1fr)}
+.why__g--4 .wc{padding:clamp(20px,2vw,28px)}
+@media(max-width:1100px){.why__g--4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.why__g--4{grid-template-columns:1fr}}
 /* six building segments, each with a line of description */
 .ind__g--3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:1000px){.ind__g--3{grid-template-columns:1fr 1fr}}
@@ -1096,7 +1100,6 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div class="shell">
 <div class="head rv">
 <div><p class="eyebrow">Our Product Portfolio</p><h2>Our Products <em>&amp; Systems</em></h2></div>
-<div><a class="btn btn--out" href="products.html">Explore Our Solutions <svg><use href="#i-arr"/></svg></a></div>
 </div>
 <div class="rv">
 <div class="comp__g">
@@ -1118,12 +1121,28 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div><p class="eyebrow">Services</p><h2>From Concept <em>to Completion</em></h2></div>
 <p>AluTek aims to provide coordinated building envelope solutions through an integrated approach covering technical planning, material coordination, fabrication and project execution.</p>
 </div>
-<div class="why__g rv">
+<div class="why__g why__g--4 rv">
 <div class="wc"><svg class="wc__ic"><use href="#i-layers"/></svg><h3>Façade Design Coordination</h3><p>Coordination of architectural intent, system requirements and project specifications to develop technically feasible façade solutions.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-cog"/></svg><h3>Engineering &amp; Technical Development</h3><p>Technical development and engineering coordination of façade systems, including system detailing, design coordination, shop drawings and installation-related engineering requirements.</p></div>
-<div class="wc"><svg class="wc__ic"><use href="#i-truck"/></svg><h3>Material Sourcing &amp; Procurement</h3><p>Coordination and sourcing of aluminium profiles, glass, hardware, accessories and other façade components through suitable suppliers and system partners.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-factory"/></svg><h3>Fabrication &amp; Manufacturing</h3><p>Fabrication planning and processing of aluminium and glass façade components in accordance with approved drawings, specifications and project requirements.</p></div>
 <div class="wc"><svg class="wc__ic"><use href="#i-shield"/></svg><h3>Supply &amp; Installation</h3><p>Coordinated supply, site execution and installation of façade systems and building envelope components with a focus on workmanship, safety and quality.</p></div>
+</div>
+</div>
+</section>
+
+<!-- ══ WHY ALUTEK ══════════════════════════════════════════ -->
+<section class="strip">
+<div class="shell">
+<div class="head rv">
+<div><p class="eyebrow">Why AluTek?</p><h2>The AluTek <em>Approach</em></h2></div>
+</div>
+<div class="strip__g rv" style="background:var(--line)">
+<div class="sp"><div><h3>Engineering-Led Solutions</h3><p>We approach building envelope requirements with a focus on technical understanding, engineering coordination and practical execution.</p></div></div>
+<div class="sp"><div><h3>Integrated Product Portfolio</h3><p>Our product range covers multiple aluminium, glass and façade applications, enabling coordinated solutions across different building segments.</p></div></div>
+<div class="sp"><div><h3>Project-Specific Approach</h3><p>Every project has different architectural, structural, functional and commercial requirements. We focus on developing solutions suited to the specific needs of each development.</p></div></div>
+<div class="sp"><div><h3>Quality-Focused Execution</h3><p>We emphasise material quality, fabrication accuracy, installation workmanship and systematic quality checks throughout project execution.</p></div></div>
+<div class="sp"><div><h3>Collaborative Project Delivery</h3><p>We work in coordination with architects, façade consultants, structural consultants, developers, contractors and other project stakeholders.</p></div></div>
+<div class="sp"><div><h3>Commitment to Delivery</h3><p>Planning, procurement coordination, fabrication scheduling and installation management form an important part of our approach to dependable project delivery.</p></div></div>
 </div>
 </div>
 </section>
@@ -1142,23 +1161,6 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div class="ii"><svg><use href="#i-hotel"/></svg><div><h3>Hospitality &amp; Leisure</h3><p>Hotels, resorts, convention centres and entertainment developments.</p></div></div>
 <div class="ii"><svg><use href="#i-factory"/></svg><div><h3>Industrial &amp; Infrastructure</h3><p>Industrial facilities, manufacturing buildings, logistics centres and specialised infrastructure developments.</p></div></div>
 <div class="ii"><svg><use href="#i-layers"/></svg><div><h3>Mixed-Use Developments</h3><p>Integrated developments combining residential, commercial, retail and institutional spaces.</p></div></div>
-</div>
-</div>
-</section>
-
-<!-- ══ WHY ALUTEK ══════════════════════════════════════════ -->
-<section class="strip" style="background:var(--concrete)">
-<div class="shell">
-<div class="head rv">
-<div><p class="eyebrow">Why AluTek?</p><h2>The AluTek <em>Approach</em></h2></div>
-</div>
-<div class="strip__g rv" style="background:var(--line)">
-<div class="sp"><div><h3>Engineering-Led Solutions</h3><p>We approach building envelope requirements with a focus on technical understanding, engineering coordination and practical execution.</p></div></div>
-<div class="sp"><div><h3>Integrated Product Portfolio</h3><p>Our product range covers multiple aluminium, glass and façade applications, enabling coordinated solutions across different building segments.</p></div></div>
-<div class="sp"><div><h3>Project-Specific Approach</h3><p>Every project has different architectural, structural, functional and commercial requirements. We focus on developing solutions suited to the specific needs of each development.</p></div></div>
-<div class="sp"><div><h3>Quality-Focused Execution</h3><p>We emphasise material quality, fabrication accuracy, installation workmanship and systematic quality checks throughout project execution.</p></div></div>
-<div class="sp"><div><h3>Collaborative Project Delivery</h3><p>We work in coordination with architects, façade consultants, structural consultants, developers, contractors and other project stakeholders.</p></div></div>
-<div class="sp"><div><h3>Commitment to Delivery</h3><p>Planning, procurement coordination, fabrication scheduling and installation management form an important part of our approach to dependable project delivery.</p></div></div>
 </div>
 </div>
 </section>
