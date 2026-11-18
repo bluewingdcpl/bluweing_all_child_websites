@@ -1438,10 +1438,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
       var hero = document.getElementById('pv-gallery-hero');
       hero.innerHTML = '<img decoding="async" src="' + esc(p.images[0].url) + '" alt="' + esc(p.title) + '" loading="lazy" width="1400" height="790">';
       var rest = p.images.slice(1);
-      // Until more real photos are added, repeat the featured photo so the
-      // gallery grid below never looks empty.
-      if (!rest.length) rest = [p.images[0], p.images[0], p.images[0]];
+      // The grid below only shows the project's other photos; with a single photo there is no grid.
       var gridEl = document.getElementById('pv-gallery-grid');
+      gridEl.style.display = rest.length ? '' : 'none';
       gridEl.innerHTML = rest.map(function(img){
         return '<img decoding="async" src="' + esc(img.url) + '" alt="' + esc(p.title) + '" loading="lazy" width="600" height="450">';
       }).join('');
