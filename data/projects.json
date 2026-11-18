@@ -1687,7 +1687,7 @@
     "id": "legacy-chiripal-corporate-house",
     "title": "Chiripal Corporate House",
     "slug": "chiripal-corporate-house",
-    "status": "Ongoing",
+    "status": "Completed",
     "content": "<p>A commercial project balancing operational requirements, user experience and long-term durability.</p>",
     "category": "Commercial",
     "tags": [],
@@ -1741,7 +1741,9 @@
     },
     "date": "2026-01-01",
     "published": true,
-    "legacyUrl": "projects/chiripal-corporate-house.html"
+    "legacyUrl": "projects/chiripal-corporate-house.html",
+    "photoCaption": "",
+    "photoCredit": ""
   },
   {
     "id": "legacy-gokul-farmhouse-ahmedabad",
