@@ -932,3 +932,5 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 /* ── Value cards with a stated principle ───────────────── */
 .val__p{display:block;font-family:var(--f-display);font-weight:500;font-size:1.02rem;
   color:var(--accent);margin-bottom:10px;letter-spacing:-.015em}
+
+.cta{display: none!important}
