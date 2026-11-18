@@ -1496,7 +1496,7 @@
     "id": "legacy-agc-industrial-park",
     "title": "AGC Industrial Park",
     "slug": "agc-industrial-park",
-    "status": "Ongoing",
+    "status": "Completed",
     "content": "<p>An industrial facility engineered for performance, efficiency and long-term reliability, built around the client's process layout and commissioning date.</p>",
     "category": "Industrial",
     "tags": [],
@@ -1556,7 +1556,9 @@
     },
     "date": "2026-01-01",
     "published": true,
-    "legacyUrl": "projects/agc-industrial-park.html"
+    "legacyUrl": "projects/agc-industrial-park.html",
+    "photoCaption": "",
+    "photoCredit": ""
   },
   {
     "id": "legacy-aquatics-gallery-ahmedabad",
