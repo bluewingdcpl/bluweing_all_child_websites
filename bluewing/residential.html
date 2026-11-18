@@ -1161,7 +1161,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div class="pj__b"><h3>Shashwat Evana</h3><svg><use href="#i-arr"/></svg></div>
 </a>
 <a class="pj" href="/rameshwar-honour">
-<div class="pj__im"><span class="pj__st pj__st--on">Ongoing</span>
+<div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/Rameshwar-Honour-1.webp" alt="Rameshwar Honour — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>Rameshwar Honour</h3><svg><use href="#i-arr"/></svg></div>
 </a>
@@ -1171,12 +1171,12 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 <div class="pj__b"><h3>The Ten</h3><svg><use href="#i-arr"/></svg></div>
 </a>
 <a class="pj" href="/rameshwar-sky">
-<div class="pj__im"><span class="pj__st pj__st--on">Ongoing</span>
+<div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp" alt="Rameshwar Sky — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>Rameshwar Sky</h3><svg><use href="#i-arr"/></svg></div>
 </a>
 <a class="pj" href="/mulsana-farm-house">
-<div class="pj__im"><span class="pj__st pj__st--on">Ongoing</span>
+<div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/Mulsana_Farmhouse-2.webp" alt="Mulsana Farm House — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>Mulsana Farm House</h3><svg><use href="#i-arr"/></svg></div>
 </a>
@@ -1501,6 +1501,24 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
     })
     .catch(function () {});
 })('bluewing');
+</script>
+<script>
+/* The project cards on this page are a fixed selection; their status badges follow the admin data. */
+(function () {
+  var cards = document.querySelectorAll('a.pj');
+  if (!cards.length) return;
+  fetch('/api/projects', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; }).then(function (items) {
+    var bySlug = {};
+    (Array.isArray(items) ? items : []).forEach(function (p) { bySlug['/' + encodeURIComponent(p.slug)] = p; });
+    cards.forEach(function (a) {
+      var p = bySlug[a.getAttribute('href')], badge = a.querySelector('.pj__st');
+      if (!p || !badge) return;
+      var status = p.status || 'Completed';
+      badge.textContent = status;
+      badge.classList.toggle('pj__st--on', status === 'Ongoing');
+    });
+  }).catch(function () {});
+})();
 </script>
 </body>
 </html>

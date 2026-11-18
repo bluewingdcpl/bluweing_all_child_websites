@@ -1624,5 +1624,23 @@ window.BW_SLIDES = [
     .catch(function () {});
 })('bluewing');
 </script>
+<script>
+/* The project cards on this page are a fixed selection; their status badges follow the admin data. */
+(function () {
+  var cards = document.querySelectorAll('a.pj');
+  if (!cards.length) return;
+  fetch('/api/projects', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; }).then(function (items) {
+    var bySlug = {};
+    (Array.isArray(items) ? items : []).forEach(function (p) { bySlug['/' + encodeURIComponent(p.slug)] = p; });
+    cards.forEach(function (a) {
+      var p = bySlug[a.getAttribute('href')], badge = a.querySelector('.pj__st');
+      if (!p || !badge) return;
+      var status = p.status || 'Completed';
+      badge.textContent = status;
+      badge.classList.toggle('pj__st--on', status === 'Ongoing');
+    });
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>
