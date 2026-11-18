@@ -202,6 +202,10 @@
   ],
   "rewrites": [
     {
+      "source": "/shared/:path*",
+      "destination": "/shared/:path*"
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": { "re": "sygnific" } }],
       "destination": "/sygnificinfra/sygnific-infra.html"
