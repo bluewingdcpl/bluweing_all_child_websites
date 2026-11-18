@@ -2822,7 +2822,7 @@
     "id": "legacy-rajpath-club",
     "title": "Rajpath Club",
     "slug": "rajpath-club",
-    "status": "Ongoing",
+    "status": "Completed",
     "content": "<p>A hospitality project balancing functionality, aesthetics and long-term performance, delivered to operator finish standards.</p>",
     "category": "Hotels",
     "tags": [],
@@ -2900,7 +2900,9 @@
     },
     "date": "2026-01-01",
     "published": true,
-    "legacyUrl": "projects/rajpath-club.html"
+    "legacyUrl": "projects/rajpath-club.html",
+    "photoCaption": "",
+    "photoCredit": ""
   },
   {
     "id": "legacy-rameshwar-honour",
