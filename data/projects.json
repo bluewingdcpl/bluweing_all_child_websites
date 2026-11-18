@@ -2976,7 +2976,7 @@
     "id": "legacy-rameshwar-sky",
     "title": "Rameshwar Sky",
     "slug": "rameshwar-sky",
-    "status": "Ongoing",
+    "status": "Completed",
     "content": "<p>A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.</p>",
     "category": "Residential",
     "tags": [],
@@ -3051,7 +3051,9 @@
     },
     "date": "2026-01-01",
     "published": true,
-    "legacyUrl": "projects/rameshwar-sky.html"
+    "legacyUrl": "projects/rameshwar-sky.html",
+    "photoCaption": "",
+    "photoCredit": ""
   },
   {
     "id": "legacy-rm-engineering",
