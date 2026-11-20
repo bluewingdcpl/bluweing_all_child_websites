@@ -1,35 +1,5 @@
 [
   {
-    "id": "mwotsmx0gw5od",
-    "title": "test",
-    "slug": "test",
-    "status": "Ongoing",
-    "content": "<p>test</p>",
-    "category": "",
-    "tags": [],
-    "images": [],
-    "photoCaption": "",
-    "photoCredit": "",
-    "table": {
-      "headers": [
-        "Project Particulars",
-        "Specifications"
-      ],
-      "rows": [
-        [
-          "Status",
-          "Ongoing"
-        ],
-        [
-          "Location",
-          "Gujarat, India"
-        ]
-      ]
-    },
-    "date": "2026-11-20",
-    "published": true
-  },
-  {
     "id": "mu2ah1vd1uzov",
     "title": "Boys Hostel Building",
     "slug": "boys-hostel-building",
