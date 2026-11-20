@@ -17,6 +17,38 @@ function categoriesOf(post) {
   return Array.from(new Set(list.map((c) => String(c || '').trim()).filter(Boolean)));
 }
 
+// /sitemap.xml on the BlueWing domain is rewritten here (vercel.json), so projects and
+// posts published from the admin are listed without a deploy. Plain pages are listed below.
+const SITE = 'https://www.bluewingconstruction.com';
+const SITEMAP_PAGES = [
+  '/', '/about-bluewing-dcpl.html', '/bluewing-dcpl.html', '/leadership-message.html', '/value-statement.html',
+  '/epc-turnkey-projects.html', '/commercial.html', '/hospitals.html', '/hotels.html', '/industrial.html',
+  '/institutional.html', '/residential.html', '/projects.html', '/projects-ongoing.html', '/projects-completed.html',
+  '/projects-commercial.html', '/projects-hospitals.html', '/projects-hotels.html', '/projects-industrial.html',
+  '/projects-institutional.html', '/projects-residential.html', '/quality-standards.html', '/safety-standards.html',
+  '/clients.html', '/careers.html', '/blog.html', '/contact-us.html', '/privacy-policy.html', '/terms-conditions.html',
+  '/cookies-policy.html',
+];
+
+function xmlEscape(s) {
+  return String(s).replace(/[<>&'"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&apos;', '"': '&quot;' }[c]));
+}
+
+async function sitemap(res) {
+  const [{ data: posts }, { data: projects }] = await Promise.all([readJson(PATH, []), readJson('data/projects.json', [])]);
+  const day = (d) => (/^\d{4}-\d{2}-\d{2}/.test(String(d || '')) ? String(d).slice(0, 10) : '');
+  const live = (item) => item && item.slug && item.published !== false;
+  const urls = [
+    ...SITEMAP_PAGES.map((p) => ({ loc: SITE + p })),
+    ...projects.filter(live).map((p) => ({ loc: `${SITE}/${p.slug}`, lastmod: day(p.date) })),
+    ...posts.filter(live).map((p) => ({ loc: `${SITE}/blog/${p.slug}`, lastmod: day(p.date) })),
+  ];
+  const rows = urls.map((u) => `  <url><loc>${xmlEscape(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`);
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+  res.status(200).send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.join('\n')}\n</urlset>\n`);
+}
+
 async function readBody(req) {
   let body = req.body;
   if (typeof body === 'string') {
@@ -28,6 +60,7 @@ async function readBody(req) {
 module.exports = async (req, res) => {
   try {
     if (req.method === 'GET') {
+      if ((req.query || {}).sitemap !== undefined) return sitemap(res);
       res.setHeader('Cache-Control', 'no-store');
       const { data: posts } = await readJson(PATH, []);
       const { slug, id, list } = req.query || {};
