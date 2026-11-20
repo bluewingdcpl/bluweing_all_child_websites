@@ -1,0 +1,2 @@
+# Header/footer sources: scripts/build-layout.js copies them into the pages, so they are not served.
+_layout/

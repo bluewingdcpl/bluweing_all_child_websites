@@ -1,7 +1,9 @@
 # BlueWing Group — Website (64 pages)
 
-Open `index.html`. Every page is self-contained (CSS and JS inlined), so the
-site runs from any folder with no server.
+Every page is plain HTML. The header, menu, footer, icons and shared script come
+from one set of files per site (see **Header, footer, icons and script** below).
+Links and assets are root-relative (`/assets/...`), so view the site through a
+local server or the Vercel deployment, not by opening the file.
 
 ## Contents
 
@@ -118,8 +120,35 @@ swap the copy in — the layouts are already built.
 - Dark logo variants (SVG) for the white header
 - Real testimonials, and legal review of the three policy pages
 
-## Build system
+## Header, footer, icons and script
 
-`build.py` holds the shared header, nav, footer and project data; `pages*.py`
-hold the page definitions. Edit and re-run — the header cannot drift across 64
-pages. `/assets` holds the same CSS/JS unminified for the Next.js port.
+Each site (`bluewing`, `bhaaratprecast`, `sygnificinfra`, `alutek`) has its own files:
+
+| File | What it holds |
+|---|---|
+| `<site>/_layout/header.html` | Header and mobile menu |
+| `<site>/_layout/footer.html` | Footer |
+| `<site>/assets/icons.svg` | Every icon (pages use `<use href="/assets/icons.svg#i-arr">`) |
+| `<site>/assets/js/site.js` | Menu, header, sliders, forms and logo script for every page |
+
+To change the header or footer, edit the site's `_layout` file, then run:
+
+```
+node scripts/build-layout.js
+```
+
+It copies the header and footer into every page of that site, between the
+`<!-- layout:header -->` and `<!-- layout:footer -->` markers, and commits nothing
+by itself. Commit the pages it changes. `node scripts/build-layout.js --check`
+lists pages that are out of date.
+
+- The marker sets the menu item marked as the current page:
+  `<!-- layout:header current="/projects.html" -->`. The BlueWing DCPL page adds
+  `cobrand="BlueWing DCPL"`.
+- Run the script after editing `icons.svg` or `site.js` too. It stamps
+  `?v=<hash>` on their links. Browsers keep these two files cached (see
+  `headers` in `vercel.json`), so a change reaches visitors only through a new
+  `?v=`.
+- `contact-us.html` on each site keeps its own inline copy of the script (it has
+  the phone-code form) and does not load `site.js`.
+- `_layout` folders are not deployed (`.vercelignore`).
