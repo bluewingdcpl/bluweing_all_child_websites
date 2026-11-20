@@ -158,8 +158,9 @@ module.exports = async (req, res) => {
     });
     if (resumeUrl) entry.fields.resumeUrl = resumeUrl;
 
-    let emailError = null;
+    let emailError = 'SMTP_HOST is not set', emailed = false;
     if (process.env.SMTP_HOST) {
+      emailError = null;
       try {
         const rows = Object.entries(entry.fields)
           .filter(([, v]) => v)
@@ -186,20 +187,28 @@ module.exports = async (req, res) => {
           replyTo: entry.fields.email,
           to: (await recipientFor(mailKey)) || undefined,
         });
+        emailed = true;
       } catch (err) {
         emailError = err.message;
       }
     }
-    entry.emailError = emailError;
+    entry.emailError = emailed ? null : emailError;
 
+    let saved = false;
     if (process.env.BLOB_READ_WRITE_TOKEN) {
       await put(`submissions/${formType}/${entry.id}.json`, JSON.stringify(entry, null, 2), {
         access: 'public',
         contentType: 'application/json',
         addRandomSuffix: false,
       });
+      saved = true;
     }
 
+    // Not emailed and not saved means the enquiry would be lost: say so instead of thanking the visitor.
+    if (!emailed && !saved) {
+      console.error(`${formType} not delivered: ${emailError}; Blob storage not configured`);
+      return res.status(503).json({ error: 'Your message could not be sent right now. Please email or call us directly.' });
+    }
     res.status(200).json({ ok: true });
   } catch (err) {
     res.status(500).json({ error: err.message || 'Server error' });
