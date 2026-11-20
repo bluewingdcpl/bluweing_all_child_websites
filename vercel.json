@@ -269,6 +269,8 @@
     { "source": "/roof-shading-and-fabrication-guide/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/waterproofing-guide", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/blog.html", "permanent": true },
     { "source": "/waterproofing-guide/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/blog.html", "permanent": true },
+    { "source": "/bluewing-dcpl", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/bluewing-dcpl.html", "permanent": true },
+    { "source": "/bluewing-dcpl/", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/bluewing-dcpl.html", "permanent": true },
     { "source": "/:map(sitemap_index|page-sitemap|post-sitemap|portfolio-sitemap|category-sitemap|post_tag-sitemap|author-sitemap|wp-sitemap)\\.xml", "missing": [{ "type": "host", "value": { "re": "bhaarat|sygnific|alutek" } }], "destination": "/sitemap.xml", "permanent": true }
   ],
   "rewrites": [
