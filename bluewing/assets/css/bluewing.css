@@ -307,8 +307,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .stats__n .u{color:var(--accent)}
 .stats__l{margin-top:10px;font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.2em;
   text-transform:uppercase;color:var(--on-dark)}
-:where(html.css-bw-about,html.css-bw-home) .stats__s{margin-top:6px;font-size:var(--fs-sm);color:var(--on-dark);opacity:.8}
-:where(html.css-bw-about,html.css-bw-home) .stats__s span{white-space:nowrap}
+:where(html.css-bw,html.css-bw-about,html.css-bw-home) .stats__s{margin-top:6px;font-size:var(--fs-sm);color:var(--on-dark);opacity:.8}
+:where(html.css-bw,html.css-bw-about,html.css-bw-home) .stats__s span{white-space:nowrap}
 @media(max-width:1000px){
 .stats__in{grid-template-columns:1fr 1fr}
 .stats__c{padding:26px 20px 26px 0}
