@@ -473,6 +473,52 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .strip__g{grid-template-columns:1fr}
 }
 
+/* Sector panels — project photography, hovered panel widens (BlueWing DCPL page) */
+.secp{display:flex;gap:10px;height:clamp(440px,42vw,560px)}
+.secp__p{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border-radius:var(--r);color:#fff;
+  background:var(--ink);transition:flex-grow .6s var(--ease)}
+.secp__p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform 1.1s var(--ease),filter .6s}
+.secp__p::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,21,35,.25) 0%,rgba(6,21,35,.35) 40%,rgba(6,21,35,.9) 100%);
+  transition:background .6s}
+.secp__v{position:absolute;z-index:2;left:50%;bottom:28px;transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-family:var(--f-display);font-size:1.2rem;font-weight:600;letter-spacing:.02em;
+  white-space:nowrap;transition:opacity .3s}
+.secp__in{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(22px,2.4vw,34px)}
+.secp__ic{width:38px;height:38px;stroke-width:1.4;color:#fff;padding:9px;box-sizing:content-box;
+  border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(6,21,35,.3);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.secp__b{display:block;max-width:38ch;opacity:0;transform:translateY(14px);
+  transition:opacity .3s,transform .5s var(--ease);visibility:hidden}
+.secp__t{font-size:clamp(1.5rem,2.3vw,2.1rem);font-weight:600;color:#fff;line-height:1.1;margin-bottom:12px}
+.secp__d{display:block;font-size:var(--fs-sm);color:rgba(255,255,255,.82);line-height:1.6}
+.secp__go{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding-top:14px;
+  border-top:2px solid var(--accent-lt,#8FA0D8);font-family:var(--f-mono);font-size:var(--fs-lbl);
+  letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.secp__go svg{width:14px;height:14px;transition:transform var(--d2) var(--ease)}
+/* open state: hovered/focused panel, or the first one while nothing is hovered */
+.secp__p:hover,.secp__p:focus-visible,.secp:not(:hover):not(:focus-within) .secp__p:first-child{flex-grow:3.6}
+.secp__p:hover img,.secp__p:focus-visible img{transform:scale(1.05)}
+.secp__p:hover .secp__v,.secp__p:focus-visible .secp__v,
+.secp:not(:hover):not(:focus-within) .secp__p:first-child .secp__v{opacity:0}
+.secp__p:hover .secp__b,.secp__p:focus-visible .secp__b,
+.secp:not(:hover):not(:focus-within) .secp__p:first-child .secp__b{opacity:1;transform:none;visibility:visible;
+  transition-delay:.18s}
+.secp__p:hover .secp__go svg{transform:translateX(5px)}
+@media(max-width:900px){
+.secp{flex-direction:column;height:auto;gap:8px}
+.secp__p,.secp__p:hover,.secp__p:focus-visible,.secp:not(:hover):not(:focus-within) .secp__p:first-child{flex:none;height:auto;min-height:230px}
+.secp__v{display:none}
+.secp__in{position:relative;min-height:230px;gap:40px}
+.secp__b{opacity:1;transform:none;visibility:visible}
+.secp__ic{width:30px;height:30px;padding:8px}
+}
+@media(prefers-reduced-motion:reduce){
+.secp__p,.secp__p img,.secp__b,.secp__v,.secp__go svg{transition:none}
+}
+
 /* ── EPC service block ─────────────────────────────────── */
 .svc{padding-block:var(--sec-y);background:var(--concrete)}
 .svc__top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);
