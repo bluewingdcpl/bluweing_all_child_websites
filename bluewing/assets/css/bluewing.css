@@ -194,12 +194,12 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .brand img{height:44px;width:auto}
 
 /* Wordmark is bound to currentColor, so one asset serves every surface */
-:where(html:not(.css-bw-legacy)) .brand__mark{width:auto;height:34px;color:var(--logo);flex:none;transition:height var(--d2) var(--ease)}
+:where(html:not(.css-bw-legacy)) .brand__mark{width:auto;height:39px;color:var(--logo);flex:none;transition:height var(--d2) var(--ease)}
 
 /* Wordmark is bound to currentColor, so one asset serves every surface */
-:where(html.css-bw-legacy) .brand__mark{width:auto;height:34px;color:var(--ink);flex:none;transition:height var(--d2) var(--ease)}
-.hdr.stuck .brand__mark{height:30px}
-.brand__mark--sm{height:28px}
+:where(html.css-bw-legacy) .brand__mark{width:auto;height:39px;color:var(--ink);flex:none;transition:height var(--d2) var(--ease)}
+.hdr.stuck .brand__mark{height:35px}
+.brand__mark--sm{height:32px}
 .brand__div{width:1px;height:30px;background:var(--line)}
 .brand__co{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.16em;text-transform:uppercase;color:var(--steel-2);line-height:1.4;max-width:9ch}
 .nav{display:flex;align-items:center;margin-left:auto}
@@ -655,8 +655,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
   font-size:var(--fs-sm);border-top:1px solid var(--line)}
 .ftr__t{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:54px;
   border-bottom:1px solid var(--line)}
-:where(html:not(.css-bw-legacy)) .ftr__lg{height:38px;width:auto;color:var(--logo);margin-bottom:26px}
-:where(html.css-bw-legacy) .ftr__lg{height:38px;width:auto;color:var(--ink);margin-bottom:26px}
+:where(html:not(.css-bw-legacy)) .ftr__lg{height:44px;width:auto;color:var(--logo);margin-bottom:26px}
+:where(html.css-bw-legacy) .ftr__lg{height:44px;width:auto;color:var(--ink);margin-bottom:26px}
 .ftr h4{color:var(--ink);font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.2em;
   text-transform:uppercase;font-weight:600;margin-bottom:24px}
 .ftr li{margin-bottom:13px}
