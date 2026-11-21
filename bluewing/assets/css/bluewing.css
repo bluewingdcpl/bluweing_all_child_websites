@@ -466,6 +466,11 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;letter-spacing
 .sp__n{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.18em;color:var(--accent);flex:none;padding-top:4px}
 .sp h3{font-size:var(--fs-1-0625rem);margin-bottom:6px}
 .sp p{font-size:var(--fs-sm);color:var(--steel)}
+/* Group company cards with logos (About page) */
+.sp--logo{flex-direction:column}
+.sp__logo{display:block;height:60px;width:auto;margin:-6px 0 14px -6px}
+.sp__logo--bw{height:30px;margin:9px 0 29px;color:var(--logo,var(--ink))}
+.sp--logo h3{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(max-width:900px){
 .strip__g{grid-template-columns:1fr 1fr}
 }
