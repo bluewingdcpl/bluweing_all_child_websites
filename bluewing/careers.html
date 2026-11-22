@@ -319,7 +319,7 @@
 <div class="fld"><label for="ja-company">Current company name</label><input id="ja-company" name="company" required autocomplete="organization" placeholder="Organisation (if currently employed)"><span class="field-err">Please enter your current company name.</span></div>
 </div>
 <div class="fld"><label for="ja-role-btn" id="ja-role-lbl">Apply for</label>
-<select id="ja-role" name="applyFor" required class="csel__native" tabindex="-1" aria-hidden="true"><option value="">Select a role</option><option>Project &amp; planning</option><option>Site engineering</option><option>QA / QC</option><option>Safety</option><option>Quantity surveying</option><option>Design &amp; BIM</option></select><div class="csel" id="ja-role-ui"><button type="button" class="csel__btn" id="ja-role-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ja-role-lbl ja-role-btn"><span class="csel__val is-ph">Select a role</span><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></button><ul class="csel__list" role="listbox" tabindex="-1" aria-labelledby="ja-role-lbl" hidden></ul></div>
+<select id="ja-role" name="applyFor" required class="csel__native" tabindex="-1" aria-hidden="true"><option value="">Select Role</option><option>Project &amp; planning</option><option>Site engineering</option><option>QA / QC</option><option>Safety</option><option>Quantity surveying</option><option>Design &amp; BIM</option></select><div class="csel" id="ja-role-ui"><button type="button" class="csel__btn" id="ja-role-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ja-role-lbl ja-role-btn"><span class="csel__val is-ph">Select Role</span><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></button><ul class="csel__list" role="listbox" tabindex="-1" aria-labelledby="ja-role-lbl" hidden></ul></div>
 <span class="field-err">Please select a role.</span></div>
 <div class="fld">
 <label for="ja-resume">Your Updated Resume</label>
@@ -446,7 +446,7 @@
   var items = Array.prototype.slice.call(cselList.children), active = -1;
   function syncUi() {
     var v = roleSel.value;
-    cselVal.textContent = v || 'Select a role';
+    cselVal.textContent = v || 'Select Role';
     cselVal.classList.toggle('is-ph', !v);
     items.forEach(function (li) { li.setAttribute('aria-selected', li.getAttribute('data-value') === v ? 'true' : 'false'); });
   }
