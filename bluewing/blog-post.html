@@ -146,10 +146,18 @@
 <p class="ph__ld" id="bp-lead"></p>
 </div>
 </section>
+<style>
+/* Tags in the left column, under the industry label */
+.post-tags--side{margin-top:20px!important;gap:8px}
+.post-tags--side .post-tags__l{flex-basis:100%;margin-bottom:2px}
+.rt__side a.post-tag{text-decoration:none;color:var(--steel);transition:color var(--d2) var(--ease),border-color var(--d2) var(--ease)}
+.rt__side a.post-tag:hover{color:var(--accent);border-color:var(--accent)}
+</style>
 <section class="rt">
 <div class="shell rt__in">
 <div class="rt__side rv">
 <p class="eyebrow" id="bp-category2">Blog</p>
+<div class="post-tags post-tags--side" id="bp-tag-list" hidden></div>
 <a class="btn btn--accent" style="margin-top:22px" href="/contact-us.html">Talk to our team <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>
 </div>
 <div class="rt__body">
@@ -160,7 +168,6 @@
 <h3>FAQs</h3>
 <div class="acc" id="bp-faq-list"></div>
 </div>
-<div class="post-tags" id="bp-tag-list" hidden></div>
 <div class="byline byline--end" id="bp-byline" style="display:none"></div>
 </div>
 </div>
