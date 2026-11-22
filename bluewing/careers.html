@@ -212,13 +212,13 @@
 <span class="job__tag">Site Engineering</span>
 <h3>Site Engineer &mdash; Civil</h3>
 <p>Own setting-out, RCC works and finishing co-ordination on a live residential or industrial site in Ahmedabad. 2&ndash;5 years&rsquo; experience, reporting directly to the project manager.</p>
-<a class="btn btn--out" href="#job-application-form" data-apply-role="Site Engineer — Civil">Apply for this role <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>
+<a class="btn btn--out" href="#apply-now" data-apply-role="Site Engineer — Civil">Apply for this role <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>
 </div>
 <div class="job">
 <span class="job__tag">Quality Assurance</span>
 <h3>QA / QC Engineer</h3>
 <p>Run inspection and test plans, material approvals and third-party testing across structural stages. ISO 9001 exposure preferred; based at our Ahmedabad sites.</p>
-<a class="btn btn--out" href="#job-application-form" data-apply-role="QA / QC Engineer">Apply for this role <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>
+<a class="btn btn--out" href="#apply-now" data-apply-role="QA / QC Engineer">Apply for this role <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>
 </div>
 </div>
 <script>
@@ -234,7 +234,7 @@
         '<span class="job__tag">' + escapeHtml(j.tag || j.type || '') + '</span>' +
         '<h3>' + escapeHtml(j.title || '') + '</h3>' +
         '<p>' + (j.description || '') + '</p>' +
-        '<a class="btn btn--out" href="#job-application-form" data-apply-role="' + escapeHtml(j.title || '') + '">Apply for this role <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>' +
+        '<a class="btn btn--out" href="#apply-now" data-apply-role="' + escapeHtml(j.title || '') + '">Apply for this role <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>' +
         '</div>';
     }).join('');
   }).catch(function(){});
@@ -250,7 +250,7 @@
     var role = btn.getAttribute('data-apply-role');
     if (window.__bwSetApplyRole) window.__bwSetApplyRole(role);
     else window.__bwPendingRole = role;
-    var target = document.getElementById('job-application-form');
+    var target = document.getElementById('apply-now') || document.getElementById('job-application-form');
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 })();
@@ -258,11 +258,53 @@
 </div>
 </section>
 
-<section class="strip apply-now" style="background:var(--paper);color:var(--ink)">
+<style>
+/* Application form section, set apart from the openings list (this page only) */
+.apf{padding-top:var(--sec-y);background:var(--ink);color:var(--white);--accent:var(--accent-lt);position:relative;overflow:hidden}
+.apf::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:46px 46px;-webkit-mask-image:radial-gradient(circle at 15% 20%,#000,transparent 65%);mask-image:radial-gradient(circle at 15% 20%,#000,transparent 65%)}
+.apf .shell{position:relative}
+.apf__g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,96px);align-items:start}
+.apf__txt{position:sticky;top:120px}
+.apf__txt h2{font-size:var(--fs-h2);color:var(--white);margin:20px 0 22px;max-width:12ch}
+.apf__txt h2 em{font-style:normal;color:var(--accent-lt)}
+.apf__txt>p{color:rgba(255,255,255,.75);max-width:42ch}
+.apf__card{--accent:var(--accent-base);background:var(--paper);color:var(--ink);border-radius:var(--r);
+  padding:clamp(26px,3.4vw,48px);box-shadow:0 30px 60px -30px rgba(0,0,0,.55);border-top:4px solid var(--accent-lt)}
+.apf__card .form-light{max-width:none!important}
+/* Themed "Apply for" dropdown */
+.csel__native{position:absolute!important;width:1px!important;height:1px!important;opacity:0;pointer-events:none}
+.csel{position:relative}
+.csel__btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--paper);color:var(--ink);font:inherit;font-size:var(--fs-sm);
+  text-align:left;cursor:pointer;transition:border-color var(--d1)}
+.csel__btn:focus-visible,.csel__btn[aria-expanded="true"]{border-color:var(--accent);outline:none}
+.csel__btn svg{flex:none;width:16px;height:16px;stroke-width:2;color:var(--accent);transition:transform var(--d2) var(--ease)}
+.csel__btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.csel__val.is-ph{color:var(--steel-2)}
+.fld.has-err .csel__btn{border-color:var(--error)}
+.csel__list{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 6px);margin:0;padding:6px;list-style:none;
+  background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--r);
+  box-shadow:0 22px 44px -18px rgba(6,21,35,.35);max-height:300px;overflow:auto;outline:none}
+.csel__opt{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:2px;
+  font-size:var(--fs-sm);color:var(--ink);cursor:pointer}
+.csel__opt.is-act{background:var(--concrete)}
+.csel__opt[aria-selected="true"]{color:var(--accent);font-weight:600}
+.csel__opt[aria-selected="true"]::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+@media(max-width:900px){
+.apf__g{grid-template-columns:minmax(0,1fr)}
+.apf__txt{position:static}
+.apf__txt h2{max-width:none}
+}
+</style>
+<section class="strip apply-now apf" id="apply-now" style="scroll-margin-top:80px">
 <div class="shell">
-<div class="head rv"><div><p class="eyebrow">Apply now</p><h2>Submit your <em>application.</em></h2></div>
+<div class="apf__g">
+<div class="apf__txt rv"><p class="eyebrow">Apply now</p><h2>Submit your <em>application.</em></h2>
 <p>Don&rsquo;t see the exact role above? Apply anyway — we keep every application on file and reach out when there&rsquo;s a fit.</p></div>
-<form class="form-light rv" id="job-application-form" style="max-width:640px" novalidate>
+<div class="apf__card rv">
+<form class="form-light" id="job-application-form" novalidate>
 <div class="frow">
 <div class="fld"><label for="ja-name">Full name</label><input id="ja-name" name="name" required autocomplete="name" placeholder="Your full name"><span class="field-err">Please enter your full name.</span></div>
 <div class="fld"><label for="ja-email">Email address</label><input id="ja-email" name="email" type="email" required autocomplete="email" placeholder="name@email.com"><span class="field-err">Please enter a valid email address.</span></div>
@@ -276,8 +318,8 @@
 <span class="field-err">Please enter a valid phone number.</span></div>
 <div class="fld"><label for="ja-company">Current company name</label><input id="ja-company" name="company" required autocomplete="organization" placeholder="Organisation (if currently employed)"><span class="field-err">Please enter your current company name.</span></div>
 </div>
-<div class="fld"><label for="ja-role">Apply for</label>
-<select id="ja-role" name="applyFor" required><option value="">Select a role</option></select>
+<div class="fld"><label for="ja-role-btn" id="ja-role-lbl">Apply for</label>
+<select id="ja-role" name="applyFor" required class="csel__native" tabindex="-1" aria-hidden="true"><option value="">Select a role</option><option>Project &amp; planning</option><option>Site engineering</option><option>QA / QC</option><option>Safety</option><option>Quantity surveying</option><option>Design &amp; BIM</option></select><div class="csel" id="ja-role-ui"><button type="button" class="csel__btn" id="ja-role-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ja-role-lbl ja-role-btn"><span class="csel__val is-ph">Select a role</span><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></button><ul class="csel__list" role="listbox" tabindex="-1" aria-labelledby="ja-role-lbl" hidden></ul></div>
 <span class="field-err">Please select a role.</span></div>
 <div class="fld">
 <label for="ja-resume">Your Updated Resume</label>
@@ -290,6 +332,8 @@
 <button class="btn btn--accent" type="submit">Submit Job Application <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></button>
 <p class="pform__n" data-note>We review every application and reach out if there is a fit.</p>
 </form>
+</div>
+</div>
 </div>
 </section>
 
@@ -373,22 +417,91 @@
     if (msg) { var e = fld.querySelector('.field-err'); if (e) e.textContent = msg; }
   }
 
-  // "Apply for" — populate from current openings
+  // "Apply for" — the six roles we hire, in a themed dropdown over the native <select>
   var roleSel = document.getElementById('ja-role');
-  fetch('/api/careers', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : []; }).then(function(jobs){
-    var active = Array.isArray(jobs) ? jobs.filter(function(j){ return j.active !== false; }) : [];
-    var options = active.map(function(j){ return '<option>' + j.title.replace(/</g,'&lt;') + '</option>'; }).join('');
-    roleSel.innerHTML = '<option value="">Select a role</option>' + options;
-    if (window.__bwPendingRole) { window.__bwSetApplyRole(window.__bwPendingRole); window.__bwPendingRole = null; }
-  }).catch(function(){
-    roleSel.innerHTML = '<option value="">Select a role</option>';
+  var cselBtn = document.getElementById('ja-role-btn');
+  var cselVal = cselBtn.querySelector('.csel__val');
+  var cselList = document.querySelector('#ja-role-ui .csel__list');
+  // Map an opening title ("QA / QC Engineer") to one of the six roles
+  var ROLE_MAP = [
+    [/\b(qa|qc|quality)\b/i, 'QA / QC'],
+    [/\b(safety|hse|ehs)\b/i, 'Safety'],
+    [/\b(quantity|qs|billing|estimat)/i, 'Quantity surveying'],
+    [/\b(design|bim|architect|revit)/i, 'Design & BIM'],
+    [/\b(project|planning|planner)/i, 'Project & planning'],
+    [/\b(site|civil|structural|mep|engineer)/i, 'Site engineering']
+  ];
+  function roleFor(title) {
+    var exact = Array.prototype.some.call(roleSel.options, function (o) { return o.value && o.value === title; });
+    if (exact) return title;
+    for (var i = 0; i < ROLE_MAP.length; i++) if (ROLE_MAP[i][0].test(title)) return ROLE_MAP[i][1];
+    return '';
+  }
+  Array.prototype.filter.call(roleSel.options, function (o) { return o.value; }).forEach(function (o, i) {
+    var li = document.createElement('li');
+    li.className = 'csel__opt'; li.id = 'ja-role-opt-' + i; li.setAttribute('role', 'option');
+    li.setAttribute('aria-selected', 'false'); li.textContent = o.value; li.setAttribute('data-value', o.value);
+    cselList.appendChild(li);
   });
+  var items = Array.prototype.slice.call(cselList.children), active = -1;
+  function syncUi() {
+    var v = roleSel.value;
+    cselVal.textContent = v || 'Select a role';
+    cselVal.classList.toggle('is-ph', !v);
+    items.forEach(function (li) { li.setAttribute('aria-selected', li.getAttribute('data-value') === v ? 'true' : 'false'); });
+  }
+  function setActive(i) {
+    active = Math.max(0, Math.min(items.length - 1, i));
+    items.forEach(function (li, k) { li.classList.toggle('is-act', k === active); });
+    cselList.setAttribute('aria-activedescendant', items[active].id);
+    items[active].scrollIntoView({ block: 'nearest' });
+  }
+  function openList() {
+    cselList.hidden = false; cselBtn.setAttribute('aria-expanded', 'true');
+    var cur = -1;
+    items.forEach(function (li, k) { if (li.getAttribute('data-value') === roleSel.value) cur = k; });
+    setActive(cur < 0 ? 0 : cur); cselList.focus();
+  }
+  function closeList(refocus) {
+    cselList.hidden = true; cselBtn.setAttribute('aria-expanded', 'false');
+    if (refocus) cselBtn.focus();
+  }
+  function choose(i) {
+    roleSel.value = items[i].getAttribute('data-value'); syncUi(); clearError(roleSel);
+    roleSel.dispatchEvent(new Event('change', { bubbles: true })); closeList(true);
+  }
+  cselBtn.addEventListener('click', function () { if (cselList.hidden) openList(); else closeList(true); });
+  cselBtn.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); openList(); }
+  });
+  cselList.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); setActive(0); }
+    else if (e.key === 'End') { e.preventDefault(); setActive(items.length - 1); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
+    else if (e.key === 'Escape') { e.preventDefault(); closeList(true); }
+    else if (e.key === 'Tab') { closeList(false); }
+  });
+  cselList.addEventListener('mousemove', function (e) {
+    var li = e.target.closest('.csel__opt'); if (li) setActive(items.indexOf(li));
+  });
+  cselList.addEventListener('click', function (e) {
+    var li = e.target.closest('.csel__opt'); if (li) choose(items.indexOf(li));
+  });
+  document.addEventListener('click', function (e) {
+    if (!cselList.hidden && !e.target.closest('#ja-role-ui')) closeList(false);
+  });
+  roleSel.addEventListener('focus', function () { cselBtn.focus(); });   // validation focuses the native field
+  roleSel.addEventListener('change', syncUi);
+  form.addEventListener('reset', function () { setTimeout(syncUi, 0); });
 
   window.__bwSetApplyRole = function (role) {
-    if (!role) return;
-    var match = Array.prototype.some.call(roleSel.options, function (o) { return o.value === role; });
-    if (match) roleSel.value = role;
+    var r = role ? roleFor(role) : '';
+    if (r) { roleSel.value = r; syncUi(); clearError(roleSel); }
   };
+  if (window.__bwPendingRole) { window.__bwSetApplyRole(window.__bwPendingRole); window.__bwPendingRole = null; }
+  syncUi();
 
   // Phone country code
   var phoneSel = document.getElementById('ja-phone-cc');
@@ -499,7 +612,7 @@
     var firstBad = validate();
     if (firstBad) {
       note.textContent = 'Please fix the highlighted field(s) so we can reply.';
-      note.style.color = '#FFB4A8';
+      note.style.color = 'var(--error)';
       firstBad.focus();
       return;
     }
@@ -542,7 +655,7 @@
           applyCountry();
         }).catch(function (err) {
           note.textContent = err.message || 'Something went wrong sending this — please try again, or email us directly.';
-          note.style.color = '#FFB4A8';
+          note.style.color = 'var(--error)';
         }).finally(function () {
           btn.disabled = false;
           btn.style.opacity = '';
@@ -561,7 +674,7 @@
       }
     }).catch(function () {
       note.textContent = 'Could not read the resume file — please try attaching it again.';
-      note.style.color = '#FFB4A8';
+      note.style.color = 'var(--error)';
       btn.disabled = false;
       btn.style.opacity = '';
       btn.innerHTML = btnLabel;
