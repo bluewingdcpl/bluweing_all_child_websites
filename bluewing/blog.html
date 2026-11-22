@@ -154,7 +154,6 @@
 </section><style>
 /* Topic filter (blog index) */
 .bfil{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:clamp(28px,3.5vw,44px)}
-.bfil__lbl{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.2em;text-transform:uppercase;color:var(--steel-2);margin-right:6px}
 .bfil__b{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;
   background:var(--paper);color:var(--ink);font:inherit;font-size:var(--fs-sm);line-height:1.2;cursor:pointer;white-space:nowrap;
   transition:background var(--d1),border-color var(--d1),color var(--d1)}
@@ -163,11 +162,9 @@
 .bfil__b:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .bfil__b[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .bfil__b[aria-pressed="true"] span{color:rgba(255,255,255,.65)}
-.bfil__n{flex-basis:100%;margin-top:6px;font-size:var(--fs-sm);color:var(--steel)}
 @media(max-width:700px){
 .bfil{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding:2px 16px 8px;scrollbar-width:none}
 .bfil::-webkit-scrollbar{display:none}
-.bfil__lbl,.bfil__n{display:none}
 }
 </style>
 <section class="ins" style="background:var(--paper)"><div class="shell">
@@ -213,8 +210,6 @@
     filterBar.querySelectorAll('.bfil__b').forEach(function(b){
       b.setAttribute('aria-pressed', b.getAttribute('data-topic') === t ? 'true' : 'false');
     });
-    var n = filterBar.querySelector('.bfil__n');
-    if (n) n.textContent = list.length + (list.length === 1 ? ' article' : ' articles') + (t ? ' in ' + t : '');
     if (push) {
       var url = new URL(location.href);
       if (t) url.searchParams.set('topic', t); else url.searchParams.delete('topic');
@@ -226,11 +221,10 @@
     published.forEach(function(p){ topicsOf(p).forEach(function(t){ count[t] = (count[t] || 0) + 1; }); });
     var names = Object.keys(count).sort(function(a, b){ return count[b] - count[a] || a.localeCompare(b); });
     if (names.length < 2) return;
-    var html = '<span class="bfil__lbl">Topic</span>' +
-      '<button type="button" class="bfil__b" data-topic="" aria-pressed="true">All topics <span>' + published.length + '</span></button>' +
+    var html = '<button type="button" class="bfil__b" data-topic="" aria-pressed="true">All topics <span>' + published.length + '</span></button>' +
       names.map(function(t){
         return '<button type="button" class="bfil__b" data-topic="' + esc(t) + '" aria-pressed="false">' + esc(t) + ' <span>' + count[t] + '</span></button>';
-      }).join('') + '<p class="bfil__n"></p>';
+      }).join('');
     filterBar.innerHTML = html;
     filterBar.hidden = false;
     filterBar.addEventListener('click', function(e){
