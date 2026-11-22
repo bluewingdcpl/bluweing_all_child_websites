@@ -151,8 +151,28 @@
 <h1>Blog &amp; industry insights</h1>
 <p class="ph__ld">Writing on construction economics, technique and regulation in India — from the people running the sites.</p>
 </div>
-</section><section class="ins" style="background:var(--paper)"><div class="shell">
-<div class="ins__g rv" id="ins-grid"></div>
+</section><style>
+/* Topic filter (blog index) */
+.bfil{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:clamp(28px,3.5vw,44px)}
+.bfil__lbl{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.2em;text-transform:uppercase;color:var(--steel-2);margin-right:6px}
+.bfil__b{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;
+  background:var(--paper);color:var(--ink);font:inherit;font-size:var(--fs-sm);line-height:1.2;cursor:pointer;white-space:nowrap;
+  transition:background var(--d1),border-color var(--d1),color var(--d1)}
+.bfil__b span{font-size:.78em;color:var(--steel-2);transition:color var(--d1)}
+.bfil__b:hover{border-color:var(--accent)}
+.bfil__b:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bfil__b[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.bfil__b[aria-pressed="true"] span{color:rgba(255,255,255,.65)}
+.bfil__n{flex-basis:100%;margin-top:6px;font-size:var(--fs-sm);color:var(--steel)}
+@media(max-width:700px){
+.bfil{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding:2px 16px 8px;scrollbar-width:none}
+.bfil::-webkit-scrollbar{display:none}
+.bfil__lbl,.bfil__n{display:none}
+}
+</style>
+<section class="ins" style="background:var(--paper)"><div class="shell">
+<div class="bfil" id="ins-filter" role="group" aria-label="Filter articles by topic" hidden></div>
+<div class="ins__g rv" id="ins-grid" aria-live="polite"></div>
 <script>
 (function(){
   var grid = document.getElementById('ins-grid');
@@ -169,25 +189,64 @@
       '<div class="art__im">' + (img ? '<img decoding="async" src="' + esc(img) + '" alt="' + esc(p.title) + '" loading="lazy" width="600" height="400">' : '') + '</div>' +
       '<div><p class="lbl">' + esc(p.category || 'Blog') + '</p><h3>' + esc(p.title) + '</h3></div></a>';
   }
-  // Newest first, 12 at a time behind a "Load more" button.
-  var PAGE = 12, shown = 0, published = [];
+  // Newest first, 12 at a time behind a "Load more" button, filtered by topic.
+  var PAGE = 12, shown = 0, published = [], list = [], topic = '';
+  var filterBar = document.getElementById('ins-filter');
   var more = document.createElement('div');
   more.className = 'ins__more';
   more.innerHTML = '<button type="button" class="btn btn--out">Load more articles</button>';
+  function topicsOf(p){
+    var c = Array.isArray(p.categories) && p.categories.length ? p.categories : [p.category];
+    return c.map(function(x){ return String(x || '').trim(); }).filter(Boolean);
+  }
   function showMore(){
-    var next = published.slice(shown, shown + PAGE);
+    var next = list.slice(shown, shown + PAGE);
     grid.insertAdjacentHTML('beforeend', next.map(card).join(''));
     shown += next.length;
-    more.hidden = shown >= published.length;
+    more.hidden = shown >= list.length;
   }
   more.querySelector('button').addEventListener('click', showMore);
+  function apply(t, push){
+    topic = t;
+    list = t ? published.filter(function(p){ return topicsOf(p).indexOf(t) !== -1; }) : published;
+    grid.innerHTML = ''; shown = 0; showMore();
+    filterBar.querySelectorAll('.bfil__b').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-topic') === t ? 'true' : 'false');
+    });
+    var n = filterBar.querySelector('.bfil__n');
+    if (n) n.textContent = list.length + (list.length === 1 ? ' article' : ' articles') + (t ? ' in ' + t : '');
+    if (push) {
+      var url = new URL(location.href);
+      if (t) url.searchParams.set('topic', t); else url.searchParams.delete('topic');
+      history.replaceState(null, '', url);
+    }
+  }
+  function buildFilter(){
+    var count = {};
+    published.forEach(function(p){ topicsOf(p).forEach(function(t){ count[t] = (count[t] || 0) + 1; }); });
+    var names = Object.keys(count).sort(function(a, b){ return count[b] - count[a] || a.localeCompare(b); });
+    if (names.length < 2) return;
+    var html = '<span class="bfil__lbl">Topic</span>' +
+      '<button type="button" class="bfil__b" data-topic="" aria-pressed="true">All topics <span>' + published.length + '</span></button>' +
+      names.map(function(t){
+        return '<button type="button" class="bfil__b" data-topic="' + esc(t) + '" aria-pressed="false">' + esc(t) + ' <span>' + count[t] + '</span></button>';
+      }).join('') + '<p class="bfil__n"></p>';
+    filterBar.innerHTML = html;
+    filterBar.hidden = false;
+    filterBar.addEventListener('click', function(e){
+      var b = e.target.closest('.bfil__b');
+      if (b) apply(b.getAttribute('data-topic'), true);
+    });
+    return names;
+  }
   fetch('/api/blog?list', { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : []; }).then(function(posts){
     if (!Array.isArray(posts) || !posts.length) return;
     published = posts.filter(function(p){ return p.published !== false; })
       .sort(function(a, b){ return String(b.date || '').localeCompare(String(a.date || '')); });
-    grid.innerHTML = '';
-    showMore();
+    var names = buildFilter() || [];
+    var want = new URLSearchParams(location.search).get('topic') || '';
     grid.parentNode.insertBefore(more, grid.nextSibling);
+    apply(names.indexOf(want) !== -1 ? want : '', false);
   }).catch(function(){});
 })();
 </script>
