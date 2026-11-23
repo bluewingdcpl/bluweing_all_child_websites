@@ -16,11 +16,12 @@ function getTransport() {
   });
 }
 
-async function sendMail({ subject, html, text, replyTo, to: toOverride }) {
+// attachments: nodemailer attachment objects, e.g. [{ filename, content: Buffer, contentType }]
+async function sendMail({ subject, html, text, replyTo, to: toOverride, attachments }) {
   const to = toOverride || process.env.SMTP_TO || process.env.SMTP_USER;
   const from = process.env.SMTP_FROM || process.env.SMTP_USER;
   const transport = getTransport();
-  await transport.sendMail({ from, to, subject, html, text, replyTo });
+  await transport.sendMail({ from, to, subject, html, text, replyTo, attachments });
 }
 
 module.exports = { sendMail };

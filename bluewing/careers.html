@@ -324,8 +324,8 @@
 <div class="fld">
 <label for="ja-resume">Your Updated Resume</label>
 <input id="ja-resume" name="resume" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
-<p class="fld__hint">File size: up to 5MB. Acceptable file formats: PDF, DOCX.</p>
-<span class="field-err">Please attach a PDF or DOCX resume up to 5MB.</span>
+<p class="fld__hint">File size: up to 3MB. Acceptable file formats: PDF, DOC, DOCX.</p>
+<span class="field-err">Please attach a PDF, DOC or DOCX resume up to 3MB.</span>
 </div>
 <div class="fld"><label for="ja-message">Write your message below</label><textarea id="ja-message" name="message" placeholder="Anything you'd like us to know"></textarea></div>
 
@@ -405,7 +405,7 @@
   var COUNTRIES = window.BW_COUNTRY_CODES || [];
   var COUNTRY_BY_ISO = {};
   COUNTRIES.forEach(function (c) { COUNTRY_BY_ISO[c[0]] = c; });
-  var MAX_RESUME_BYTES = 5 * 1024 * 1024;
+  var MAX_RESUME_BYTES = 3 * 1024 * 1024;
   var ALLOWED_RESUME_EXT = /\.(pdf|doc|docx)$/i;
 
   function clearErrors() { form.querySelectorAll('.fld.has-err').forEach(function (f) { f.classList.remove('has-err'); }); }
@@ -580,7 +580,7 @@
     var file = resumeInput.files[0];
     if (!file) { markError(resumeInput, 'Please attach your resume.'); return false; }
     if (!ALLOWED_RESUME_EXT.test(file.name)) { markError(resumeInput, 'Only PDF or DOCX files are accepted.'); return false; }
-    if (file.size > MAX_RESUME_BYTES) { markError(resumeInput, 'File is too large — please keep it under 5MB.'); return false; }
+    if (file.size > MAX_RESUME_BYTES) { markError(resumeInput, 'File is too large — please keep it under 3MB.'); return false; }
     clearError(resumeInput);
     return true;
   }
