@@ -160,14 +160,23 @@
 <!-- ══ GROUP STATEMENT ═════════════════════════════════════ -->
 <section class="gw">
 <div class="shell gw__in">
-<h1>One group.<br>Three <b>disciplines.</b></h1>
-<p class="gw__ld">Turnkey construction, deep foundations and precast manufacturing — three specialist companies, one accountability.</p>
+<h1>One Group.<br>Four <b>disciplines.</b></h1>
+<p class="gw__ld">Turnkey construction, precast manufacturing, diaphragm wall, and Building Envelope Systems — four specialist companies, one accountability.</p>
 </div>
 
-<!-- three doors — white cards, icon logos, no background imagery -->
-<div class="tri">
+<!-- four doors — white cards, icon logos, no background imagery -->
+<style>
+/* Group companies: four centred boxes (home page) */
+.tri--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tri--4 .door{align-items:center;text-align:center}
+.tri--4 .door__logo{align-self:center}
+.tri--4 .door p{margin-inline:auto}
+.tri--4 .door__logo--alu{height:42px;margin-top:6px;margin-bottom:32px}
+@media(max-width:1200px){.tri--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.tri--4{grid-template-columns:minmax(0,1fr)}}
+</style>
+<div class="tri tri--4">
 <a class="door" href="bluewing-dcpl.html">
-<span class="door__no">01 / EPC</span>
 <img decoding="async" class="door__logo" src="/assets/uploads/2026/05/bluwing-icn.png" alt="BlueWing DCPL" width="54" height="54">
 <p class="door__disc">Turnkey Construction</p>
 <h2>BlueWing DCPL</h2>
@@ -175,8 +184,15 @@
 <span class="door__go">Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span>
 </a>
 
+<a class="door" href="https://bhaaratprecast.com/" target="_blank" rel="noopener">
+<img decoding="async" class="door__logo" src="/assets/uploads/2026/05/bhaarat-icn.png" alt="Bhaarat Precast" width="54" height="54">
+<p class="door__disc">Precast Construction</p>
+<h2>Bhaarat Precast</h2>
+<p>Manufacturing high-quality precast components for faster, smarter project execution.</p>
+<span class="door__go">Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span>
+</a>
+
 <a class="door" href="https://sygnificinfra.com/" target="_blank" rel="noopener">
-<span class="door__no">02 / D-WALL</span>
 <img decoding="async" class="door__logo" src="/assets/uploads/2026/05/sygnific-icn.png" alt="Sygnific Infra" width="54" height="54">
 <p class="door__disc">Diaphragm Wall Specialists</p>
 <h2>Sygnific Infra</h2>
@@ -184,12 +200,11 @@
 <span class="door__go">Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span>
 </a>
 
-<a class="door" href="https://bhaaratprecast.com/" target="_blank" rel="noopener">
-<span class="door__no">03 / PRECAST</span>
-<img decoding="async" class="door__logo" src="/assets/uploads/2026/05/bhaarat-icn.png" alt="Bhaarat Precast" width="54" height="54">
-<p class="door__disc">Precast Construction Solutions</p>
-<h2>Bhaarat Precast</h2>
-<p>Manufacturing high-quality precast components for faster, smarter project execution.</p>
+<a class="door" href="https://www.alutekenvelope.com/" target="_blank" rel="noopener">
+<img decoding="async" class="door__logo door__logo--alu" src="/assets/uploads/2026/11/alutek-icn.png" alt="AluTek" width="44" height="54">
+<p class="door__disc">Building Envelope Systems</p>
+<h2>AluTek</h2>
+<p>Integrated Façade and Building Envelope Solutions for Modern Architecture.</p>
 <span class="door__go">Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span>
 </a>
 </div>
