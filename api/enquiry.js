@@ -1,5 +1,6 @@
 const { put } = require('@vercel/blob');
 const { sendMail } = require('./_lib/mailer');
+const { buildEnquiryEmail, pageFrom } = require('./_lib/enquiry-email');
 const { recipientFor } = require('./_lib/recipients');
 const { requireAuth } = require('./_lib/auth');
 
@@ -29,10 +30,6 @@ const LABELS = {
   years: 'Years in business', website: 'Website / catalogue', applyFor: 'Apply for', resumeFile: 'Resume',
   resumeUrl: 'Resume link',
 };
-
-function esc(s) {
-  return String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
 
 async function readBody(req) {
   let body = req.body;
@@ -181,19 +178,14 @@ module.exports = async (req, res) => {
     delete entry.fields.resumeFile;
     if (resume) entry.fields.resumeFile = resume.filename;
     if (resumeUrl) entry.fields.resumeUrl = resumeUrl;
+    // The page the form was sent from (Referer header), kept with the lead and shown in the email.
+    const page = pageFrom(req);
+    if (page) entry.fields.pageUrl = page.url;
 
     let emailError = 'SMTP_HOST is not set', emailed = false;
     if (process.env.SMTP_HOST) {
       emailError = null;
       try {
-        const rows = Object.entries(entry.fields)
-          .filter(([, v]) => v)
-          .map(([k, v]) => {
-            const value = k === 'resumeUrl' ? `<a href="${esc(v)}">Download resume</a>`
-              : k === 'resumeFile' ? `${esc(v)} (attached to this email)` : esc(v);
-            return `<tr><td style="padding:6px 12px;color:#56687A;font-weight:600">${esc(LABELS[k] || k)}</td><td style="padding:6px 12px">${value}</td></tr>`;
-          })
-          .join('');
         const titles = {
           'vendor-registration': 'New vendor registration',
           'job-application': 'New job application',
@@ -206,9 +198,15 @@ module.exports = async (req, res) => {
         const host = String(req.headers['x-forwarded-host'] || req.headers.host || '');
         const mailKey = formType === 'project-enquiry' && /bhaarat/i.test(host) ? 'bhaarat-enquiry' : formType;
         const title = titles[mailKey];
+        const subject = `${title} — ${entry.fields.name || entry.fields.company || 'BlueWing website'}`;
+        const { html, text } = buildEnquiryEmail({
+          title, subject, formType: mailKey, host, fields: entry.fields, labels: LABELS, page,
+          submittedAt: entry.submittedAt, resume,
+        });
         await sendMail({
-          subject: `${title} — ${entry.fields.name || entry.fields.company || 'BlueWing website'}`,
-          html: `<h2>${title}</h2><table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">${rows}</table>`,
+          subject,
+          html,
+          text,
           replyTo: entry.fields.email,
           to: (await recipientFor(mailKey)) || undefined,
           attachments: resume ? [{ filename: resume.filename, content: resume.content, contentType: resume.contentType }] : undefined,
