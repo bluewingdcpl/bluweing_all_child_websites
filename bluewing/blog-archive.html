@@ -33,6 +33,55 @@
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 <!-- layout:header current="/blog.html" -->
+<style>
+/* Capabilities menu: BlueWing DCPL with its sectors on top, the three group companies below */
+.hdr__in{position:relative}
+.nav__i:has(> .mega--cap){position:static}
+.mega--cap.cap{display:block;left:auto;right:0;width:min(980px,100%);padding:0;overflow:hidden;transform:translateY(12px)}
+.nav__i:hover .mega--cap.cap,.nav__i:focus-within .mega--cap.cap{transform:none}
+.cap__disc{display:block;font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.cap__ds{font-size:var(--fs-xs);color:var(--steel);line-height:1.6;margin:0}
+.cap__lg{display:flex;align-items:center;height:36px;margin-bottom:16px}
+.cap__lg img{height:34px;width:auto;max-width:40px;object-fit:contain}
+/* core company */
+.cap__core{display:grid;grid-template-columns:300px minmax(0,1fr);gap:36px;padding:30px 32px}
+.cap__nm{display:block;font-family:var(--f-display);font-size:var(--fs-1-3-1-7rem,1.35rem);font-weight:600;color:var(--ink);
+  line-height:1.2;margin-bottom:10px;transition:color var(--d1)}
+.cap__nm:hover{color:var(--accent)}
+.cap__more{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:var(--f-mono);font-size:var(--fs-lbl);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.cap__more svg{width:12px;height:12px;transition:transform var(--d2) var(--ease)}
+.cap__more:hover svg{transform:translateX(4px)}
+.cap__sh{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.18em;text-transform:uppercase;color:var(--steel-2);margin-bottom:12px}
+.cap__tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cap__tiles a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line-2);border-radius:var(--r);
+  font-size:var(--fs-sm);color:var(--ink);transition:border-color var(--d2),color var(--d1)}
+.cap__ti{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:var(--r);background:var(--concrete);color:var(--accent);
+  transition:background var(--d2),color var(--d2)}
+.cap__ti svg{width:18px;height:18px;stroke-width:1.6}
+.cap__tiles a:hover{border-color:var(--accent);color:var(--accent)}
+.cap__tiles a:hover .cap__ti{background:var(--accent);color:var(--white)}
+/* group companies */
+.cap__group{background:var(--concrete);border-top:1px solid var(--line-2);padding:22px 32px 26px}
+.cap__gh{font-family:var(--f-mono);font-size:var(--fs-lbl);letter-spacing:.18em;text-transform:uppercase;color:var(--steel-2);margin-bottom:14px}
+.cap__sisters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cap__sis{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line-2);border-radius:var(--r);padding:18px 18px 14px;
+  transition:border-color var(--d2),box-shadow var(--d2)}
+.cap__sis:hover{border-color:var(--line);box-shadow:0 14px 30px -22px rgba(6,21,35,.45)}
+.cap__sh2{display:flex;align-items:center;gap:12px;color:var(--ink);margin-bottom:10px}
+.cap__lg--sm{height:auto;margin:0;flex:none;width:36px;justify-content:center}
+.cap__lg--sm img{height:30px}
+.cap__id{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.cap__tag{display:inline-flex;padding:3px 9px;border-radius:999px;background:rgba(52,68,111,.08);color:var(--accent);
+  font-family:var(--f-mono);font-size:var(--fs-0-625rem,.625rem);letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
+.cap__nm2{display:block;font-family:var(--f-display);font-size:var(--fs-0-95rem);font-weight:600;transition:color var(--d1)}
+.cap__sh2:hover .cap__nm2{color:var(--accent)}
+.cap__acts{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:auto;padding-top:12px}
+.cap__acts a{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-xs);font-weight:600;color:var(--accent)}
+.cap__acts svg{width:12px;height:12px;transition:transform var(--d2) var(--ease)}
+.cap__acts a:hover{color:var(--ink)}
+.cap__acts a:hover svg{transform:translate(2px,-1px)}
+</style>
 <header class="hdr" id="hdr">
 <div class="shell hdr__in">
 <a class="brand" href="/" aria-label="BlueWing Group — home">
@@ -66,39 +115,13 @@
 
 <div class="nav__i">
 <a class="nav__l" href="/bluewing-dcpl.html">Capabilities <svg><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></a>
-<div class="mega mega--cap">
-<div>
-<p class="mega__h">Turnkey construction</p>
-<a class="mco" href="/bluewing-dcpl.html">
-<img decoding="async" loading="lazy" src="/assets/uploads/2026/05/bluwing-icn.png" alt="" width="34" height="34">
-<b>BlueWing DCPL</b><span>EPC and turnkey projects delivered under one contract</span>
-<em>Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></em>
-</a>
-<p class="mega__h" style="margin-top:22px">Sectors</p>
-<div class="mega__sect">
-<a href="/industrial.html">Industrial</a><a href="/institutional.html">Institutional</a>
-<a href="/hotels.html">Hotels</a><a href="/hospitals.html">Hospitals</a>
-<a href="/residential.html">Residential</a><a href="/commercial.html">Commercial</a>
-</div>
-</div>
-<div>
-<p class="mega__h">Specialist foundations</p>
-<a class="mco" href="https://sygnificinfra.com/" target="_blank" rel="noopener">
-<img decoding="async" loading="lazy" src="/assets/uploads/2026/05/sygnific-icn.png" alt="" width="34" height="34">
-<b>Sygnific Infra</b><span>Diaphragm wall and geotechnical solutions for deep excavation</span>
-<em>Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></em>
-</a>
-</div>
-<div>
-<p class="mega__h">Precast manufacturing</p>
-<a class="mco" href="https://bhaaratprecast.com/" target="_blank" rel="noopener">
-<img decoding="async" loading="lazy" src="/assets/uploads/2026/05/bhaarat-icn.png" alt="" width="34" height="34">
-<b>Bhaarat Precast</b><span>Factory-controlled precast components for faster erection</span>
-<em>Explore company <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></em>
-</a>
-<p class="mega__h" style="margin-top:22px">Products</p>
-<div class="mega__sect"><a href="https://bhaaratprecast.com/precast-products.html" target="_blank" rel="noopener">Precast products &amp; specs</a></div>
-</div>
+<div class="mega mega--cap cap">
+<div class="cap__core"><div class="cap__intro"><span class="cap__lg"><img decoding="async" loading="lazy" src="/assets/uploads/2026/05/bluwing-icn.png" alt="" width="34" height="34"></span><span class="cap__disc">Turnkey &amp; EPC</span><a class="cap__nm" href="/bluewing-dcpl.html">BlueWing DCPL</a><p class="cap__ds">Design, procurement and construction delivered under one contract, across six sectors.</p><a class="cap__more" href="/bluewing-dcpl.html">Explore BlueWing DCPL <svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a></div><div class="cap__secs"><p class="cap__sh">Sectors</p><ul class="cap__tiles"><li><a href="/industrial.html"><span class="cap__ti"><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-factory"/></svg></span>Industrial</a></li><li><a href="/institutional.html"><span class="cap__ti"><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-school"/></svg></span>Institutional</a></li><li><a href="/hotels.html"><span class="cap__ti"><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-hotel"/></svg></span>Hotels</a></li><li><a href="/hospitals.html"><span class="cap__ti"><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-health"/></svg></span>Hospitals</a></li><li><a href="/residential.html"><span class="cap__ti"><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-home"/></svg></span>Residential</a></li><li><a href="/commercial.html"><span class="cap__ti"><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-office"/></svg></span>Commercial</a></li></ul></div></div>
+<div class="cap__group"><p class="cap__gh">Group companies</p><div class="cap__sisters">
+<div class="cap__sis"><a class="cap__sh2" href="https://bhaaratprecast.com/" target="_blank" rel="noopener"><span class="cap__lg cap__lg--sm"><img decoding="async" loading="lazy" src="/assets/uploads/2026/05/bhaarat-icn.png" alt="" width="34" height="34"></span><span class="cap__id"><b class="cap__nm2">Bhaarat Precast</b><span class="cap__tag">Precast</span></span></a><p class="cap__ds">Factory-controlled precast components for faster erection.</p><div class="cap__acts"><a href="https://bhaaratprecast.com/precast-products.html" target="_blank" rel="noopener">Products &amp; specs <svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a><a href="https://bhaaratprecast.com/" target="_blank" rel="noopener">Visit site <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div></div>
+<div class="cap__sis"><a class="cap__sh2" href="https://sygnificinfra.com/" target="_blank" rel="noopener"><span class="cap__lg cap__lg--sm"><img decoding="async" loading="lazy" src="/assets/uploads/2026/05/sygnific-icn.png" alt="" width="34" height="34"></span><span class="cap__id"><b class="cap__nm2">Sygnific Infra</b><span class="cap__tag">Diaphragm wall</span></span></a><p class="cap__ds">Diaphragm wall and geotechnical solutions for deep excavation.</p><div class="cap__acts"><a href="https://sygnificinfra.com/" target="_blank" rel="noopener">Visit site <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div></div>
+<div class="cap__sis"><a class="cap__sh2" href="https://www.alutekenvelope.com/" target="_blank" rel="noopener"><span class="cap__lg cap__lg--sm"><img decoding="async" loading="lazy" src="/assets/uploads/2026/11/alutek-icn.png" alt="" width="28" height="34"></span><span class="cap__id"><b class="cap__nm2">AluTek</b><span class="cap__tag">Building envelope systems</span></span></a><p class="cap__ds">Integrated fa&ccedil;ade and building envelope systems for modern architecture.</p><div class="cap__acts"><a href="https://www.alutekenvelope.com/" target="_blank" rel="noopener">Visit site <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div></div>
+</div></div>
 </div>
 </div>
 
@@ -123,8 +146,9 @@
 <p class="drw__gh">Group companies</p>
 <nav aria-label="Companies">
 <a href="/bluewing-dcpl.html">BlueWing DCPL<small>Turnkey &amp; EPC construction</small></a>
+<a href="https://bhaaratprecast.com/" target="_blank" rel="noopener">Bhaarat Precast<small>Precast construction</small></a>
 <a href="https://sygnificinfra.com/" target="_blank" rel="noopener">Sygnific Infra<small>Diaphragm wall specialists</small></a>
-<a href="https://bhaaratprecast.com/" target="_blank" rel="noopener">Bhaarat Precast<small>Precast construction solutions</small></a>
+<a href="https://www.alutekenvelope.com/" target="_blank" rel="noopener">AluTek<small>Building envelope systems</small></a>
 </nav>
 <p class="drw__gh">Explore</p>
 <nav aria-label="Mobile">
