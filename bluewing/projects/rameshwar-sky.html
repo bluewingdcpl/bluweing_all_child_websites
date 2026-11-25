@@ -9,22 +9,22 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rameshwar Sky | BlueWing Group Projects</title>
-<meta name="description" content="Rameshwar Sky — a residential project delivered by BlueWing DCPL. A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.">
-<link rel="canonical" href="https://www.bluewingconstruction.com/projects/rameshwar-sky/">
+<title>Rameshwar Sky — Case Study | BlueWing Group</title>
+<meta name="description" content="Case study: BlueWing executed Core &amp; Shell works for Rameshwar Sky: 5 blocks, 1 Basement + G + 12 floors, approx. 3.5 lakh sq.ft., including waterlogged foundation and basement works. Completed July 2025.">
+<link rel="canonical" href="https://www.bluewingconstruction.com/rameshwar-sky">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#061523">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:site_name" content="BlueWing Group">
 <meta property="og:locale" content="en_IN">
-<meta property="og:url" content="https://www.bluewingconstruction.com/projects/rameshwar-sky/">
-<meta property="og:title" content="Rameshwar Sky | BlueWing Group Projects">
-<meta property="og:description" content="Rameshwar Sky — a residential project delivered by BlueWing DCPL. A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.">
-<meta property="og:image" content="https://www.bluewingconstruction.com/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp">
+<meta property="og:url" content="https://www.bluewingconstruction.com/rameshwar-sky">
+<meta property="og:title" content="Rameshwar Sky — Case Study | BlueWing Group">
+<meta property="og:description" content="5 blocks · B + G + 12 floors · approx. 3.5 lakh sq.ft. Core &amp; Shell, completed 21 July 2025.">
+<meta property="og:image" content="https://www.bluewingconstruction.com/assets/uploads/rameshwar-sky/completed.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/uploads/rameshwar-sky/completed.jpg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/bluewing.css?v=1"></head>
 <body>
@@ -165,78 +165,465 @@
 </div>
 <!-- /layout:header -->
 
-<main id="main"><section class="ph">
-<div class="shell ph__in">
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="../projects.html">Projects</a><span>/</span><span>Rameshwar Sky</span></nav>
-<p class="eyebrow">Ongoing</p>
+<style>
+/* =====================================================================
+   RAMESHWAR SKY — CASE STUDY
+   Every style is scoped under .rs, so nothing leaks into the site
+   header or footer. Tokens read the site's own CSS variables.
+   ===================================================================== */
+.rs{
+  --rs-ink:var(--ink,#061523); --rs-ink-2:var(--ink-2,#0B2135); --rs-deep:var(--deep,#0E2B44);
+  --rs-paper:var(--paper,#fff); --rs-concrete:var(--concrete,#F1F3F5);
+  --rs-steel:var(--steel,#56687A); --rs-steel-2:var(--steel-2,#8698A6);
+  --rs-line:var(--line,rgba(6,21,35,.11)); --rs-line-dk:var(--line-dk,rgba(255,255,255,.13));
+  --rs-on-dark:var(--on-dark,rgba(255,255,255,.68));
+  --rs-accent:var(--accent-base,#34446F); --rs-accent-lt:var(--accent-lt,#93A1CE);
+  --rs-btn:var(--btn,#34446F); --rs-btn-600:var(--btn-600,#26334F);
+  --rs-font:var(--f-body,'Poppins',system-ui,-apple-system,sans-serif);
+  --rs-r:var(--r,3px); --rs-shadow:var(--shadow,0 22px 60px rgba(6,21,35,.16));
+  --rs-ease:var(--ease,cubic-bezier(.22,.68,.34,1));
+  --rs-sec:var(--sec-y,clamp(80px,9.5vw,142px)); --rs-shell:var(--shell,1400px); --rs-gut:var(--gut,clamp(20px,5vw,64px));
+  --rs-fs-h2:var(--fs-h2,clamp(1.9rem,3.7vw,3.2rem)); --rs-fs-h3:var(--fs-h3,clamp(1.18rem,1.6vw,1.45rem));
+  --rs-fs-sm:var(--fs-sm,.9375rem); --rs-fs-xs:var(--fs-xs,.8125rem); --rs-fs-lbl:var(--fs-lbl,.6875rem);
+  font-family:var(--rs-font); color:var(--rs-ink); font-size:var(--fs-body,1.0625rem); line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+.rs *,.rs *::before,.rs *::after{box-sizing:border-box}
+:where(.rs) :where(h1,h2,h3,h4){margin:0}
+.rs h1,.rs h2,.rs h3,.rs h4{font-family:var(--rs-font);font-weight:600;letter-spacing:-.024em;line-height:1.16}
+:where(.rs) :where(p){margin:0}
+:where(.rs) :where(img,video){display:block;max-width:100%}
+:where(.rs) :where(a){color:inherit;text-decoration:none}
+.rs button{font:inherit;cursor:pointer}
+
+/* ---------- Shared building blocks ---------- */
+.rs-shell{width:100%;max-width:var(--rs-shell);margin-inline:auto;padding-inline:var(--rs-gut)}
+.rs-sec{padding-block:var(--rs-sec)}
+.rs-sec--tight{padding-top:0}
+.rs-sec--concrete{background:var(--rs-concrete)}
+.rs-sec--ink{background:var(--rs-ink);color:#fff}
+.rs-eyebrow{font-size:var(--rs-fs-lbl);letter-spacing:.22em;text-transform:uppercase;color:var(--rs-accent);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.rs-eyebrow::before{content:"";width:26px;height:1px;background:currentColor;flex:0 0 auto}
+.rs-sec--ink .rs-eyebrow,.rs-hero .rs-eyebrow{color:var(--rs-accent-lt)}
+.rs-h2{font-size:var(--rs-fs-h2);max-width:20ch}
+.rs-sec--ink .rs-h2{color:#fff}
+.rs-lede{color:var(--rs-steel);max-width:58ch;margin-top:20px}
+.rs-sec--ink .rs-lede{color:var(--rs-on-dark)}
+.rs-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)}
+.rs-btn{display:inline-flex;align-items:center;gap:12px;padding:17px 30px;border-radius:var(--rs-r);font-weight:600;font-size:var(--rs-fs-sm);border:1px solid transparent;transition:background .2s,color .2s,border-color .2s}
+.rs-btn svg{width:15px;height:15px;transition:transform .4s var(--rs-ease)}
+.rs-btn:hover svg{transform:translateX(5px)}
+.rs-btn--accent{background:var(--rs-btn);color:#fff}
+.rs-btn--accent:hover{background:var(--rs-btn-600)}
+.rs-btn--out-lt{border-color:var(--rs-line-dk);color:#fff}
+.rs-btn--out-lt:hover{background:#fff;color:var(--rs-ink);border-color:#fff}
+.rs-lbl{font-size:var(--rs-fs-lbl);letter-spacing:.18em;text-transform:uppercase;color:var(--rs-steel-2)}
+
+/* ---------- Media slots ---------- */
+.rs-m{position:relative;margin:0;border-radius:var(--rs-r);overflow:hidden;background:var(--rs-concrete)}
+.rs-m img,.rs-m video{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--rs-ease)}
+.rs-m.is-missing img{opacity:0}
+.rs-m.is-missing::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;
+  font-size:var(--rs-fs-xs);color:var(--rs-steel);border:1px dashed rgba(6,21,35,.22);border-radius:var(--rs-r);
+  background:repeating-linear-gradient(135deg,transparent 0 12px,rgba(6,21,35,.025) 12px 24px)}
+.rs-sec--ink .rs-m{background:var(--rs-ink-2)}
+.rs-tile{cursor:zoom-in}
+.rs-tile:hover img{transform:scale(1.04)}
+.rs-tile:focus-visible{outline:2px solid var(--rs-accent);outline-offset:3px}
+
+/* ---------- 1. Hero ---------- */
+.rs-hero{position:relative;background:var(--rs-ink);color:#fff;overflow:hidden;padding-block:clamp(72px,9vw,124px) 0}
+.rs-hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:58px 58px;-webkit-mask-image:radial-gradient(ellipse at 88% 8%,#000,transparent 68%);mask-image:radial-gradient(ellipse at 88% 8%,#000,transparent 68%)}
+.rs-hero::after{content:"";position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--rs-accent-lt);opacity:.5}
+.rs-hero .rs-shell{position:relative}
+.rs-crumb{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:26px;font-size:var(--rs-fs-lbl);letter-spacing:.18em;text-transform:uppercase;color:var(--rs-on-dark)}
+.rs-crumb a:hover{color:#fff}
+.rs-crumb i{font-style:normal;opacity:.5}
+.rs-hero h1{max-width:20ch;font-size:var(--fs-hero,clamp(2.3rem,4.4vw,3.8rem));font-weight:500;letter-spacing:-.038em;line-height:1.06;margin:22px 0 20px;color:#fff}
+.rs-hero__ld{color:var(--rs-on-dark);font-size:clamp(1rem,1.2vw,1.15rem);max-width:58ch}
+.rs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.rs-pill{font-size:var(--rs-fs-lbl);letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--rs-line-dk);border-radius:2px;color:rgba(255,255,255,.86)}
+.rs-pill--ok{border-color:rgba(98,196,140,.45);color:#8fe0b2}
+.rs-stats{display:grid;grid-template-columns:repeat(5,1fr);margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--rs-line-dk)}
+.rs-stat{padding:30px 24px 34px 0;border-right:1px solid var(--rs-line-dk)}
+.rs-stat+.rs-stat{padding-left:24px}
+.rs-stat:last-child{border-right:0}
+.rs-stat b{display:block;font-size:clamp(1.5rem,2.4vw,2.2rem);font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.rs-stat span{display:block;margin-top:8px;font-size:var(--rs-fs-xs);color:var(--rs-on-dark)}
+
+/* ---------- 2. Project film ---------- */
+.rs-film-wrap{background:linear-gradient(var(--rs-ink) 0 50%,var(--rs-paper) 50% 100%);padding-bottom:var(--rs-sec)}
+.rs-film{position:relative;aspect-ratio:16/9;border-radius:var(--rs-r);overflow:hidden;background:var(--rs-ink-2);box-shadow:var(--rs-shadow)}
+.rs-film>img{width:100%;height:100%;object-fit:cover}
+.rs-film::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,21,35,.78),rgba(6,21,35,.1) 55%);pointer-events:none}
+.rs-film__btn{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:none;border:0;color:#fff}
+.rs-film__btn span{width:clamp(70px,8vw,96px);height:clamp(70px,8vw,96px);border-radius:50%;background:var(--rs-btn);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(255,255,255,.12);transition:transform .4s var(--rs-ease),box-shadow .4s}
+.rs-film__btn svg{width:26px;height:26px;fill:#fff;margin-left:5px}
+.rs-film__btn:hover span{transform:scale(1.06);box-shadow:0 0 0 18px rgba(255,255,255,.14)}
+.rs-film__meta{position:absolute;left:clamp(20px,3vw,40px);right:clamp(20px,3vw,40px);bottom:clamp(18px,3vw,36px);z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;pointer-events:none;color:#fff}
+.rs-film__meta h2{font-size:clamp(1.2rem,2vw,1.7rem);font-weight:500;color:#fff}
+.rs-film__meta .rs-lbl{color:rgba(255,255,255,.7)}
+.rs-film.is-playing::after,.rs-film.is-playing .rs-film__meta,.rs-film.is-playing>img{display:none}
+.rs-film iframe,.rs-film video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+
+/* ---------- 3. Overview ---------- */
+.rs-ov{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,96px);align-items:start}
+.rs-ov__body p+p{margin-top:16px}
+.rs-ov__body .rs-lede{margin-bottom:24px}
+.rs-ov__body .rs-btn{margin-top:36px}
+.rs-spec{border-top:2px solid var(--rs-ink)}
+.rs-spec h3{font-size:var(--rs-fs-lbl);letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--rs-steel);padding:18px 0}
+.rs-spec dl{margin:0}
+.rs-spec div{display:grid;grid-template-columns:42% 58%;gap:12px;padding:15px 0;border-top:1px solid var(--rs-line);font-size:var(--rs-fs-sm)}
+.rs-spec dt{color:var(--rs-steel)}
+.rs-spec dd{margin:0;font-weight:500}
+
+/* ---------- 4. Challenges ---------- */
+.rs-ch{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+.rs-ch+.rs-ch{margin-top:clamp(64px,8vw,112px)}
+.rs-ch:nth-of-type(even) .rs-ch__media{order:2}
+.rs-ch__media{aspect-ratio:4/3}
+.rs-ch__num{font-size:clamp(3rem,5vw,4.4rem);font-weight:500;letter-spacing:-.04em;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(6,21,35,.22)}
+.rs-ch h3{font-size:clamp(1.4rem,2.2vw,2rem);margin:14px 0 14px}
+.rs-ch__problem{color:var(--rs-steel)}
+.rs-ch__blk{margin-top:22px;padding-left:18px;border-left:2px solid var(--rs-accent)}
+.rs-ch__blk .rs-lbl{color:var(--rs-accent);display:block;margin-bottom:6px}
+.rs-ch__blk--exp{border-color:var(--rs-ink)}
+.rs-ch__blk--exp .rs-lbl{color:var(--rs-ink)}
+.rs-ch__blk ul{margin:0;padding-left:18px}
+.rs-ch__blk li+li{margin-top:6px}
+
+/* ---------- 5. Construction journey ---------- */
+.rs-jr__ends{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px}
+.rs-jr__ends span{font-size:var(--rs-fs-lbl);letter-spacing:.18em;text-transform:uppercase;color:var(--rs-on-dark)}
+.rs-jr__ends b{display:block;font-size:1.05rem;font-weight:500;letter-spacing:-.01em;text-transform:none;color:#fff;margin-bottom:2px}
+.rs-jr__ends span:last-child{text-align:right}
+.rs-jr__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative;border-top:1px solid var(--rs-line-dk)}
+.rs-jr__list::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:linear-gradient(90deg,var(--rs-accent-lt),rgba(147,161,206,.15))}
+.rs-jr__ph{position:relative;padding:44px 24px 8px 0}
+.rs-jr__ph+.rs-jr__ph{padding-left:24px;border-left:1px solid var(--rs-line-dk)}
+.rs-jr__ph::before{content:"";position:absolute;top:-6px;left:0;width:11px;height:11px;border-radius:50%;background:var(--rs-ink);border:2px solid var(--rs-accent-lt)}
+.rs-jr__ph+.rs-jr__ph::before{left:-6px}
+.rs-jr__ph:last-child::before{background:var(--rs-accent-lt)}
+.rs-jr__n{display:block;font-size:clamp(2.6rem,4vw,3.6rem);font-weight:500;letter-spacing:-.04em;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(147,161,206,.55);margin-bottom:22px}
+.rs-jr__ph h3{font-size:1.1rem;font-weight:500;color:#fff}
+.rs-jr__ph p{font-size:var(--rs-fs-xs);color:var(--rs-on-dark);margin-top:10px;line-height:1.65}
+.rs-jr__ph ul{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.rs-jr__ph ul li{font-size:.72rem;padding:5px 10px;border:1px solid var(--rs-line-dk);border-radius:2px;color:rgba(255,255,255,.82)}
+.rs-note{margin-top:clamp(40px,5vw,64px);padding:22px 26px;border:1px solid var(--rs-line-dk);border-left:3px solid var(--rs-accent-lt);border-radius:var(--rs-r);color:rgba(255,255,255,.86);font-size:var(--rs-fs-sm)}
+
+/* ---------- 6. Expertise ---------- */
+.rs-exp{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rs-line);border-left:1px solid var(--rs-line)}
+.rs-exp>div{padding:clamp(24px,2.6vw,36px);border-right:1px solid var(--rs-line);border-bottom:1px solid var(--rs-line);background:var(--rs-paper)}
+.rs-exp h3{font-size:var(--rs-fs-h3);margin-bottom:16px}
+.rs-exp ul{list-style:none;margin:0;padding:0}
+.rs-exp li{position:relative;padding:6px 0 6px 20px;color:var(--rs-steel);font-size:var(--rs-fs-sm)}
+.rs-exp li::before{content:"";position:absolute;left:0;top:16px;width:9px;height:1px;background:var(--rs-accent)}
+
+/* ---------- 7. Gallery ---------- */
+.rs-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.rs-tabs button{padding:11px 18px;border:1px solid var(--rs-line);border-radius:var(--rs-r);background:none;color:var(--rs-ink);font-size:var(--rs-fs-xs);font-weight:500;transition:all .2s}
+.rs-tabs button[aria-selected="true"]{background:var(--rs-ink);border-color:var(--rs-ink);color:#fff}
+.rs-tabs button:not([aria-selected="true"]):hover{border-color:var(--rs-ink)}
+.rs-tabs small{opacity:.6;margin-left:6px}
+.rs-gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,16vw,240px);grid-auto-flow:dense;gap:clamp(10px,1.4vw,18px)}
+.rs-gal .rs-m.w2{grid-column:span 2}
+.rs-gal .rs-m.h2{grid-row:span 2}
+.rs-gal .rs-m[hidden]{display:none}
+
+/* ---------- 8. Outcome ---------- */
+.rs-out{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:start}
+.rs-out__body p+p{margin-top:16px}
+.rs-out__body p{color:var(--rs-steel)}
+.rs-done{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-size:var(--rs-fs-sm);font-weight:500}
+.rs-done::before{content:"";width:10px;height:10px;border-radius:50%;background:#2f9e63;box-shadow:0 0 0 5px rgba(47,158,99,.15)}
+.rs-take{background:var(--rs-ink);color:#fff;border-radius:var(--rs-r);padding:clamp(30px,3.4vw,48px);position:relative;overflow:hidden}
+.rs-take::after{content:"";position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--rs-accent-lt);opacity:.5}
+.rs-take .rs-eyebrow{color:var(--rs-accent-lt)}
+.rs-take p{color:rgba(255,255,255,.86);font-size:clamp(1rem,1.25vw,1.15rem);line-height:1.75}
+
+/* ---------- 9. CTA ---------- */
+.rs-cta .rs-shell{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.rs-cta__btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- Lightbox ---------- */
+.rs-lb{position:fixed;inset:0;z-index:9999;background:rgba(6,21,35,.94);display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,64px)}
+.rs-lb.is-open{display:flex}
+.rs-lb__stage{max-width:min(1200px,100%);max-height:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
+.rs-lb__stage img{max-width:100%;max-height:calc(100vh - 140px);border-radius:var(--rs-r);background:#000}
+.rs-lb__cap{color:rgba(255,255,255,.75);font-size:var(--rs-fs-xs);text-align:center}
+.rs-lb button{position:absolute;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1}
+.rs-lb button:hover{background:rgba(255,255,255,.18)}
+.rs-lb__x{top:20px;right:20px}
+.rs-lb__prev{left:20px;top:50%;transform:translateY(-50%)}
+.rs-lb__next{right:20px;top:50%;transform:translateY(-50%)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .rs-jr__ph,.rs-jr__ph+.rs-jr__ph{padding-right:14px}
+  .rs-jr__ph+.rs-jr__ph{padding-left:14px}
+  .rs-stats{grid-template-columns:repeat(3,1fr)}
+  .rs-stat:nth-child(3){border-right:0}
+  .rs-stat:nth-child(4){padding-left:0}
+  .rs-stat:nth-child(n+4){border-top:1px solid var(--rs-line-dk)}
+  .rs-exp{grid-template-columns:repeat(2,1fr)}
+  .rs-gal{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:780px){
+  .rs-stats{grid-template-columns:1fr 1fr}
+  .rs-stat,.rs-stat+.rs-stat{padding:22px 16px 24px 0;border-right:0;border-top:1px solid var(--rs-line-dk)}
+  .rs-stat:nth-child(odd){border-right:1px solid var(--rs-line-dk)}
+  .rs-stat:nth-child(even){padding-left:16px}
+  .rs-stat:first-child{border-top:0}.rs-stat:nth-child(2){border-top:0}
+  .rs-film-wrap{background:linear-gradient(var(--rs-ink) 0 35%,var(--rs-paper) 35% 100%)}
+  .rs-film__meta h2,.rs-film__meta>.rs-lbl{display:none}
+  .rs-ov,.rs-ch,.rs-out{grid-template-columns:1fr}
+  .rs-ch:nth-of-type(even) .rs-ch__media{order:0}
+  .rs-jr__ends{display:none}
+  .rs-jr__list{grid-template-columns:1fr;border-top:0;border-left:1px solid var(--rs-line-dk);margin-left:6px}
+  .rs-jr__list::before{top:0;bottom:0;left:-1px;right:auto;width:1px;height:auto;background:linear-gradient(180deg,var(--rs-accent-lt),rgba(147,161,206,.15))}
+  .rs-jr__ph,.rs-jr__ph+.rs-jr__ph{padding:0 0 40px 30px;border-left:0}
+  .rs-jr__ph::before,.rs-jr__ph+.rs-jr__ph::before{top:6px;left:-7px}
+  .rs-jr__n{font-size:2.2rem;margin-bottom:10px}
+  .rs-jr__ph:first-child .rs-jr__n::after{content:"Start · 09 Mar 2023";display:block;margin-top:8px;font-size:var(--rs-fs-lbl);letter-spacing:.16em;text-transform:uppercase;-webkit-text-stroke:0;color:var(--rs-accent-lt)}
+  .rs-jr__ph:last-child .rs-jr__n::after{content:"Completed · 21 Jul 2025";display:block;margin-top:8px;font-size:var(--rs-fs-lbl);letter-spacing:.16em;text-transform:uppercase;-webkit-text-stroke:0;color:var(--rs-accent-lt)}
+  .rs-exp{grid-template-columns:1fr}
+  .rs-gal{grid-template-columns:1fr 1fr}
+  .rs-gal .rs-m.w2{grid-column:span 2}
+  .rs-lb__prev,.rs-lb__next{top:auto!important;bottom:20px;transform:none!important}
+}
+@media (prefers-reduced-motion:reduce){.rs *{transition:none!important}}
+</style>
+<main id="main" class="rs">
+
+<!-- 1. HERO -->
+<section class="rs-hero">
+<div class="rs-shell">
+<nav class="rs-crumb" aria-label="Breadcrumb"><a href="/">Home</a><i>/</i><a href="/projects.html">Projects</a><i>/</i><span aria-current="page">Rameshwar Sky</span></nav>
+<p class="rs-eyebrow">Case Study · Core &amp; Shell</p>
 <h1>Rameshwar Sky</h1>
-<p class="ph__ld">A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.</p>
+<p class="rs-hero__ld">BlueWing delivered the Core &amp; Shell construction of this 5-block, multi-storey development. The work took in a waterlogged foundation, an 18,200 sq.ft. basement and fast-track structural work across G + 12 floors.</p>
+<div class="rs-pills">
+<span class="rs-pill rs-pill--ok">Completed · July 2025</span>
+<span class="rs-pill">Residential</span>
+<span class="rs-pill">Mar 2023 – Jul 2025</span>
+</div>
+<div class="rs-stats">
+<div class="rs-stat"><b>5</b><span>Blocks built at the same time</span></div>
+<div class="rs-stat"><b>B + G + 12</b><span>Floors per block</span></div>
+<div class="rs-stat"><b>3.5 Lakh</b><span>Sq.ft. built-up area (approx.)</span></div>
+<div class="rs-stat"><b>18,200</b><span>Sq.ft. basement (approx.)</span></div>
+<div class="rs-stat"><b>₹12.59 Cr</b><span>Project value (approx.)</span></div>
+</div>
 </div>
 </section>
-<section class="pd">
-<div class="shell pd__in">
-<div class="rv">
-<p class="eyebrow">Residential</p>
-<h2>About the project</h2>
-<p class="pd__ld">A residential project delivered around comfort, functionality and long-term value, held to a controlled construction cycle.</p>
-<!-- TODO: replace with the real project narrative, client name and dates -->
-<p class="pd__ld">Delivered by BlueWing DCPL under our turnkey delivery model — design co-ordination, procurement and execution carried by a single team accountable for cost, programme and quality.</p>
-<a class="btn btn--accent" style="margin-top:26px" href="../contact-us.html">Discuss a similar project <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a>
+
+<!-- 2. PROJECT FILM (YouTube loads only when Play is clicked) -->
+<div class="rs-film-wrap">
+<div class="rs-shell">
+<div class="rs-film" id="rsFilm" data-youtube="d8H6LSOQ7wo">
+<img src="/assets/uploads/rameshwar-sky/completed.jpg" alt="Rameshwar Sky, the five completed blocks" width="1400" height="899" fetchpriority="high" decoding="async">
+<button class="rs-film__btn" type="button" aria-label="Play the Rameshwar Sky project film">
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+</button>
+<div class="rs-film__meta">
+<div><p class="rs-lbl">Project film</p><h2>Rameshwar Sky, from excavation to Core &amp; Shell</h2></div>
+<p class="rs-lbl">BlueWing · 2023 – 2025</p>
 </div>
-<dl class="spec rv">
-<div><dt>Status</dt><dd>Ongoing</dd></div>
-<div><dt>Sector</dt><dd><a href="../residential.html">Residential</a></dd></div>
-<div><dt>Delivery model</dt><dd>Turnkey / EPC</dd></div>
-<div><dt>Location</dt><dd>Gujarat, India</dd></div>
-<div><dt>Built-up area</dt><dd>On request</dd></div>
-<div><dt>Client</dt><dd>On request</dd></div>
+</div>
+</div>
+</div>
+
+<!-- 3. OVERVIEW + PROJECT DETAILS -->
+<section class="rs-sec rs-sec--tight">
+<div class="rs-shell rs-ov">
+<div class="rs-ov__body">
+<p class="rs-eyebrow">Project Overview</p>
+<h2 class="rs-h2">A large-scale, multi-block development, delivered end to end.</h2>
+<p class="rs-lede">Rameshwar Sky is a 5-block multi-storey development. Each block has 1 basement, a ground floor and 12 upper floors, for a total built-up area of approximately 3.50 lakh sq.ft.</p>
+<p>BlueWing Design and Construction Pvt. Ltd. carried out the Core &amp; Shell construction works. This covered major RCC work, foundations, the basement, retaining walls, shuttering and structural construction.</p>
+<p>The project needed careful planning, a fast-track construction method, good resource management, strict quality control and coordination across several work fronts at once.</p>
+<a class="rs-btn rs-btn--accent" href="/contact-us.html">Discuss a similar project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+</div>
+<aside class="rs-spec" aria-label="Project details">
+<h3>Project details</h3>
+<dl>
+<div><dt>Project</dt><dd>Rameshwar Sky</dd></div>
+<div><dt>Scope of work</dt><dd>Core &amp; Shell Construction</dd></div>
+<div><dt>Configuration</dt><dd>1 Basement + Ground + 12 Floors</dd></div>
+<div><dt>No. of blocks</dt><dd>5</dd></div>
+<div><dt>Basement area</dt><dd>Approx. 18,200 sq.ft.</dd></div>
+<div><dt>Total built-up area</dt><dd>Approx. 3,50,000 sq.ft.</dd></div>
+<div><dt>Project value</dt><dd>Approx. ₹12.59 Crore</dd></div>
+<div><dt>Start date</dt><dd>09 March 2023</dd></div>
+<div><dt>Completion date</dt><dd>21 July 2025</dd></div>
+<div><dt>Status</dt><dd>Completed</dd></div>
 </dl>
+</aside>
 </div>
 </section>
 
-<section class="shots">
-<div class="shell">
-<div class="shots__fig rv"><img decoding="async" src="/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp" alt="Rameshwar Sky — BlueWing DCPL project photograph" loading="lazy" width="1400" height="790"></div>
-<div class="shots__cap rv">
-<p>Fig. 01 — Rameshwar Sky, ongoing</p>
-<p>Photography: BlueWing DCPL</p>
+<!-- 4. KEY CHALLENGES -->
+<section class="rs-sec rs-sec--concrete">
+<div class="rs-shell">
+<div class="rs-head">
+<div><p class="rs-eyebrow">Key Project Challenges</p><h2 class="rs-h2">Difficult ground, five work fronts and a tight pace.</h2></div>
+<p class="rs-lede" style="max-width:44ch;margin:0">Each challenge needed a solution suited to this site. The photos are from the site during construction.</p>
 </div>
-<!-- TODO: add 3–6 more site photographs per project; the grid below repeats
-     the single available image until the real gallery is supplied -->
-<div class="shots__g rv">
-<img decoding="async" src="/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp" alt="Rameshwar Sky — site view" loading="lazy" width="600" height="450">
-<img decoding="async" src="/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp" alt="Rameshwar Sky — structural works" loading="lazy" width="600" height="450">
-<img decoding="async" src="/assets/uploads/2023/06/Projects_Rameshwar_Sky-1.webp" alt="Rameshwar Sky — completed elevation" loading="lazy" width="600" height="450">
+<article class="rs-ch">
+<figure class="rs-m rs-tile rs-ch__media" data-label="Dewatering and foundation bed" data-caption="Dewatering and foundation-bed preparation in the waterlogged area" data-full="/assets/uploads/rameshwar-sky/ch1-dewatering.jpg"><img src="/assets/uploads/rameshwar-sky/ch1-dewatering-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch1-dewatering-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch1-dewatering.jpg 1400w" sizes="(max-width:780px) 100vw, 50vw" alt="Dewatering and foundation-bed preparation in the waterlogged area" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<div>
+<span class="rs-ch__num">01</span>
+<h3>Waterlogged foundation area</h3>
+<p class="rs-ch__problem">The basement foundation area was waterlogged, which made excavation and foundation preparation difficult.</p>
+<div class="rs-ch__blk"><span class="rs-lbl">Solution</span>The team carried out dewatering and prepared the foundation bed, then laid rubble soling to give a stable base for the RCC foundation works that followed.</div>
+<div class="rs-ch__blk rs-ch__blk--exp"><span class="rs-lbl">Expertise demonstrated</span>Foundation work in difficult ground conditions, using a construction method planned for this specific site.</div>
+</div>
+</article>
+
+<article class="rs-ch">
+<figure class="rs-m rs-tile rs-ch__media" data-label="Basement and retaining wall" data-caption="Basement raft reinforcement and retaining wall formwork" data-full="/assets/uploads/rameshwar-sky/ch2-basement.jpg"><img src="/assets/uploads/rameshwar-sky/ch2-basement-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch2-basement-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch2-basement.jpg 1400w" sizes="(max-width:780px) 100vw, 50vw" alt="Basement raft reinforcement and retaining wall formwork" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<div>
+<span class="rs-ch__num">02</span>
+<h3>Basement &amp; retaining wall construction</h3>
+<p class="rs-ch__problem">The project included approximately 18,200 sq.ft. of basement area, including retaining wall works.</p>
+<div class="rs-ch__blk"><span class="rs-lbl">Execution</span>Excavation, dewatering, reinforcement, formwork and concrete placement were carefully coordinated in the restricted space of the basement.</div>
+<div class="rs-ch__blk rs-ch__blk--exp"><span class="rs-lbl">Expertise demonstrated</span>Basement construction, retaining walls and RCC works in challenging site conditions.</div>
+</div>
+</article>
+
+<article class="rs-ch">
+<figure class="rs-m rs-tile rs-ch__media" data-label="All five blocks under construction" data-caption="All 5 blocks under construction at the same time, with the tower crane and batching plant" data-full="/assets/uploads/rameshwar-sky/ch3-five-blocks.jpg"><img src="/assets/uploads/rameshwar-sky/ch3-five-blocks-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch3-five-blocks-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch3-five-blocks.jpg 1400w" sizes="(max-width:780px) 100vw, 50vw" alt="All 5 blocks under construction at the same time, with the tower crane and batching plant" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<div>
+<span class="rs-ch__num">03</span>
+<h3>Multi-block construction</h3>
+<p class="rs-ch__problem">Building 5 blocks at the same time meant coordinating manpower, materials, machinery and several work fronts together.</p>
+<div class="rs-ch__blk"><span class="rs-lbl">Solution</span>The team planned construction and allocated resources block by block. This kept work moving continuously and stopped work fronts from clashing.</div>
+</div>
+</article>
+
+<article class="rs-ch">
+<figure class="rs-m rs-tile rs-ch__media" data-label="Aluminium shuttering" data-caption="Aluminium shuttering on the retaining wall" data-full="/assets/uploads/rameshwar-sky/ch4-shuttering.jpg"><img src="/assets/uploads/rameshwar-sky/ch4-shuttering-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch4-shuttering-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch4-shuttering.jpg 1400w" sizes="(max-width:780px) 100vw, 50vw" alt="Aluminium shuttering on the retaining wall" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<div>
+<span class="rs-ch__num">04</span>
+<h3>Fast-track construction &amp; shuttering management</h3>
+<p class="rs-ch__problem">A key challenge was reaching the required construction speed across many floors.</p>
+<div class="rs-ch__blk"><span class="rs-lbl">Solution</span>
+<ul>
+<li><strong>Aluminium shuttering</strong> was used for repetitive structural work to raise speed and productivity.</li>
+<li><strong>Plywood shuttering</strong> was used for slabs and columns that needed more flexible, custom formwork.</li>
+</ul>
+</div>
+<div class="rs-ch__blk rs-ch__blk--exp"><span class="rs-lbl">Result</span>Using both systems balanced speed, flexibility, quality and productivity.</div>
+</div>
+</article>
+</div>
+</section>
+
+<!-- 5. CONSTRUCTION JOURNEY -->
+<section class="rs-sec rs-sec--ink">
+<div class="rs-shell">
+<div class="rs-head">
+<div><p class="rs-eyebrow">Construction Journey</p><h2 class="rs-h2">From waterlogged ground to a finished Core &amp; Shell.</h2></div>
+<p class="rs-lede" style="max-width:44ch;margin:0">The team followed a clear sequence of steps, from excavation through to quality control and the finishing of the Core &amp; Shell works.</p>
+</div>
+<div class="rs-jr">
+<div class="rs-jr__ends" aria-hidden="true"><span><b>09 Mar 2023</b>Start</span><span><b>21 Jul 2025</b>Completion</span></div>
+<ol class="rs-jr__list">
+<li class="rs-jr__ph"><span class="rs-jr__n">01</span><h3>Excavation &amp; dewatering</h3><p>The waterlogged ground was dewatered so excavation could go ahead safely.</p><ul><li>Excavation</li><li>Dewatering</li></ul></li>
+<li class="rs-jr__ph"><span class="rs-jr__n">02</span><h3>Foundation</h3><p>Rubble soling gave a stable base for the RCC foundations.</p><ul><li>Rubble soling</li><li>Foundation</li><li>Reinforcement</li><li>Formwork</li><li>RCC</li></ul></li>
+<li class="rs-jr__ph"><span class="rs-jr__n">03</span><h3>Basement &amp; retaining wall</h3><p>About 18,200 sq.ft. of basement built in restricted conditions.</p><ul><li>Basement</li><li>Retaining wall</li></ul></li>
+<li class="rs-jr__ph"><span class="rs-jr__n">04</span><h3>Superstructure, G + 12</h3><p>Floor-wise RCC across all 5 blocks, on a fast-track floor cycle.</p><ul><li>Floor-wise structure</li><li>Aluminium shuttering</li><li>Plywood shuttering</li></ul></li>
+<li class="rs-jr__ph"><span class="rs-jr__n">05</span><h3>QC &amp; Core &amp; Shell completion</h3><p>Quality checks and finishing of the Core &amp; Shell works.</p><ul><li>Quality control</li><li>Core &amp; Shell finishing</li></ul></li>
+</ol>
+</div>
+<p class="rs-note">Aluminium shuttering for repetitive work and plywood shuttering for slabs and columns allowed faster construction cycles, while keeping the required quality and dimensional accuracy.</p>
+</div>
+</section>
+
+<!-- 6. EXPERTISE -->
+<section class="rs-sec">
+<div class="rs-shell">
+<div class="rs-head"><div><p class="rs-eyebrow">BlueWing's Expertise</p><h2 class="rs-h2">The capabilities behind the delivery.</h2></div></div>
+<div class="rs-exp">
+<div><h3>Foundation &amp; difficult ground</h3><ul><li>Dewatering of waterlogged foundation areas</li><li>Foundation-bed preparation</li><li>Rubble soling</li><li>RCC foundation execution</li></ul></div>
+<div><h3>Multi-storey RCC construction</h3><ul><li>5-block construction management</li><li>Ground + 12-floor structural execution</li><li>Reinforcement, shuttering and concreting</li><li>Floor-cycle planning</li><li>High-volume RCC execution</li></ul></div>
+<div><h3>Formwork expertise</h3><ul><li>Aluminium shuttering for fast-track construction</li><li>Plywood shuttering for slabs and columns</li><li>Formwork alignment, level and dimensional control</li><li>Efficient rotation and reuse of shuttering material</li></ul></div>
+<div><h3>Basement &amp; retaining walls</h3><ul><li>Approx. 18,200 sq.ft. basement execution</li><li>Retaining wall construction</li><li>RCC and reinforcement works</li><li>Safe working in restricted basement conditions</li></ul></div>
+<div><h3>Project management</h3><ul><li>Manpower and material planning</li><li>Equipment coordination</li><li>Management of multiple work fronts</li><li>Consultant, client and multi-agency coordination</li></ul></div>
+<div><h3>Quality &amp; safety</h3><ul><li>Quality assurance and quality control</li><li>HSE and safety management</li><li>Dimensional accuracy across repetitive floors</li></ul></div>
 </div>
 </div>
 </section>
 
-<section class="pr">
-<div class="shell">
-<div class="head rv"><div><p class="eyebrow">More work</p><h2>Related <em>projects.</em></h2></div>
-<div><p>Other projects from across our portfolio.</p>
-<a class="btn btn--out-lt" style="margin-top:24px" href="../projects.html">All projects <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a></div></div>
-<div class="pr__g rv"><a class="pj" href="mulsana-farm-house.html">
-<div class="pj__im"><span class="pj__st pj__st--on">Ongoing</span>
-<img decoding="async" src="/assets/uploads/2023/06/Mulsana_Farmhouse-2.webp" alt="Mulsana Farm House — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
-<div class="pj__b"><h3>Mulsana Farm House</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
-</a>
-<a class="pj" href="kanjari-farm-house-ahmedabad.html">
-<div class="pj__im"><span class="pj__st">Completed</span>
-<img decoding="async" src="/assets/uploads/2023/06/projects_Kanjari-3.webp" alt="Kanjari Farm House — Ahmedabad — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
-<div class="pj__b"><h3>Kanjari Farm House — Ahmedabad</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
-</a>
-<a class="pj" href="gokul-farmhouse-ahmedabad.html">
-<div class="pj__im"><span class="pj__st">Completed</span>
-<img decoding="async" src="/assets/uploads/2023/06/projects_Gokul_Farm-House_1.webp" alt="Gokul Farmhouse — Ahmedabad — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
-<div class="pj__b"><h3>Gokul Farmhouse — Ahmedabad</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
-</a></div>
-<nav class="pnav rv">
-<a href="3-by-oyo-hotel-nami-residency-ahmedabad.html"><span>Previous</span>3 by OYO (Hotel Nami Residency)</a>
-<a href="mulsana-farm-house.html" style="text-align:right"><span>Next</span>Mulsana Farm House</a>
-</nav>
+<!-- 7. GALLERY -->
+<section class="rs-sec rs-sec--tight">
+<div class="rs-shell">
+<div class="rs-head">
+<div><p class="rs-eyebrow">Project Gallery</p><h2 class="rs-h2">On site at Rameshwar Sky.</h2></div>
+<div class="rs-tabs" role="tablist" aria-label="Filter gallery">
+<button type="button" role="tab" aria-selected="true" data-filter="all">All<small></small></button>
+<button type="button" role="tab" aria-selected="false" data-filter="uc">Under construction<small></small></button>
+<button type="button" role="tab" aria-selected="false" data-filter="done">Completed<small></small></button>
 </div>
-</section></main>
+</div>
+<div class="rs-gal" id="rsGal">
+<figure class="rs-m rs-tile w2 h2" data-cat="uc" data-caption="Tower crane and batching plant across the site" data-full="/assets/uploads/rameshwar-sky/ch3-five-blocks.jpg"><img src="/assets/uploads/rameshwar-sky/ch3-five-blocks-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch3-five-blocks-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch3-five-blocks.jpg 1400w" sizes="(max-width:1100px) 100vw, 50vw" alt="Rameshwar Sky: tower crane and batching plant across the site" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile" data-cat="uc" data-caption="Dewatering the foundation area" data-full="/assets/uploads/rameshwar-sky/ch1-dewatering.jpg"><img src="/assets/uploads/rameshwar-sky/ch1-dewatering-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch1-dewatering-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch1-dewatering.jpg 1400w" sizes="(max-width:1100px) 50vw, 25vw" alt="Rameshwar Sky: dewatering the foundation area" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile" data-cat="uc" data-caption="Basement raft reinforcement" data-full="/assets/uploads/rameshwar-sky/ch2-basement.jpg"><img src="/assets/uploads/rameshwar-sky/ch2-basement-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch2-basement-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch2-basement.jpg 1400w" sizes="(max-width:1100px) 50vw, 25vw" alt="Rameshwar Sky: basement raft reinforcement" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile" data-cat="uc" data-caption="Excavation and rubble soling" data-full="/assets/uploads/rameshwar-sky/uc-02.jpg"><img src="/assets/uploads/rameshwar-sky/uc-02-sm.jpg" srcset="/assets/uploads/rameshwar-sky/uc-02-sm.jpg 720w, /assets/uploads/rameshwar-sky/uc-02.jpg 1400w" sizes="(max-width:1100px) 50vw, 25vw" alt="Rameshwar Sky: excavation and rubble soling" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile" data-cat="uc" data-caption="Aluminium shuttering on the retaining wall" data-full="/assets/uploads/rameshwar-sky/ch4-shuttering.jpg"><img src="/assets/uploads/rameshwar-sky/ch4-shuttering-sm.jpg" srcset="/assets/uploads/rameshwar-sky/ch4-shuttering-sm.jpg 720w, /assets/uploads/rameshwar-sky/ch4-shuttering.jpg 1400w" sizes="(max-width:1100px) 50vw, 25vw" alt="Rameshwar Sky: aluminium shuttering on the retaining wall" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile w2 h2" data-cat="done" data-caption="Completed blocks" data-full="/assets/uploads/rameshwar-sky/completed.jpg"><img src="/assets/uploads/rameshwar-sky/completed-sm.jpg" srcset="/assets/uploads/rameshwar-sky/completed-sm.jpg 720w, /assets/uploads/rameshwar-sky/completed.jpg 1400w" sizes="(max-width:1100px) 100vw, 50vw" alt="Rameshwar Sky: completed blocks" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile w2" data-cat="uc" data-caption="Footings, retaining wall and rubble soling" data-full="/assets/uploads/rameshwar-sky/uc-01.jpg"><img src="/assets/uploads/rameshwar-sky/uc-01-sm.jpg" srcset="/assets/uploads/rameshwar-sky/uc-01-sm.jpg 720w, /assets/uploads/rameshwar-sky/uc-01.jpg 1400w" sizes="(max-width:1100px) 100vw, 50vw" alt="Rameshwar Sky: footings, retaining wall and rubble soling" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile w2" data-cat="uc" data-caption="The BlueWing site team" data-full="/assets/uploads/rameshwar-sky/uc-team.jpg"><img src="/assets/uploads/rameshwar-sky/uc-team-sm.jpg" srcset="/assets/uploads/rameshwar-sky/uc-team-sm.jpg 720w, /assets/uploads/rameshwar-sky/uc-team.jpg 1400w" sizes="(max-width:1100px) 100vw, 50vw" alt="Rameshwar Sky: the bluewing site team" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile w2" data-cat="uc" data-caption="Plywood shuttering for footings and columns" data-full="/assets/uploads/rameshwar-sky/uc-03.jpg"><img src="/assets/uploads/rameshwar-sky/uc-03-sm.jpg" srcset="/assets/uploads/rameshwar-sky/uc-03-sm.jpg 720w, /assets/uploads/rameshwar-sky/uc-03.jpg 1400w" sizes="(max-width:1100px) 100vw, 50vw" alt="Rameshwar Sky: plywood shuttering for footings and columns" width="1400" height="933" loading="lazy" decoding="async"></figure>
+<figure class="rs-m rs-tile w2" data-cat="uc" data-caption="Column reinforcement and formwork" data-full="/assets/uploads/rameshwar-sky/uc-04.jpg"><img src="/assets/uploads/rameshwar-sky/uc-04-sm.jpg" srcset="/assets/uploads/rameshwar-sky/uc-04-sm.jpg 720w, /assets/uploads/rameshwar-sky/uc-04.jpg 1400w" sizes="(max-width:1100px) 100vw, 50vw" alt="Rameshwar Sky: column reinforcement and formwork" width="1400" height="933" loading="lazy" decoding="async"></figure>
+</div>
+</div>
+</section>
+
+<!-- 8. OUTCOME -->
+<section class="rs-sec rs-sec--concrete">
+<div class="rs-shell rs-out">
+<div class="rs-out__body">
+<p class="rs-eyebrow">Project Outcome</p>
+<h2 class="rs-h2" style="margin-bottom:24px">Delivered despite difficult ground and five work fronts at once.</h2>
+<p>The ground conditions were difficult and all 5 blocks were built at the same time. Even so, BlueWing completed the Core &amp; Shell construction works.</p>
+<p>The team's experience with waterlogged foundations, basement construction, RCC work, retaining walls and fast-track shuttering kept productivity high without compromising quality or safety.</p>
+<span class="rs-done">Completed on 21 July 2025</span>
+</div>
+<div class="rs-take">
+<p class="rs-eyebrow">Key Takeaway</p>
+<p>Rameshwar Sky shows that BlueWing can deliver large multi-block, multi-storey Core &amp; Shell projects, including difficult waterlogged foundation and basement works. Its use of dewatering, rubble soling, aluminium shuttering and plywood shuttering reflects practical construction skill, fast-track delivery and strong project management.</p>
+</div>
+</div>
+</section>
+
+<!-- 9. CTA -->
+<section class="rs-sec rs-sec--ink rs-cta">
+<div class="rs-shell">
+<div>
+<p class="rs-eyebrow">Work with BlueWing</p>
+<h2 class="rs-h2">Planning a multi-storey or multi-block project?</h2>
+<p class="rs-lede">Talk to us about Core &amp; Shell, turnkey and EPC construction.</p>
+</div>
+<div class="rs-cta__btns">
+<a class="rs-btn rs-btn--accent" href="/contact-us.html">Discuss a similar project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+<a class="rs-btn rs-btn--out-lt" href="/projects.html">All projects</a>
+</div>
+</div>
+</section>
+
+<div class="rs-lb" id="rsLb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+<button class="rs-lb__x" type="button" aria-label="Close">×</button>
+<button class="rs-lb__prev" type="button" aria-label="Previous">‹</button>
+<div class="rs-lb__stage"></div>
+<button class="rs-lb__next" type="button" aria-label="Next">›</button>
+</div>
+
+</main>
 
 <!-- layout:footer -->
 <footer class="ftr">
@@ -293,5 +680,77 @@
 </footer>
 <!-- /layout:footer -->
 <script src="/assets/js/site.js?v=6d987563"></script>
+<script>
+(function(){
+  var root=document.querySelector('.rs'); if(!root) return;
+
+  /* Project film: load YouTube only when Play is clicked */
+  var film=document.getElementById('rsFilm');
+  if(film){
+    film.querySelector('.rs-film__btn').addEventListener('click',function(){
+      var yt=(film.getAttribute('data-youtube')||'').trim(); if(!yt) return;
+      var el=document.createElement('iframe');
+      el.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(yt)+'?autoplay=1&rel=0&modestbranding=1';
+      el.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; el.allowFullscreen=true;
+      el.title='Rameshwar Sky project film';
+      film.appendChild(el); film.classList.add('is-playing'); this.remove();
+    });
+  }
+
+  /* Gallery filter */
+  var gal=document.getElementById('rsGal'), tabs=root.querySelectorAll('.rs-tabs button');
+  if(gal){
+    tabs.forEach(function(b){
+      var f=b.getAttribute('data-filter');
+      b.querySelector('small').textContent=gal.querySelectorAll(f==='all'?'.rs-m':'.rs-m[data-cat="'+f+'"]').length;
+      b.addEventListener('click',function(){
+        tabs.forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false')});
+        gal.querySelectorAll('.rs-m').forEach(function(m){ m.hidden=!(f==='all'||m.getAttribute('data-cat')===f); });
+      });
+    });
+  }
+
+  /* Lightbox: opens the large version of the photo */
+  var lb=document.getElementById('rsLb'), stage=lb.querySelector('.rs-lb__stage'), list=[], idx=0, lastFocus;
+  function show(i){
+    idx=(i+list.length)%list.length;
+    var t=list[idx], img=t.querySelector('img'), node=document.createElement('img');
+    node.src=t.getAttribute('data-full')||img.currentSrc||img.src; node.alt=img.alt;
+    stage.innerHTML=''; stage.appendChild(node);
+    var c=document.createElement('p'); c.className='rs-lb__cap';
+    c.textContent=(t.getAttribute('data-caption')||img.alt||'')+'  ·  '+(idx+1)+' / '+list.length; stage.appendChild(c);
+    var multi=list.length>1;
+    lb.querySelector('.rs-lb__prev').style.display=multi?'':'none';
+    lb.querySelector('.rs-lb__next').style.display=multi?'':'none';
+  }
+  function open(tile){
+    var scope=tile.closest('.rs-gal');
+    list=scope?Array.prototype.filter.call(scope.querySelectorAll('.rs-tile'),function(t){return !t.hidden}):[tile];
+    lastFocus=document.activeElement;
+    lb.classList.add('is-open'); document.documentElement.style.overflow='hidden';
+    show(list.indexOf(tile)); lb.querySelector('.rs-lb__x').focus();
+  }
+  function close(){
+    lb.classList.remove('is-open'); stage.innerHTML=''; document.documentElement.style.overflow='';
+    if(lastFocus) lastFocus.focus();
+  }
+  root.querySelectorAll('.rs-tile').forEach(function(t){
+    t.setAttribute('tabindex','0'); t.setAttribute('role','button');
+    t.setAttribute('aria-label','View photo: '+(t.getAttribute('data-caption')||''));
+    t.addEventListener('click',function(){ open(t); });
+    t.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(t); } });
+  });
+  lb.querySelector('.rs-lb__x').addEventListener('click',close);
+  lb.querySelector('.rs-lb__prev').addEventListener('click',function(){show(idx-1)});
+  lb.querySelector('.rs-lb__next').addEventListener('click',function(){show(idx+1)});
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('is-open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1);
+  });
+})();
+</script>
 </body>
 </html>

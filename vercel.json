@@ -325,6 +325,10 @@
       "destination": "/bluewing/blog-post.html"
     },
     {
+      "source": "/rameshwar-sky",
+      "destination": "/bluewing/projects/rameshwar-sky.html"
+    },
+    {
       "source": "/:slug((?!(?:api|blog|projects|assets|new-pillar)$)[a-z0-9]+(?:-[a-z0-9]+)*)",
       "destination": "/bluewing/project-view.html"
     },
