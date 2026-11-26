@@ -1,5 +1,6 @@
 const { readJson, writeJson } = require('./_lib/github');
 const { requireAuth } = require('./_lib/auth');
+const render = require('./_lib/render');
 
 const PATH = 'data/blog.json';
 
@@ -60,6 +61,8 @@ async function readBody(req) {
 module.exports = async (req, res) => {
   try {
     if (req.method === 'GET') {
+      // Server-rendered blog articles, project pages and blog index (see api/_lib/render.js)
+      if ((req.query || {}).render !== undefined) return render(req, res);
       if ((req.query || {}).sitemap !== undefined) return sitemap(res);
       res.setHeader('Cache-Control', 'no-store');
       const { data: posts } = await readJson(PATH, []);

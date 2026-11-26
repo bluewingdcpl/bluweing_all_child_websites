@@ -1,5 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/blog.js": { "includeFiles": "bluewing/{blog-post,project-view,blog}.html" }
+  },
   "headers": [
     { "source": "/assets/icons.svg", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
     { "source": "/assets/js/site.js", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
@@ -322,7 +325,7 @@
     },
     {
       "source": "/blog/:slug([a-z0-9]+(?:-[a-z0-9]+)*)",
-      "destination": "/bluewing/blog-post.html"
+      "destination": "/api/blog?render=post&slug=:slug"
     },
     {
       "source": "/rameshwar-sky",
@@ -330,8 +333,9 @@
     },
     {
       "source": "/:slug((?!(?:api|blog|projects|assets|new-pillar)$)[a-z0-9]+(?:-[a-z0-9]+)*)",
-      "destination": "/bluewing/project-view.html"
+      "destination": "/api/blog?render=project&slug=:slug"
     },
+    { "source": "/blog.html", "destination": "/api/blog?render=list" },
     {
       "source": "/:path((?!api/).*)",
       "destination": "/bluewing/:path"
