@@ -63,6 +63,7 @@
 ]}
 </script>
 <!-- /layout:schema -->
+<style>.fld__opt{text-transform:none;letter-spacing:0;font-weight:400;opacity:.75}</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -267,7 +268,7 @@
 </div>
 <div class="enq__card rv">
 <h3>Send a project enquiry</h3>
-<p>Five fields and a message. No sales sequence.</p>
+<p>A few details and a message. No sales sequence.</p>
 <form class="form-light" data-enquiry data-form-type="project-enquiry" novalidate>
 <div class="frow">
 <div class="fld"><label for="epc-n">Name</label><input id="epc-n" name="name" required autocomplete="name" placeholder="Your name"><span class="field-err">Please enter your name.</span></div>
@@ -282,9 +283,15 @@
 </div>
 <span class="field-err">Please enter a valid phone number.</span></div>
 </div>
-<div class="fld"><label for="epc-i">Your interest</label>
-<select id="epc-i" name="interest" required><option value="">Select an option</option><option selected>EPC / Turnkey Construction</option><option>Precast Solutions</option><option>Diaphragm Wall Construction</option><option>Building Envelope Systems</option><option>Other</option></select><span class="field-err">Please select an option.</span></div>
-<div class="fld"><label for="epc-m">Project details</label><textarea id="epc-m" name="message" placeholder="Location, plot area, intended use, target handover date"></textarea></div>
+<div class="frow">
+<div class="fld"><label for="epc-pt">Project type</label><select id="epc-pt" name="projectType" required><option value="">Select project type</option><option>Residential</option><option>Commercial</option><option>Industrial / Warehouse</option><option>Hospital / Healthcare</option><option>Hotel / Hospitality</option><option>Institutional / Educational</option><option>Other</option></select><span class="field-err">Please select a project type.</span></div>
+<div class="fld"><label for="epc-wt">Work type</label><select id="epc-wt" name="workType" required><option value="">Select work type</option><option selected>Turnkey EPC (design to handover)</option><option>Core &amp; Shell / Structural Works</option><option>Infrastructure Works</option><option>Other / Not sure yet</option></select><span class="field-err">Please select a work type.</span></div>
+</div>
+<div class="frow">
+<div class="fld"><label for="epc-loc">Project location <span class="fld__opt">(optional)</span></label><input id="epc-loc" name="location" autocomplete="address-level2" placeholder="City, e.g. Ahmedabad"></div>
+<div class="fld"><label for="epc-st">Project stage <span class="fld__opt">(optional)</span></label><select id="epc-st" name="stage"><option value="">Select stage</option><option>Planning / Feasibility</option><option>Design ready</option><option>Ready to start</option><option>Construction ongoing</option></select></div>
+</div>
+<div class="fld"><label for="epc-m">Project details</label><textarea id="epc-m" name="message" placeholder="Plot area, intended use, target handover date"></textarea></div>
 <button class="btn btn--accent" type="submit">Send enquiry <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></button>
 <p class="pform__n" data-note>We reply within two working days. Your details are never shared.</p>
 </form>

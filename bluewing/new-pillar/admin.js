@@ -1123,11 +1123,12 @@
   /* ---------- ENQUIRIES TAB ---------- */
   var FIELD_LABELS = {
     name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', interest: 'Interest',
+    projectType: 'Project type', workType: 'Work type', location: 'Project location', stage: 'Project stage',
     category: 'Category of supply', city: 'City / state', gst: 'GST number',
     years: 'Years in business', website: 'Website / catalogue', applyFor: 'Apply for', resumeUrl: 'Resume',
   };
   var FIELD_ORDER = {
-    'project-enquiry': ['name', 'company', 'email', 'phone', 'interest'],
+    'project-enquiry': ['name', 'company', 'email', 'phone', 'projectType', 'workType', 'location', 'stage', 'interest'],
     'vendor-registration': ['company', 'name', 'email', 'phone', 'category', 'city', 'gst', 'years', 'website'],
     'job-application': ['name', 'email', 'phone', 'company', 'applyFor', 'resumeUrl'],
     'sygnific-enquiry': ['name', 'company', 'email', 'phone'],

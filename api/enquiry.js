@@ -26,6 +26,7 @@ const REQUIRED_FIELDS = {
 
 const LABELS = {
   name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', interest: 'Interest',
+  projectType: 'Project type', workType: 'Work type', location: 'Project location', stage: 'Project stage',
   message: 'Message', category: 'Category of supply', city: 'City / state', gst: 'GST number',
   years: 'Years in business', website: 'Website / catalogue', applyFor: 'Apply for', resumeFile: 'Resume',
   resumeUrl: 'Resume link',
