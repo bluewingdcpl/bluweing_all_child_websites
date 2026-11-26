@@ -144,7 +144,8 @@ async function renderPost(res, slug) {
 
   const url = `${SITE}/blog/${p.slug}`;
   const base = p.seoTitle || p.title;
-  const title = base.length <= 52 && !/bluewing/i.test(base) ? `${base} | BlueWing` : base;
+  // " | BlueWing" only when the whole title still fits Google's ~60-character display.
+  const title = base.length <= 49 && !/bluewing/i.test(base) ? `${base} | BlueWing` : base;
   const desc = clip(p.metaDescription || p.excerpt || text(p.content));
   const media = list(p.media);
   const image = abs(p.coverImage || (media[0] && media[0].url));
@@ -322,9 +323,17 @@ async function renderProject(res, slug) {
   const sectorOne = sector.replace(/s$/, ''); // Hotels → Hotel, Hospitals → Hospital
   const sqft = area.replace(/\.0+$/, '');
 
-  let title = `${p.title}${city ? ', ' + city : ''} | ${sectorOne ? sectorOne + ' ' : ''}Project | BlueWing`;
-  if (title.length > 65) title = `${p.title} | ${sectorOne ? sectorOne + ' ' : ''}Project | BlueWing`;
-  if (title.length > 65) title = `${p.title} | BlueWing DCPL`;
+  // Most descriptive title that fits Google's ~60-character display.
+  const where = city ? ', ' + city : '';
+  const kind = sectorOne ? sectorOne + ' ' : '';
+  const title = [
+    `${p.title}${where} | ${kind}Project | BlueWing`,
+    `${p.title}${where} | ${kind}Project`,
+    `${p.title} | ${kind}Project | BlueWing`,
+    `${p.title}${where} | BlueWing`,
+    `${p.title} | BlueWing DCPL`,
+    p.title,
+  ].find((t) => t.length <= 60) || p.title;
 
   const showPlace = place && !p.title.toLowerCase().includes(place.toLowerCase()) ? place : '';
   const facts = `${p.title}${showPlace ? ', ' + showPlace : ''}: ${status.toLowerCase()} ${sectorOne ? sectorOne.toLowerCase() + ' ' : ''}project by BlueWing DCPL` +
