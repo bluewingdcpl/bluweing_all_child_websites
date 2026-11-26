@@ -64,6 +64,7 @@
 </script>
 <!-- /layout:schema -->
 <style>.fld__opt{text-transform:none;letter-spacing:0;font-weight:400;opacity:.75}</style>
+<style>.fld__req{color:#c0392b;margin-left:3px;font-weight:600}.fld__legend{font-size:12px;color:var(--steel);margin:-12px 0 18px}</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -354,13 +355,14 @@
 <h3>Send a project enquiry</h3>
 <p>A few details and a message. No sales sequence.</p>
 <form class="form-light" data-enquiry data-form-type="project-enquiry" novalidate>
+<p class="fld__legend" style="margin:0 0 14px"><span class="fld__req" aria-hidden="true">*</span> Required fields</p>
 <div class="frow">
-<div class="fld"><label for="hm-n">Name</label><input id="hm-n" name="name" required autocomplete="name" placeholder="Your name"><span class="field-err">Please enter your name.</span></div>
+<div class="fld"><label for="hm-n">Name<span class="fld__req" aria-hidden="true">*</span></label><input id="hm-n" name="name" required autocomplete="name" placeholder="Your name"><span class="field-err">Please enter your name.</span></div>
 <div class="fld"><label for="hm-c">Company</label><input id="hm-c" name="company" autocomplete="organization" placeholder="Organisation"></div>
 </div>
 <div class="frow">
-<div class="fld"><label for="hm-e">Work email</label><input id="hm-e" name="email" type="email" required autocomplete="email" placeholder="name@company.com"><span class="field-err">Please enter a valid email address.</span></div>
-<div class="fld"><label for="hm-p">Phone</label>
+<div class="fld"><label for="hm-e">Work email<span class="fld__req" aria-hidden="true">*</span></label><input id="hm-e" name="email" type="email" required autocomplete="email" placeholder="name@company.com"><span class="field-err">Please enter a valid email address.</span></div>
+<div class="fld"><label for="hm-p">Phone<span class="fld__req" aria-hidden="true">*</span></label>
 <div class="phone-combo">
 <select id="hm-p-cc" name="phoneCode" aria-label="Country code" autocomplete="tel-country-code"></select>
 <input id="hm-p" name="phone" type="tel" required autocomplete="tel-national" placeholder="">
@@ -368,8 +370,8 @@
 <span class="field-err">Please enter a valid phone number.</span></div>
 </div>
 <div class="frow">
-<div class="fld"><label for="hm-pt">Project type</label><select id="hm-pt" name="projectType" required><option value="">Select project type</option><option>Residential</option><option>Commercial</option><option>Industrial / Warehouse</option><option>Hospital / Healthcare</option><option>Hotel / Hospitality</option><option>Institutional / Educational</option><option>Other</option></select><span class="field-err">Please select a project type.</span></div>
-<div class="fld"><label for="hm-wt">Work type</label><select id="hm-wt" name="workType" required><option value="">Select work type</option><option>Turnkey EPC (design to handover)</option><option>Core &amp; Shell / Structural Works</option><option>Infrastructure Works</option><option>Other / Not sure yet</option></select><span class="field-err">Please select a work type.</span></div>
+<div class="fld"><label for="hm-pt">Project type<span class="fld__req" aria-hidden="true">*</span></label><select id="hm-pt" name="projectType" required><option value="">Select project type</option><option>Residential</option><option>Commercial</option><option>Industrial / Warehouse</option><option>Hospital / Healthcare</option><option>Hotel / Hospitality</option><option>Institutional / Educational</option><option>Other</option></select><span class="field-err">Please select a project type.</span></div>
+<div class="fld"><label for="hm-wt">Work type<span class="fld__req" aria-hidden="true">*</span></label><select id="hm-wt" name="workType" required><option value="">Select work type</option><option>Turnkey EPC (design to handover)</option><option>Core &amp; Shell / Structural Works</option><option>Infrastructure Works</option><option>Other / Not sure yet</option></select><span class="field-err">Please select a work type.</span></div>
 </div>
 <div class="frow">
 <div class="fld"><label for="hm-loc">Project location <span class="fld__opt">(optional)</span></label><input id="hm-loc" name="location" autocomplete="address-level2" placeholder="City, e.g. Ahmedabad"></div>
