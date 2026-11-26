@@ -15,6 +15,13 @@
  *   current="/x.html"   the menu link marked as the page you are on (aria-current)
  *   cobrand="Name"      company name next to the logo (BlueWing DCPL page)
  *
+ * Sites with a <site>/_layout/schema.html also get it in every page's <head>, between
+ *   <!-- layout:schema -->  ...  <!-- /layout:schema -->   (added before </head> if missing).
+ *   It holds the sitewide structured data (organisation, local business, website).
+ *
+ * For the BlueWing site it also writes data/page-dates.json: each static page's last change
+ * date (from git, or today for pages with uncommitted edits). /sitemap.xml uses it for <lastmod>.
+ *
  * It also stamps ?v=<hash> on icons.svg and site.js links, so browsers fetch a new copy only
  * when the file has changed (vercel.json lets browsers keep these files cached).
  *
@@ -26,6 +33,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { execSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
 const SITES = ['bluewing', 'bhaaratprecast', 'sygnificinfra', 'alutek'];
@@ -74,6 +82,8 @@ for (const site of SITES) {
   for (const name of ['header', 'footer']) {
     partials[name] = fs.readFileSync(path.join(siteDir, '_layout', `${name}.html`), 'utf8').replace(/\r\n/g, '\n').replace(/\n+$/, '');
   }
+  const schemaFile = path.join(siteDir, '_layout', 'schema.html');
+  const schema = fs.existsSync(schemaFile) ? fs.readFileSync(schemaFile, 'utf8').replace(/\r\n/g, '\n').replace(/\n+$/, '') : null;
   const iconsV = hashOf(path.join(siteDir, 'assets', 'icons.svg'));
   const jsV = hashOf(path.join(siteDir, 'assets', 'js', 'site.js'));
 
@@ -89,6 +99,12 @@ for (const site of SITES) {
       const body = render(name, partials[name], attrsOf(m[2]), path.relative(ROOT, file));
       html = html.replace(re, () => `${m[1]}\n${body}\n${m[3]}`);
     }
+    if (schema) {
+      const block = `<!-- layout:schema -->\n${schema}\n<!-- /layout:schema -->`;
+      const re = /<!-- layout:schema -->[\s\S]*?<!-- \/layout:schema -->/;
+      if (re.test(html)) html = html.replace(re, () => block);
+      else if (html.includes('</head>')) html = html.replace('</head>', () => `\n${block}\n</head>`);
+    }
     if (iconsV) html = html.replace(/\/assets\/icons\.svg(\?v=[0-9a-f]*)?#/g, `/assets/icons.svg?v=${iconsV}#`);
     if (jsV) html = html.replace(/\/assets\/js\/site\.js(\?v=[0-9a-f]*)?"/g, `/assets/js/site.js?v=${jsV}"`);
     html = html.replace(/\n/g, eol);
@@ -99,5 +115,34 @@ for (const site of SITES) {
     }
   }
 }
+if (!check) writePageDates();
 console.log(`${check ? 'checked' : 'built'} ${total} pages, ${changed} ${check ? 'out of date' : 'updated'}`);
 if (check && changed) process.exit(1);
+
+// data/page-dates.json for the sitemap: URL -> last change date of the page file.
+function writePageDates() {
+  const site = path.join(ROOT, 'bluewing');
+  const git = (args) => execSync(`git -c safe.directory=* ${args}`, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+  let dirty;
+  try {
+    dirty = new Set(git('status --porcelain -- bluewing').split('\n')
+      .map((l) => l.slice(3).trim().replace(/^"|"$/g, '')).filter(Boolean));
+  } catch (e) { console.log('page-dates: git not available, skipped'); return; }
+  const today = new Date().toISOString().slice(0, 10);
+  const dates = {};
+  for (const file of pagesOf(site)) {
+    const rel = path.relative(ROOT, file).split(path.sep).join('/');
+    const inSite = rel.slice('bluewing/'.length);
+    let url;
+    if (inSite === 'index.html') url = '/';
+    else if (inSite === 'projects/rameshwar-sky.html') url = '/rameshwar-sky';
+    else if (!inSite.includes('/')) url = '/' + inSite;
+    else continue; // other sub-folder pages are redirects or templates
+    let d = '';
+    if (!dirty.has(rel)) { try { d = git(`log -1 --format=%cs -- "${rel}"`).trim(); } catch (e) { d = ''; } }
+    dates[url] = d || today;
+  }
+  const out = path.join(ROOT, 'data', 'page-dates.json');
+  const json = JSON.stringify(dates, null, 2) + '\n';
+  if (!fs.existsSync(out) || fs.readFileSync(out, 'utf8') !== json) fs.writeFileSync(out, json);
+}

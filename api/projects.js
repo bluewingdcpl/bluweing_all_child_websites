@@ -89,6 +89,7 @@ module.exports = async (req, res) => {
         ...existing,
         ...body,
         slug,
+        updated: new Date().toISOString().slice(0, 10),
         tags: Array.isArray(body.tags) ? body.tags : existing.tags,
         images: Array.isArray(body.images) ? body.images : existing.images,
         table: body.table && Array.isArray(body.table.rows) ? body.table : existing.table,

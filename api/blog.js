@@ -35,14 +35,23 @@ function xmlEscape(s) {
   return String(s).replace(/[<>&'"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&apos;', '"': '&quot;' }[c]));
 }
 
+// 2026-01-01 is the placeholder date given to projects imported from the old site; it is not
+// a real change date, so those URLs carry no <lastmod> until the project is next edited.
+const PLACEHOLDER_DATE = '2026-01-01';
+
 async function sitemap(res) {
-  const [{ data: posts }, { data: projects }] = await Promise.all([readJson(PATH, []), readJson('data/projects.json', [])]);
+  const [{ data: posts }, { data: projects }, { data: pageDates }] = await Promise.all([
+    readJson(PATH, []), readJson('data/projects.json', []), readJson('data/page-dates.json', {}),
+  ]);
   const day = (d) => (/^\d{4}-\d{2}-\d{2}/.test(String(d || '')) ? String(d).slice(0, 10) : '');
+  const changed = (item) => day(item.updated) || (day(item.date) !== PLACEHOLDER_DATE ? day(item.date) : '');
   const live = (item) => item && item.slug && item.published !== false;
+  const dates = pageDates && typeof pageDates === 'object' ? pageDates : {};
   const urls = [
-    ...SITEMAP_PAGES.map((p) => ({ loc: SITE + p })),
-    ...projects.filter(live).map((p) => ({ loc: `${SITE}/${p.slug}`, lastmod: day(p.date) })),
-    ...posts.filter(live).map((p) => ({ loc: `${SITE}/blog/${p.slug}`, lastmod: day(p.date) })),
+    ...SITEMAP_PAGES.map((p) => ({ loc: SITE + p, lastmod: day(dates[p]) })),
+    // The Rameshwar Sky case study is a static page, so its date comes from the page file.
+    ...projects.filter(live).map((p) => ({ loc: `${SITE}/${p.slug}`, lastmod: day(dates['/' + p.slug]) || changed(p) })),
+    ...posts.filter(live).map((p) => ({ loc: `${SITE}/blog/${p.slug}`, lastmod: changed(p) })),
   ];
   const rows = urls.map((u) => `  <url><loc>${xmlEscape(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`);
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
@@ -142,6 +151,7 @@ module.exports = async (req, res) => {
         ...existing,
         ...body,
         slug,
+        updated: new Date().toISOString().slice(0, 10),
         category: categories[0] || '',
         categories,
         tags: Array.isArray(body.tags) ? body.tags : existing.tags,
