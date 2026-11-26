@@ -229,27 +229,27 @@
 <div class="head rv"><div><p class="eyebrow">Our hotels projects</p><h2>Delivered, <em>not rendered.</em></h2></div>
 <div><p>Selected hotels work from our portfolio.</p>
 <a class="btn btn--out-lt" style="margin-top:24px" href="projects.html">All projects <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></a></div></div>
-<div class="pr__g rv"><a class="pj" href="/rajpath-club">
+<div class="pr__g rv"><a class="pj" href="/projects/rajpath-club.html">
 <div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/Rajpath-Club_1.webp" alt="Rajpath Club — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>Rajpath Club</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
 </a>
-<a class="pj" href="/oyo-townhouse-royal-inn">
+<a class="pj" href="/projects/oyo-townhouse-royal-inn.html">
 <div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/OYO-Townhouse_Ahmedabad_1.webp" alt="OYO Townhouse (Royal Inn) — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>OYO Townhouse (Royal Inn)</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
 </a>
-<a class="pj" href="/oyo-townhouse-hotel-shagun">
+<a class="pj" href="/projects/oyo-townhouse-hotel-shagun.html">
 <div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/OYO-Hotel_Shagun-6.webp" alt="OYO Townhouse (Hotel Shagun) — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>OYO Townhouse (Hotel Shagun)</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
 </a>
-<a class="pj" href="/itc-hotel-ahmedabad">
+<a class="pj" href="/projects/itc-hotel-ahmedabad.html">
 <div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/ITC-Hotel_1.webp" alt="ITC Hotel — Ahmedabad — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>ITC Hotel — Ahmedabad</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
 </a>
-<a class="pj" href="/3-by-oyo-hotel-nami-residency-ahmedabad">
+<a class="pj" href="/projects/3-by-oyo-hotel-nami-residency-ahmedabad.html">
 <div class="pj__im"><span class="pj__st">Completed</span>
 <img decoding="async" src="/assets/uploads/2023/06/3byOYO_1.webp" alt="3 by OYO (Hotel Nami Residency) — a BlueWing Group project" loading="lazy" width="640" height="480"></div>
 <div class="pj__b"><h3>3 by OYO (Hotel Nami Residency)</h3><svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></div>
@@ -330,7 +330,7 @@
   if (!cards.length) return;
   fetch('/api/projects', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; }).then(function (items) {
     var bySlug = {};
-    (Array.isArray(items) ? items : []).forEach(function (p) { bySlug['/' + encodeURIComponent(p.slug)] = p; });
+    (Array.isArray(items) ? items : []).forEach(function (p) { bySlug['/projects/' + encodeURIComponent(p.slug) + '.html'] = p; });
     cards.forEach(function (a) {
       var p = bySlug[a.getAttribute('href')], badge = a.querySelector('.pj__st');
       if (!p || !badge) return;

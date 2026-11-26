@@ -135,7 +135,7 @@ function writePageDates() {
     const inSite = rel.slice('bluewing/'.length);
     let url;
     if (inSite === 'index.html') url = '/';
-    else if (inSite === 'projects/rameshwar-sky.html') url = '/rameshwar-sky';
+    else if (inSite === 'projects/rameshwar-sky.html') url = '/projects/rameshwar-sky.html';
     else if (!inSite.includes('/')) url = '/' + inSite;
     else continue; // other sub-folder pages are redirects or templates
     let d = '';

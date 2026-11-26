@@ -143,7 +143,7 @@ async function renderPost(res, slug) {
   const p = posts.find((x) => x.slug === slug && x.published !== false);
   if (!p) return notFound(res, html, 'Article');
 
-  const url = `${SITE}/blog/${p.slug}`;
+  const url = `${SITE}/blog/${p.slug}.html`;
   const base = p.seoTitle || p.title;
   // " | BlueWing" only when the whole title still fits Google's ~60-character display.
   const title = base.length <= 49 && !/bluewing/i.test(base) ? `${base} | BlueWing` : base;
@@ -257,7 +257,7 @@ async function renderPost(res, slug) {
 
 function card(o) {
   const img = o.coverImage || (o.media && o.media[0] && o.media[0].url) || '';
-  return `<a class="art" href="/blog/${encodeURIComponent(o.slug)}">` +
+  return `<a class="art" href="/blog/${encodeURIComponent(o.slug)}.html">` +
     `<div class="art__im">${img ? `<img decoding="async" src="${esc(img)}" alt="${esc(o.title)}" loading="lazy" width="600" height="400">` : ''}</div>` +
     `<div><p class="lbl">${esc(o.category || 'Blog')}</p><h3>${esc(o.title)}</h3></div></a>`;
 }
@@ -279,7 +279,7 @@ async function renderList(res) {
       name: 'BlueWing Blog & Industry Insights',
       url: SITE + '/blog.html',
       publisher: ORG,
-      blogPost: published.slice(0, 20).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: `${SITE}/blog/${p.slug}`, datePublished: day(p.date) || undefined })),
+      blogPost: published.slice(0, 20).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: `${SITE}/blog/${p.slug}.html`, datePublished: day(p.date) || undefined })),
     }),
     jsonLd({
       '@context': 'https://schema.org',
@@ -307,7 +307,7 @@ async function renderProject(res, slug) {
   const p = projects.find((x) => x.slug === slug && x.published !== false);
   if (!p) return notFound(res, html, 'Project');
 
-  const url = `${SITE}/${p.slug}`;
+  const url = `${SITE}/projects/${p.slug}.html`;
   const sector = p.category || '';
   const status = p.status || 'Project';
   const location = spec(p, /location/i);
@@ -435,7 +435,7 @@ function sitemapProjects(projects) {
   const html = keys.map((k) => {
     const items = groups[k].sort((a, b) => a.title.localeCompare(b.title)).map((p) => {
       const note = p.slug === 'rameshwar-sky' ? 'Case study' : (p.status === 'Ongoing' ? 'Ongoing' : '');
-      return `<li><a href="/${esc(p.slug)}">${esc(p.title)}${note ? `<span>${note}</span>` : ''}</a></li>`;
+      return `<li><a href="/projects/${esc(p.slug)}.html">${esc(p.title)}${note ? `<span>${note}</span>` : ''}</a></li>`;
     }).join('');
     return `<div class="smap__cat"><h3>${esc(k)}<small>${groups[k].length}</small></h3><ul>${items}</ul></div>`;
   }).join('');
@@ -448,7 +448,7 @@ function sitemapPosts(posts) {
   const keys = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length || a.localeCompare(b));
   const html = keys.map((k) => {
     const items = groups[k].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
-      .map((p) => `<li><a href="/blog/${esc(p.slug)}">${esc(p.title)}</a></li>`).join('');
+      .map((p) => `<li><a href="/blog/${esc(p.slug)}.html">${esc(p.title)}</a></li>`).join('');
     return `<div class="smap__cat"><h3>${esc(k)}<small>${groups[k].length}</small></h3><ul>${items}</ul></div>`;
   }).join('');
   return { html, count: live.length };

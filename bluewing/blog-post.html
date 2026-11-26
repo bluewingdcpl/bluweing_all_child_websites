@@ -357,11 +357,11 @@
     el.innerHTML = '<img decoding="async" class="bp-feature" src="' + esc(media[0].url) + '" alt="' + esc(p.title) + '">';
   }
 
-  // Clean URL: /blog/<slug>. Old ?slug= links are sent to the clean URL.
+  // Clean URL: /blog/<slug>.html. Old ?slug= links are sent to the clean URL.
   var qSlug = new URLSearchParams(location.search).get('slug');
-  if (qSlug) { location.replace('/blog/' + encodeURIComponent(qSlug) + location.hash); return; }
-  var slug = decodeURIComponent(location.pathname.split('/').filter(Boolean).pop() || '');
-  if (slug === 'blog-post.html') slug = '';
+  if (qSlug) { location.replace('/blog/' + encodeURIComponent(qSlug) + '.html' + location.hash); return; }
+  var slug = decodeURIComponent(location.pathname.split('/').filter(Boolean).pop() || '').replace(/\.html$/, '');
+  if (slug === 'blog-post') slug = '';
   if (!slug) { document.getElementById('bp-title').textContent = 'Article not found'; return; }
 
   function setMeta(attr, key, value) {
@@ -380,11 +380,11 @@
     setMeta('name', 'description', desc);
     setMeta('property', 'og:title', p.seoTitle || p.title);
     setMeta('property', 'og:description', desc);
-    setMeta('property', 'og:url', 'https://www.bluewingconstruction.com/blog/' + p.slug);
+    setMeta('property', 'og:url', 'https://www.bluewingconstruction.com/blog/' + p.slug + '.html');
     if (p.coverImage) setMeta('property', 'og:image', new URL(p.coverImage, location.origin).href);
     var canon = document.head.querySelector('link[rel="canonical"]');
     if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
-    canon.href = 'https://www.bluewingconstruction.com/blog/' + p.slug;
+    canon.href = 'https://www.bluewingconstruction.com/blog/' + p.slug + '.html';
     document.getElementById('bp-title').textContent = p.title;
     document.getElementById('bp-crumb').textContent = p.title;
     document.getElementById('bp-category').textContent = p.category || 'Blog';
@@ -489,7 +489,7 @@
       if (!others.length) { relEl.closest('section').style.display = 'none'; return; }
       relEl.innerHTML = others.map(function(o){
         var img = o.coverImage || (o.media && o.media[0] && o.media[0].url) || '';
-        return '<a class="art" href="/blog/' + encodeURIComponent(o.slug) + '">' +
+        return '<a class="art" href="/blog/' + encodeURIComponent(o.slug) + '.html">' +
           '<div class="art__im">' + (img ? '<img decoding="async" src="' + esc(img) + '" alt="' + esc(o.title) + '" loading="lazy" width="600" height="400">' : '') + '</div>' +
           '<div><p class="lbl">' + esc(o.category || 'Blog') + '</p><h3>' + esc(o.title) + '</h3></div></a>';
       }).join('');

@@ -223,7 +223,7 @@
   }
   function card(p){
     var img = p.coverImage || (p.media && p.media[0] && p.media[0].url) || '';
-    var href = '/blog/' + encodeURIComponent(p.slug);
+    var href = '/blog/' + encodeURIComponent(p.slug) + '.html';
     return '<a class="art" href="' + esc(href) + '">' +
       '<div class="art__im">' + (img ? '<img decoding="async" src="' + esc(img) + '" alt="' + esc(p.title) + '" loading="lazy" width="600" height="400">' : '') + '</div>' +
       '<div><p class="lbl">' + esc(p.category || 'Blog') + '</p><h3>' + esc(p.title) + '</h3></div></a>';

@@ -50,8 +50,8 @@ async function sitemap(res) {
   const urls = [
     ...SITEMAP_PAGES.map((p) => ({ loc: SITE + p, lastmod: day(dates[p]) })),
     // The Rameshwar Sky case study is a static page, so its date comes from the page file.
-    ...projects.filter(live).map((p) => ({ loc: `${SITE}/${p.slug}`, lastmod: day(dates['/' + p.slug]) || changed(p) })),
-    ...posts.filter(live).map((p) => ({ loc: `${SITE}/blog/${p.slug}`, lastmod: changed(p) })),
+    ...projects.filter(live).map((p) => ({ loc: `${SITE}/projects/${p.slug}.html`, lastmod: day(dates[`/projects/${p.slug}.html`]) || changed(p) })),
+    ...posts.filter(live).map((p) => ({ loc: `${SITE}/blog/${p.slug}.html`, lastmod: changed(p) })),
   ];
   const rows = urls.map((u) => `  <url><loc>${xmlEscape(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`);
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');

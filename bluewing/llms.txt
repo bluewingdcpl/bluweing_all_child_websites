@@ -32,7 +32,7 @@
 ## Projects
 
 - [All projects](https://www.bluewingconstruction.com/projects.html)
-- [Rameshwar Sky case study](https://www.bluewingconstruction.com/rameshwar-sky): Core & Shell of 5 blocks, basement + ground + 12 floors, about 3.5 lakh sq.ft., completed July 2025
+- [Rameshwar Sky case study](https://www.bluewingconstruction.com/projects/rameshwar-sky.html): Core & Shell of 5 blocks, basement + ground + 12 floors, about 3.5 lakh sq.ft., completed July 2025
 - [Ongoing projects](https://www.bluewingconstruction.com/projects-ongoing.html)
 - [Completed projects](https://www.bluewingconstruction.com/projects-completed.html)
 - [Clients](https://www.bluewingconstruction.com/clients.html)
