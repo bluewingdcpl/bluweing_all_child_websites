@@ -28,7 +28,7 @@ const SITEMAP_PAGES = [
   '/projects-commercial.html', '/projects-hospitals.html', '/projects-hotels.html', '/projects-industrial.html',
   '/projects-institutional.html', '/projects-residential.html', '/quality-standards.html', '/safety-standards.html',
   '/clients.html', '/careers.html', '/blog.html', '/contact-us.html', '/privacy-policy.html', '/terms-conditions.html',
-  '/cookies-policy.html',
+  '/cookies-policy.html', '/sitemap.html',
 ];
 
 function xmlEscape(s) {

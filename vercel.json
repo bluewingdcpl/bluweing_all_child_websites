@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/blog.js": { "includeFiles": "bluewing/{blog-post,project-view,blog}.html" }
+    "api/blog.js": { "includeFiles": "bluewing/{blog-post,project-view,blog,sitemap}.html" }
   },
   "headers": [
     { "source": "/assets/icons.svg", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
@@ -336,6 +336,7 @@
       "destination": "/api/blog?render=project&slug=:slug"
     },
     { "source": "/blog.html", "destination": "/api/blog?render=list" },
+    { "source": "/sitemap.html", "destination": "/api/blog?render=sitemap" },
     {
       "source": "/:path((?!api/).*)",
       "destination": "/bluewing/:path"

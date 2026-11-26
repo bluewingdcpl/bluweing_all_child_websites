@@ -27,6 +27,7 @@ const TEMPLATES = {
   post: 'bluewing/blog-post.html',
   project: 'bluewing/project-view.html',
   list: 'bluewing/blog.html',
+  sitemap: 'bluewing/sitemap.html',
 };
 
 const tplCache = {};
@@ -419,6 +420,63 @@ async function renderProject(res, slug) {
   return send(res, html);
 }
 
+// ---------- HTML sitemap ----------
+
+// Fills the project and blog lists on /sitemap.html (the fixed sections are in the template).
+const SECTOR_ORDER = ['Industrial', 'Institutional', 'Hotels', 'Hospitals', 'Residential', 'Commercial'];
+function sitemapProjects(projects) {
+  const live = projects.filter((p) => p.slug && p.published !== false);
+  const groups = {};
+  live.forEach((p) => { const k = p.category || 'Other'; (groups[k] = groups[k] || []).push(p); });
+  const keys = Object.keys(groups).sort((a, b) => {
+    const ia = SECTOR_ORDER.indexOf(a), ib = SECTOR_ORDER.indexOf(b);
+    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
+  });
+  const html = keys.map((k) => {
+    const items = groups[k].sort((a, b) => a.title.localeCompare(b.title)).map((p) => {
+      const note = p.slug === 'rameshwar-sky' ? 'Case study' : (p.status === 'Ongoing' ? 'Ongoing' : '');
+      return `<li><a href="/${esc(p.slug)}">${esc(p.title)}${note ? `<span>${note}</span>` : ''}</a></li>`;
+    }).join('');
+    return `<div class="smap__cat"><h3>${esc(k)}<small>${groups[k].length}</small></h3><ul>${items}</ul></div>`;
+  }).join('');
+  return { html, count: live.length };
+}
+function sitemapPosts(posts) {
+  const live = posts.filter((p) => p.slug && p.published !== false);
+  const groups = {};
+  live.forEach((p) => { const k = p.category || 'Blog'; (groups[k] = groups[k] || []).push(p); });
+  const keys = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length || a.localeCompare(b));
+  const html = keys.map((k) => {
+    const items = groups[k].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+      .map((p) => `<li><a href="/blog/${esc(p.slug)}">${esc(p.title)}</a></li>`).join('');
+    return `<div class="smap__cat"><h3>${esc(k)}<small>${groups[k].length}</small></h3><ul>${items}</ul></div>`;
+  }).join('');
+  return { html, count: live.length };
+}
+
+async function renderSitemap(res) {
+  let html = template('sitemap');
+  const [{ data: projects }, { data: posts }] = await Promise.all([
+    readJson('data/projects.json', []),
+    readJson('data/blog.json', []),
+  ]);
+  const pr = sitemapProjects(projects);
+  const po = sitemapPosts(posts);
+  html = fill(html, 'sm-projects', pr.html);
+  html = fill(html, 'sm-projects-n', String(pr.count));
+  html = fill(html, 'sm-blog', po.html);
+  html = fill(html, 'sm-blog-n', String(po.count));
+  html = addHead(html, jsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Sitemap', item: SITE + '/sitemap.html' },
+    ],
+  }));
+  return send(res, html);
+}
+
 // ---------- entry ----------
 
 module.exports = async (req, res) => {
@@ -426,6 +484,7 @@ module.exports = async (req, res) => {
   const clean = String(slug || '').toLowerCase();
   try {
     if (type === 'list') return await renderList(res);
+    if (type === 'sitemap') return await renderSitemap(res);
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(clean)) return notFound(res, template(type === 'post' ? 'post' : 'project'), type === 'post' ? 'Article' : 'Project');
     if (type === 'post') return await renderPost(res, clean);
     if (type === 'project') return await renderProject(res, clean);
@@ -436,7 +495,7 @@ module.exports = async (req, res) => {
     try {
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-store');
-      return res.status(200).send(template(type === 'post' ? 'post' : type === 'list' ? 'list' : 'project'));
+      return res.status(200).send(template(type === 'post' ? 'post' : type === 'list' ? 'list' : type === 'sitemap' ? 'sitemap' : 'project'));
     } catch (e) {
       return res.status(500).send('Server error');
     }
