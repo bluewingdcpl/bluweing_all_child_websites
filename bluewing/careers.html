@@ -225,13 +225,12 @@
 <div class="shell">
 <div class="head rv"><div><p class="eyebrow">Roles we hire</p><h2>Where you'd <em>fit in.</em></h2></div>
 <p>Please check our <a href="#current-openings" style="color:var(--accent);font-weight:500;text-decoration:underline;text-underline-offset:3px">current job openings</a> and explore the opportunities that match your profile.</p></div>
-<div class="vals__g rv"><div class="val"><span class="val__n">01</span>
-<svg><use href="/assets/icons.svg?v=a382eb3b#i-cog"/></svg><h3>Project &amp; planning</h3><p>Project managers and planning engineers running programme, resources and client reporting.</p></div><div class="val"><span class="val__n">02</span>
-<svg><use href="/assets/icons.svg?v=a382eb3b#i-layers"/></svg><h3>Site engineering</h3><p>Civil, structural and MEP engineers owning packages from setting-out to handover.</p></div><div class="val"><span class="val__n">03</span>
-<svg><use href="/assets/icons.svg?v=a382eb3b#i-award"/></svg><h3>QA / QC</h3><p>Quality engineers running ITPs, material approvals and third-party testing.</p></div><div class="val"><span class="val__n">04</span>
-<svg><use href="/assets/icons.svg?v=a382eb3b#i-shield"/></svg><h3>Safety</h3><p>Safety officers — NEBOSH or IOSH preferred — with authority that reaches management.</p></div><div class="val"><span class="val__n">05</span>
-<svg><use href="/assets/icons.svg?v=a382eb3b#i-rupee"/></svg><h3>Quantity surveying</h3><p>QS and billing engineers producing measurement and certification clients can audit.</p></div><div class="val"><span class="val__n">06</span>
-<svg><use href="/assets/icons.svg?v=a382eb3b#i-eye"/></svg><h3>Design &amp; BIM</h3><p>Design co-ordination and BIM roles resolving buildability before it reaches site.</p></div></div>
+<div class="vals__g rv"><div class="val">
+<svg><use href="/assets/icons.svg?v=a382eb3b#i-cog"/></svg><h3>Project &amp; planning</h3><p>Project managers and planning engineers running programme, resources and client reporting.</p></div><div class="val">
+<svg><use href="/assets/icons.svg?v=a382eb3b#i-layers"/></svg><h3>Site engineering</h3><p>Civil, structural and MEP engineers owning packages from setting-out to handover.</p></div><div class="val">
+<svg><use href="/assets/icons.svg?v=a382eb3b#i-award"/></svg><h3>QA / QC</h3><p>Quality engineers running ITPs, material approvals and third-party testing.</p></div><div class="val">
+<svg><use href="/assets/icons.svg?v=a382eb3b#i-shield"/></svg><h3>Safety</h3><p>Safety officers — NEBOSH or IOSH preferred — with authority that reaches management.</p></div><div class="val">
+<svg><use href="/assets/icons.svg?v=a382eb3b#i-rupee"/></svg><h3>Quantity surveying</h3><p>QS and billing engineers producing measurement and certification clients can audit.</p></div></div>
 </div>
 </section>
 
@@ -375,7 +374,7 @@
 <div class="fld"><label for="ja-company">Current company name</label><input id="ja-company" name="company" required autocomplete="organization" placeholder="Organisation (if currently employed)"><span class="field-err">Please enter your current company name.</span></div>
 </div>
 <div class="fld"><label for="ja-role-btn" id="ja-role-lbl">Apply for</label>
-<select id="ja-role" name="applyFor" required class="csel__native" tabindex="-1" aria-hidden="true"><option value="">Select Role</option><option>Project &amp; planning</option><option>Site engineering</option><option>QA / QC</option><option>Safety</option><option>Quantity surveying</option><option>Design &amp; BIM</option></select><div class="csel" id="ja-role-ui"><button type="button" class="csel__btn" id="ja-role-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ja-role-lbl ja-role-btn"><span class="csel__val is-ph">Select Role</span><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></button><ul class="csel__list" role="listbox" tabindex="-1" aria-labelledby="ja-role-lbl" hidden></ul></div>
+<select id="ja-role" name="applyFor" required class="csel__native" tabindex="-1" aria-hidden="true"><option value="">Select Role</option><option>Project &amp; planning</option><option>Site engineering</option><option>QA / QC</option><option>Safety</option><option>Quantity surveying</option></select><div class="csel" id="ja-role-ui"><button type="button" class="csel__btn" id="ja-role-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ja-role-lbl ja-role-btn"><span class="csel__val is-ph">Select Role</span><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></button><ul class="csel__list" role="listbox" tabindex="-1" aria-labelledby="ja-role-lbl" hidden></ul></div>
 <span class="field-err">Please select a role.</span></div>
 <div class="fld">
 <label for="ja-resume">Your Updated Resume</label>
@@ -475,17 +474,16 @@
     if (msg) { var e = fld.querySelector('.field-err'); if (e) e.textContent = msg; }
   }
 
-  // "Apply for" — the six roles we hire, in a themed dropdown over the native <select>
+  // "Apply for" — the five roles we hire, in a themed dropdown over the native <select>
   var roleSel = document.getElementById('ja-role');
   var cselBtn = document.getElementById('ja-role-btn');
   var cselVal = cselBtn.querySelector('.csel__val');
   var cselList = document.querySelector('#ja-role-ui .csel__list');
-  // Map an opening title ("QA / QC Engineer") to one of the six roles
+  // Map an opening title ("QA / QC Engineer") to one of the five roles
   var ROLE_MAP = [
     [/\b(qa|qc|quality)\b/i, 'QA / QC'],
     [/\b(safety|hse|ehs)\b/i, 'Safety'],
     [/\b(quantity|qs|billing|estimat)/i, 'Quantity surveying'],
-    [/\b(design|bim|architect|revit)/i, 'Design & BIM'],
     [/\b(project|planning|planner)/i, 'Project & planning'],
     [/\b(site|civil|structural|mep|engineer)/i, 'Site engineering']
   ];
