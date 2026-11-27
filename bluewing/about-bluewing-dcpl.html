@@ -61,6 +61,25 @@
 ]}
 </script>
 <!-- /layout:schema -->
+<style>
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.g4c{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:460px;padding:22px;color:#fff;text-decoration:none;background:#0b1a2c;box-shadow:0 0 0 1px var(--line-2),0 10px 28px rgba(10,24,40,.08)}
+.g4c__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.g4c::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,18,32,.10) 0%,rgba(8,18,32,.25) 38%,rgba(8,18,32,.92) 78%,rgba(8,18,32,.97) 100%);transition:background .4s}
+.g4c:hover .g4c__bg{transform:scale(1.06)}
+.g4c__lg{align-self:stretch;margin:-22px -22px 0;height:84px;background:#fff;display:flex;align-items:center;justify-content:center;padding:0 18px;border-bottom:3px solid var(--accent)}
+.g4c__img{display:block;height:38px;width:auto;max-width:180px}
+.g4c__img--bw{height:30px;width:auto;color:var(--logo,var(--ink))}
+.g4c__img--sy{height:60px;margin:-10px 0}
+.g4c__tag{align-self:flex-start;margin-top:auto;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.45);padding:5px 10px;margin-bottom:12px}
+.g4c__h{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.g4c p{font-size:var(--fs-sm);line-height:1.55;color:rgba(255,255,255,.85);margin:0 0 18px}
+.g4c__cta{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.22);padding-top:14px}
+.g4c__cta svg{width:14px;height:14px;transition:transform .25s}
+.g4c:hover .g4c__cta svg{transform:translateX(4px)}
+@media (max-width:1024px){.g4{grid-template-columns:1fr 1fr}.g4c{min-height:400px}}
+@media (max-width:560px){.g4{grid-template-columns:1fr}.g4c{min-height:360px}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -255,12 +274,13 @@
 
 <section class="strip">
 <div class="shell">
-<div class="head rv"><div><p class="eyebrow">The group</p><h2>Three companies, <em>one accountability.</em></h2></div>
-<p>When a project needs a diaphragm wall or a precast frame, it goes to a team inside the group working to the same quality system.</p></div>
-<div class="strip__g rv">
-<a class="sp sp--logo" href="bluewing-dcpl.html"><div><svg class="sp__logo sp__logo--bw" viewBox="0 0 31687 5669" role="img" aria-label="BlueWing DCPL"><use href="/assets/icons.svg?v=a382eb3b#bw-logo"/></svg><h3>BlueWing DCPL</h3><p>Turnkey and EPC construction across six sectors.</p></div></a>
-<a class="sp sp--logo" href="https://sygnificinfra.com/" target="_blank" rel="noopener"><div><img class="sp__logo" src="/assets/uploads/2026/06/sy-new-logo.png" alt="Sygnific Infra" width="450" height="150" loading="lazy" decoding="async"><h3>Sygnific Infra</h3><p>Diaphragm wall and geotechnical solutions.</p></div></a>
-<a class="sp sp--logo" href="https://bhaaratprecast.com/" target="_blank" rel="noopener"><div><img class="sp__logo" src="/assets/uploads/2026/06/bh-new-logo.png" alt="Bhaarat Precast" width="450" height="150" loading="lazy" decoding="async"><h3>Bhaarat Precast</h3><p>Precast concrete manufacturing.</p></div></a>
+<div class="head rv"><div><p class="eyebrow">The group</p><h2>Four companies, <em>one accountability.</em></h2></div>
+<p>When a project needs a diaphragm wall, a precast frame or a façade, it goes to a team inside the group working to the same quality system.</p></div>
+<div class="g4 rv">
+<a class="g4c" href="/bluewing-dcpl.html"><img class="g4c__bg" src="/assets/uploads/2026/11/group-bluewing.webp" alt="Rameshwar Sky towers built by BlueWing DCPL" width="600" height="800" loading="lazy" decoding="async"><div class="g4c__lg"><svg class="g4c__img g4c__img--bw" viewBox="0 0 31687 5669" role="img" aria-label="BlueWing DCPL"><use href="/assets/icons.svg?v=a382eb3b#bw-logo"/></svg></div><span class="g4c__tag">Turnkey EPC</span><h3 class="g4c__h">BlueWing DCPL</h3><p>Turnkey and EPC construction across six sectors.</p><span class="g4c__cta">Explore <svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span></a>
+<a class="g4c" href="https://sygnificinfra.com/" target="_blank" rel="noopener"><img class="g4c__bg" src="/assets/uploads/2026/11/group-sygnific.webp" alt="Sygnific Infra diaphragm wall rig on site" width="600" height="800" loading="lazy" decoding="async"><div class="g4c__lg"><img class="g4c__img g4c__img--sy" src="/assets/uploads/2026/06/sy-new-logo.png" alt="Sygnific Infra" width="450" height="150" loading="lazy" decoding="async"></div><span class="g4c__tag">Diaphragm Wall</span><h3 class="g4c__h">Sygnific Infra</h3><p>Diaphragm wall and geotechnical solutions.</p><span class="g4c__cta">Visit website <svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span></a>
+<a class="g4c" href="https://bhaaratprecast.com/" target="_blank" rel="noopener"><img class="g4c__bg" src="/assets/uploads/2026/11/group-bhaarat.webp" alt="Precast concrete elements being produced and installed" width="600" height="800" loading="lazy" decoding="async"><div class="g4c__lg"><img class="g4c__img " src="/assets/uploads/2026/11/bhaarat-precast-logo.webp" alt="Bhaarat Precast" width="609" height="180" loading="lazy" decoding="async"></div><span class="g4c__tag">Precast</span><h3 class="g4c__h">Bhaarat Precast</h3><p>Precast concrete manufacturing.</p><span class="g4c__cta">Visit website <svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span></a>
+<a class="g4c" href="https://www.alutekenvelope.com/" target="_blank" rel="noopener"><img class="g4c__bg" src="/assets/uploads/2026/11/group-alutek.webp" alt="Glass curtain wall façade" width="600" height="800" loading="lazy" decoding="async"><div class="g4c__lg"><img class="g4c__img " src="/assets/uploads/2026/11/alutek-logo.webp" alt="AluTek Building Envelope Systems" width="602" height="180" loading="lazy" decoding="async"></div><span class="g4c__tag">Building Envelope Systems</span><h3 class="g4c__h">AluTek</h3><p>Façade and building envelope systems.</p><span class="g4c__cta">Visit website <svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></span></a>
 </div>
 </div>
 </section></main>
