@@ -1126,11 +1126,12 @@
     projectType: 'Project type', workType: 'Work type', location: 'Project location', stage: 'Project stage',
     category: 'Category of supply', city: 'City / state', gst: 'GST number',
     years: 'Years in business', website: 'Website / catalogue', applyFor: 'Apply for', resumeUrl: 'Resume',
+    experience: 'Total experience', noticePeriod: 'Notice period',
   };
   var FIELD_ORDER = {
     'project-enquiry': ['name', 'company', 'email', 'phone', 'projectType', 'workType', 'location', 'stage', 'interest'],
     'vendor-registration': ['company', 'name', 'email', 'phone', 'category', 'city', 'gst', 'years', 'website'],
-    'job-application': ['name', 'email', 'phone', 'company', 'applyFor', 'resumeUrl'],
+    'job-application': ['name', 'email', 'phone', 'city', 'applyFor', 'experience', 'company', 'noticePeriod', 'resumeUrl'],
     'sygnific-enquiry': ['name', 'company', 'email', 'phone'],
     'alutek-enquiry': ['name', 'company', 'email', 'phone'],
   };

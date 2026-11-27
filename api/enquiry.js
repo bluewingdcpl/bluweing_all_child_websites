@@ -18,7 +18,7 @@ const RESUME_TYPES = {
 const REQUIRED_FIELDS = {
   'project-enquiry': ['name', 'email', 'phone'],
   'vendor-registration': ['company', 'name', 'email', 'phone', 'category', 'city'],
-  'job-application': ['name', 'email', 'phone', 'company', 'applyFor'],
+  'job-application': ['name', 'email', 'phone', 'city', 'applyFor', 'experience'],
   'sygnific-enquiry': ['name', 'company', 'email', 'phone', 'message'],
   'alutek-enquiry': ['name', 'email', 'phone'],
 };
@@ -28,7 +28,8 @@ const LABELS = {
   name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', interest: 'Interest',
   projectType: 'Project type', workType: 'Work type', location: 'Project location', stage: 'Project stage',
   message: 'Message', category: 'Category of supply', city: 'City / state', gst: 'GST number',
-  years: 'Years in business', website: 'Website / catalogue', applyFor: 'Apply for', resumeFile: 'Resume',
+  years: 'Years in business', website: 'Website / catalogue', applyFor: 'Apply for', experience: 'Total experience',
+  noticePeriod: 'Notice period', resumeFile: 'Resume',
   resumeUrl: 'Resume link',
 };
 

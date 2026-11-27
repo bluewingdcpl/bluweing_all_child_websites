@@ -62,6 +62,7 @@
 ]}
 </script>
 <!-- /layout:schema -->
+<style>.fld__req{color:#c0392b;margin-left:3px;font-weight:600}.fld__legend{font-size:12px;color:var(--steel);margin:0 0 14px}.fld__opt{text-transform:none;letter-spacing:0;font-weight:400;opacity:.75}</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -328,6 +329,12 @@
 .apf__card{--accent:var(--accent-base);background:var(--paper);color:var(--ink);border-radius:var(--r);
   padding:clamp(26px,3.4vw,48px);box-shadow:0 30px 60px -30px rgba(0,0,0,.55);border-top:4px solid var(--accent-lt)}
 .apf__card .form-light{max-width:none!important}
+/* Plain dropdowns styled like the themed Apply for button */
+#job-application-form select:not(.csel__native):not([name="phoneCode"]){width:100%;-webkit-appearance:none;appearance:none;padding:14px 44px 14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2334446F%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m6 9 6 6 6-6%27/%3E%3C/svg%3E") no-repeat right 16px center/16px;color:var(--ink);font:inherit;font-size:var(--fs-sm);cursor:pointer;transition:border-color var(--d1)}
+#job-application-form select:not(.csel__native):not([name="phoneCode"]):focus{border-color:var(--accent);outline:none}
+#job-application-form select:not(.csel__native):has(option[value=""]:checked){color:var(--steel-2)}
+#job-application-form select option{color:var(--ink)}
+.fld.has-err select{border-color:var(--error)!important}
 /* Themed "Apply for" dropdown */
 .csel__native{position:absolute!important;width:1px!important;height:1px!important;opacity:0;pointer-events:none}
 .csel{position:relative}
@@ -360,29 +367,37 @@
 <p>Don&rsquo;t see the exact role above? Apply anyway — we keep every application on file and reach out when there&rsquo;s a fit.</p></div>
 <div class="apf__card rv">
 <form class="form-light" id="job-application-form" novalidate>
+<p class="fld__legend"><span class="fld__req" aria-hidden="true">*</span> Required fields</p>
 <div class="frow">
-<div class="fld"><label for="ja-name">Full name</label><input id="ja-name" name="name" required autocomplete="name" placeholder="Your full name"><span class="field-err">Please enter your full name.</span></div>
-<div class="fld"><label for="ja-email">Email address</label><input id="ja-email" name="email" type="email" required autocomplete="email" placeholder="name@email.com"><span class="field-err">Please enter a valid email address.</span></div>
+<div class="fld"><label for="ja-name">Full name<span class="fld__req" aria-hidden="true">*</span></label><input id="ja-name" name="name" required autocomplete="name" placeholder="Your full name"><span class="field-err">Please enter your full name.</span></div>
+<div class="fld"><label for="ja-email">Email address<span class="fld__req" aria-hidden="true">*</span></label><input id="ja-email" name="email" type="email" required autocomplete="email" placeholder="name@email.com"><span class="field-err">Please enter a valid email address.</span></div>
 </div>
 <div class="frow">
-<div class="fld"><label for="ja-phone">Contact no.</label>
+<div class="fld"><label for="ja-phone">Phone<span class="fld__req" aria-hidden="true">*</span></label>
 <div class="phone-combo">
 <select id="ja-phone-cc" name="phoneCode" aria-label="Country code" autocomplete="tel-country-code"></select>
 <input id="ja-phone" name="phone" type="tel" required autocomplete="tel-national" placeholder="">
 </div>
 <span class="field-err">Please enter a valid phone number.</span></div>
-<div class="fld"><label for="ja-company">Current company name</label><input id="ja-company" name="company" required autocomplete="organization" placeholder="Organisation (if currently employed)"><span class="field-err">Please enter your current company name.</span></div>
+<div class="fld"><label for="ja-city">Current city<span class="fld__req" aria-hidden="true">*</span></label><input id="ja-city" name="city" required autocomplete="address-level2" placeholder="e.g. Ahmedabad"><span class="field-err">Please enter your current city.</span></div>
 </div>
-<div class="fld"><label for="ja-role-btn" id="ja-role-lbl">Apply for</label>
+<div class="frow">
+<div class="fld"><label for="ja-role-btn" id="ja-role-lbl">Apply for<span class="fld__req" aria-hidden="true">*</span></label>
 <select id="ja-role" name="applyFor" required class="csel__native" tabindex="-1" aria-hidden="true"><option value="">Select Role</option><option>Project &amp; planning</option><option>Site engineering</option><option>QA / QC</option><option>Safety</option><option>Quantity surveying</option></select><div class="csel" id="ja-role-ui"><button type="button" class="csel__btn" id="ja-role-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="ja-role-lbl ja-role-btn"><span class="csel__val is-ph">Select Role</span><svg aria-hidden="true"><use href="/assets/icons.svg?v=a382eb3b#i-chev"/></svg></button><ul class="csel__list" role="listbox" tabindex="-1" aria-labelledby="ja-role-lbl" hidden></ul></div>
 <span class="field-err">Please select a role.</span></div>
+<div class="fld"><label for="ja-exp">Total experience<span class="fld__req" aria-hidden="true">*</span></label><select id="ja-exp" name="experience" required><option value="">Select experience</option><option>Fresher (0–1 year)</option><option>1–3 years</option><option>3–5 years</option><option>5–10 years</option><option>10–15 years</option><option>15+ years</option></select><span class="field-err">Please select your experience.</span></div>
+</div>
+<div class="frow">
+<div class="fld"><label for="ja-company">Current company</label><input id="ja-company" name="company" autocomplete="organization" placeholder="If currently employed"></div>
+<div class="fld"><label for="ja-notice">Notice period</label><select id="ja-notice" name="noticePeriod"><option value="">Select notice period</option><option>Immediate joiner</option><option>Up to 15 days</option><option>30 days</option><option>45 days</option><option>60 days</option><option>90 days or more</option></select></div>
+</div>
 <div class="fld">
-<label for="ja-resume">Your Updated Resume</label>
+<label for="ja-resume">Resume / CV<span class="fld__req" aria-hidden="true">*</span></label>
 <input id="ja-resume" name="resume" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
 <p class="fld__hint">File size: up to 3MB. Acceptable file formats: PDF, DOC, DOCX.</p>
 <span class="field-err">Please attach a PDF, DOC or DOCX resume up to 3MB.</span>
 </div>
-<div class="fld"><label for="ja-message">Write your message below</label><textarea id="ja-message" name="message" placeholder="Anything you'd like us to know"></textarea></div>
+<div class="fld"><label for="ja-message">Message <span class="fld__opt">(optional)</span></label><textarea id="ja-message" name="message" placeholder="Anything you'd like us to know"></textarea></div>
 
 <button class="btn btn--accent" type="submit">Submit Job Application <svg><use href="/assets/icons.svg?v=a382eb3b#i-arr"/></svg></button>
 <p class="pform__n" data-note>We review every application and reach out if there is a fit.</p>
@@ -688,6 +703,9 @@
         email: emailInput.value.trim(),
         phone: '+' + phoneSel.selectedOptions[0].getAttribute('data-dial') + ' ' + phoneInput.value.trim(),
         company: document.getElementById('ja-company').value.trim(),
+        city: document.getElementById('ja-city').value.trim(),
+        experience: document.getElementById('ja-exp').value,
+        noticePeriod: document.getElementById('ja-notice').value,
         applyFor: roleSel.value,
         message: document.getElementById('ja-message').value.trim(),
         resumeBase64: dataUrl,
